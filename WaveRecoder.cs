@@ -40,7 +40,7 @@ namespace TestCms1
                     WaveData[] waves = null;
                     lock ((WavesQueue as ICollection).SyncRoot)
                     {
-                        if (WavesQueue.Count <= 0) break;
+                        if (WavesQueue.Count <= 0) continue;
                         waves = WavesQueue.Dequeue();
                     }
                     using (var bw = new BinaryWriter(new FileStream(FilePath, FileMode.Append)))

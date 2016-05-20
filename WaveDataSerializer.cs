@@ -50,8 +50,8 @@ namespace TestCms1
                         };
                     waves[ch].AsyncData = new float[waves[ch].AsyncDataCount];
 
-                    for (int i = 0; i < waves[i].AsyncDataCount; i++)
-                        waves[i].AsyncData[i] = reader.ReadSingle();
+                    for (int i = 0; i < waves[ch].AsyncDataCount; i++)
+                        waves[ch].AsyncData[i] = reader.ReadSingle();
                 }
 
             }
