@@ -63,23 +63,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigReceiver.cs" />
-    <Compile Include="ConfigSender.cs" />
-    <Compile Include="ConfigSerializer.cs" />
     <Compile Include="ConstantMember.cs" />
-    <Compile Include="Dialog\MeasureEditForm.cs" />
+    <Compile Include="Dialog\MeasureEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialog\MeasureEditForm.Designer.cs">
       <DependentUpon>MeasureEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\ReceiverEditForm.cs" />
+    <Compile Include="Dialog\ReceiverEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialog\ReceiverEditForm.Designer.cs">
       <DependentUpon>ReceiverEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\RecoderEditForm.cs" />
+    <Compile Include="Dialog\RecoderEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialog\RecoderEditForm.Designer.cs">
       <DependentUpon>RecoderEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FFTCalculator.cs" />
+    <Compile Include="SendableConfig.cs" />
     <Compile Include="WaveMeasure.cs" />
     <Compile Include="WaveReceiver.cs" />
     <Compile Include="DaqProtocol\ElapsedHandler.cs" />
@@ -143,14 +147,6 @@
     <Content Include="Math\MathNet.Iridium.dll" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxTeeChart">
-      <Guid>{EB7A6012-79A9-4A1A-91AF-F2A92FCA3406}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>

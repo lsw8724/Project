@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using System.Collections;
+using Newtonsoft.Json;
 
 namespace TestCms1
 {
@@ -67,9 +68,12 @@ namespace TestCms1
 
         private void List_Changed(object sender, ListChangedEventArgs e)
         {
-            var configs = new SendableConfigs() { Receivers = ReceiverList, Measures = MeasureList, Recoders = RecoderList };
-            var configSender = new FileConfigSender(ConfigPath, new ConfigSerializer_LSW());
-            configSender.SendConfig(configs);
+            List<SendableConfig> confList = new List<SendableConfig>();
+            foreach (var receiver in ReceiverList)
+               confList.Add(new SendableConfig(receiver.GetType().ToString(), JsonConvert.SerializeObject(receiver)));
+            var jsonStr = JsonConvert.SerializeObject(confList[0]);
+            File.WriteAllText(Application.StartupPath + "\\Receiver.JSON", jsonStr);
+            SendableConfig obj = JsonConvert.DeserializeObject<SendableConfig>(jsonStr);
         }
 
         private void DelBtn_Click(object sender, EventArgs e)

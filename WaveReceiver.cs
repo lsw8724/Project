@@ -61,7 +61,7 @@ namespace TestCms1
         public event Action<WaveData[]> WavesReceived;
         private System.Timers.Timer Timer;
         private IWaveSerializer WaveSerializer;
-        private string FilePath;
+        public string FilePath;
         public FileReceiver() { }
         public FileReceiver(string filePath, IWaveSerializer serializer)
         {
@@ -112,12 +112,14 @@ namespace TestCms1
         private System.Timers.Timer Timer;
         private IWaveSerializer WaveSerializer;
         private Socket Client;
-        private IPEndPoint LocalEndPoint;
+        public string ServerIp;
+        public int Port;
         public NetworkReceiver() { }
         public NetworkReceiver(string Ip, int port, IWaveSerializer serializer)
         {
             WaveSerializer = serializer;
-            LocalEndPoint = new IPEndPoint(IPAddress.Parse(Ip), port);
+            ServerIp = Ip;
+            Port = port;
             Timer = new System.Timers.Timer();
             Timer.Interval = 1000;
             Timer.Elapsed += TimerElapsed;
@@ -150,7 +152,7 @@ namespace TestCms1
                 Client.ReceiveTimeout = 5000;
                 Client.SendTimeout = 5000;
             }
-            Client.Connect(LocalEndPoint);
+            Client.Connect(ServerIp,Port);
             Timer.Start();
         }
 
@@ -177,7 +179,7 @@ namespace TestCms1
 
         public override string ToString()
         {
-            return "NetReceiver - " + LocalEndPoint.Address + ":" + LocalEndPoint.Port+ ", " + WaveSerializer.ToString(); ;
+            return "NetReceiver - " + ServerIp + ":" + Port+ ", " + WaveSerializer.ToString(); ;
         }
     }
 }
