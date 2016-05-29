@@ -5,17 +5,8 @@ using Steema.TeeChart.Styles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Timers;
 using System.Windows.Forms;
-using TestCms1.Properties;
-using System.Xml.Serialization;
 using System.Collections;
 
 namespace TestCms1
@@ -26,18 +17,28 @@ namespace TestCms1
         private SimpleButton[] AddButtons;
         private SimpleButton[] DelButtons;
         public BindingList<IWavesReceiver> ReceiverList = new BindingList<IWavesReceiver>();
-        public BindingList<IMeasureCalculator> MeasureList = new BindingList<IMeasureCalculator>();
-        public BindingList<IWaveRecoder> RecoderList = new BindingList<IWaveRecoder>();
+        public BindingList<IWavesMeasure> MeasureList = new BindingList<IWavesMeasure>();
+        public BindingList<IWavesRecoder> RecoderList = new BindingList<IWavesRecoder>();
         private IWavesReceiver SelectedReceiver;
-        private IWaveRecoder SelectedRecoder;
         public Queue<WaveData[]> WaveQueue = new Queue<WaveData[]>();
+        private string ConfigPath = Application.StartupPath + "\\Config.JSON";
 
         public WaveMonitor()
         {
             InitializeComponent();
-            //ReceiverList = ConfigFileSerializer_Receiver.Deserialize(Application.StartupPath + "\\ReceiverConfig.dat");
-            //MeasureList = ConfigFileSerializer_Measure.Deserialize(Application.StartupPath + "\\MeasureConfig.dat");
-            //RecoderList = ConfigFileSerializer_Recoder.Deserialize(Application.StartupPath + "\\RecoderConfig.dat");
+
+            //if (File.Exists(ConfigPath))
+            //{
+            //    var configReceiver = new FileConfigReceiver(ConfigPath, new ConfigSerializer_LSW());
+            //    var configs = configReceiver.ReceiveConfig();
+            //    ReceiverList = configs.Receivers as BindingList<IWavesReceiver>;
+            //    MeasureList = configs.Measures as BindingList<IWavesMeasure>;
+            //    RecoderList = configs.Recoders as BindingList<IWavesRecoder>;
+            //}
+
+            ReceiverList.ListChanged += List_Changed;
+            MeasureList.ListChanged += List_Changed;
+            RecoderList.ListChanged += List_Changed;
 
             FFTChart.Axes.Bottom.Maximum = ConstantMember.AsyncFMax;
             TrendChart.Axes.Bottom.Labels.DateTimeFormat = "yyyy.M.d\nHH:mm:ss";
@@ -49,7 +50,7 @@ namespace TestCms1
             lb_Recoder.DataSource = RecoderList;
 
             lb_Receiver.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
-            AddButtons = new SimpleButton[] {btn_AddMeasure,btn_AddRceive,btn_AddRecode};
+            AddButtons = new SimpleButton[] { btn_AddMeasure, btn_AddRceive, btn_AddRecode };
             btn_AddMeasure.Tag = new MeasureEditForm();
             btn_AddRceive.Tag = new ReceiverEditForm();
             btn_AddRecode.Tag = new RecoderEditForm();
@@ -64,11 +65,18 @@ namespace TestCms1
                 btn.Click += DelBtn_Click;
         }
 
+        private void List_Changed(object sender, ListChangedEventArgs e)
+        {
+            var configs = new SendableConfigs() { Receivers = ReceiverList, Measures = MeasureList, Recoders = RecoderList };
+            var configSender = new FileConfigSender(ConfigPath, new ConfigSerializer_LSW());
+            configSender.SendConfig(configs);
+        }
+
         private void DelBtn_Click(object sender, EventArgs e)
         {
             var btn = sender as SimpleButton;
             var listBox = btn.Tag as ListBox;
-            if(listBox.Items.Count != 0)
+            if (listBox.Items.Count != 0)
                 (listBox.DataSource as IBindingList).RemoveAt(listBox.SelectedIndex);
         }
 
@@ -82,10 +90,14 @@ namespace TestCms1
 
         public void waveReceiver_WavesReceived(WaveData[] waves)
         {
-            lock (((ICollection)WaveQueue).SyncRoot)
+            foreach(var recoder in RecoderList)
             {
-                if (WaveQueue.Count > 10) WaveQueue.Clear();
-                WaveQueue.Enqueue(waves);
+                var queue = recoder.GetWavesQueue();
+                lock (((ICollection)queue).SyncRoot)
+                {
+                    if (queue.Count > 10) WaveQueue.Clear();
+                    queue.Enqueue(waves);
+                }
             }
 
             /*Time*/
@@ -105,7 +117,7 @@ namespace TestCms1
                     FFTChart.Series[ch].Add(fft.XValues[i], fft.YValues[i]);
             }
 
-            
+
             /*Trend*/
             if (MeasureList.Count > 0)
             {
@@ -115,17 +127,13 @@ namespace TestCms1
                     var fftData = FFTCalculator.CreateSpectrumData(waves[chid].AsyncData, waves[chid].DateTime, ConstantMember.AsyncLine, ConstantMember.AsyncFMax);
                     var series = TrendChart.Series[i];
                     if (series.Count > TrendXScale) series.Delete(0);
-                    series.Add(waves[chid].DateTime, MeasureList[i].CalcMeasureData(waves[chid], fftData));
+                    series.Add(waves[chid].DateTime, MeasureList[i].CalcMeasureScalar(waves[chid], fftData));
                 }
             }
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //ConfigFileSerializer_Receiver.Serialize(Application.StartupPath + "\\ReceiverConfig.dat", ReceiverList);
-            //ConfigFileSerializer_Measure.Serialize(Application.StartupPath + "\\MeasureConfig.dat", MeasureList);
-            //ConfigFileSerializer_Recoder.Serialize(Application.StartupPath + "\\RecoderConfig.dat", RecoderList);
-
             if (SelectedReceiver != null)
             {
                 SelectedReceiver.Stop();
@@ -145,20 +153,19 @@ namespace TestCms1
             foreach (var serise in TimeChart.Series) (serise as FastLine).Clear();
             foreach (var serise in FFTChart.Series) (serise as FastLine).Clear();
             TrendChart.Series.Clear();
-          
+
             btnStart.Enabled = false;
             btnStop.Enabled = true;
 
             SelectedReceiver = lb_Receiver.SelectedItem as IWavesReceiver;
-            SelectedRecoder = lb_Recoder.SelectedItem as IWaveRecoder;
 
             foreach (var m in MeasureList)
             {
-                FastLine line = new FastLine() { Title = "Ch"+(m.GetChannelIdx()+1)+" " + m.ToString().Replace("TestCms1.","").Replace("Measure","") };
+                FastLine line = new FastLine() { Title = "Ch" + (m.GetChannelIdx() + 1) + " " + m.ToString().Replace("TestCms1.", "").Replace("Measure", "") };
                 TrendChart.Series.Add(line);
             }
 
-            if (SelectedReceiver != null)  SelectedReceiver.Start();
+            if (SelectedReceiver != null) SelectedReceiver.Start();
             foreach (var recoder in RecoderList)
                 recoder.Start();
         }
@@ -168,7 +175,7 @@ namespace TestCms1
             if (SelectedReceiver != null)
             {
                 SelectedReceiver.Stop();
-              
+
                 btnStop.Enabled = false;
                 btnStart.Enabled = true;
             }

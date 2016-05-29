@@ -32,11 +32,11 @@ namespace TestCms1.Dialog
         {
             var serializer = cb_Protocol.SelectedValue as IWaveSerializer;
             var monitor = Owner as WaveMonitor;
-            IWaveRecoder CurrentRecoder = null;
+            IWavesRecoder CurrentRecoder = null;
             switch ((RecoderType)ConfigItems.RecoderTypeIndex)
             {
-                case RecoderType.File: CurrentRecoder = new FileRecoder(ConfigItems.FilePath, serializer, monitor.WaveQueue); break;
-                case RecoderType.Network: CurrentRecoder = new NetworkRecoder(ConfigItems.Port, serializer, monitor.WaveQueue); break;
+                case RecoderType.File: CurrentRecoder = new FileRecoder(ConfigItems.FilePath, serializer); break;
+                case RecoderType.Network: CurrentRecoder = new NetworkRecoder(ConfigItems.Port, serializer); break;
             }
             if (CurrentRecoder != null)
             {
@@ -51,14 +51,14 @@ namespace TestCms1.Dialog
                 RecoderTypeIndex = 0;
                 FilePath = Application.StartupPath + "\\Test_LSW.dat";
                 Port = 8999;
-                Serializers = new Dictionary<string, IWaveSerializer>();
-                Serializers.Add("LSW", new WaveDataSerializer_LSW());
-                Serializers.Add("KHW", new WaveDataSerializer_KHW());
-                Serializers.Add("SHK", new WaveDataSerializer_SHK());
+                Serializers = new List<IWaveSerializer>();
+                Serializers.Add(new WaveDataSerializer_LSW());
+                Serializers.Add(new WaveDataSerializer_KHW());
+                Serializers.Add(new WaveDataSerializer_SHK());
             }
 
             public int RecoderTypeIndex { get; set; }
-            public Dictionary<string, IWaveSerializer> Serializers { get; set; }
+            public List<IWaveSerializer> Serializers { get; set; }
 
             public string FilePath { get; set; }
             public int Port { get; set; }

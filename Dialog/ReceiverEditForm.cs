@@ -39,11 +39,8 @@ namespace TestCms1.Dialog
             IWavesReceiver CurrentReceiver = null;
             switch ((ReceiverType)ConfigItems.ReceiverTypeIndex)
             {
-                case ReceiverType.Daq5509: 
-                    RobinChannel[] channels = new RobinChannel[8];
-                    for (int i = 0; i < channels.Length; i++)
-                        channels[i] = new RobinChannel(i, ConstantMember.AsyncFMax, ConstantMember.AsyncLine);
-                    CurrentReceiver = new Daq5509Receiver(ConfigItems.ModuleIp, channels); 
+                case ReceiverType.Daq5509:               
+                    CurrentReceiver = new VDPMReceiver(ConfigItems.ModuleIp); 
                     break;
                 case ReceiverType.File: CurrentReceiver = new FileReceiver(ConfigItems.FilePath, Serializers);
                     break;
@@ -68,14 +65,14 @@ namespace TestCms1.Dialog
                 ServerIp = "127.0.0.1";
                 Port = 8999;
 
-                Serializers = new Dictionary<string, IWaveSerializer>();
-                Serializers.Add("LSW", new WaveDataSerializer_LSW());
-                Serializers.Add("KHW", new WaveDataSerializer_KHW());
-                Serializers.Add("SHK", new WaveDataSerializer_SHK());
+                Serializers = new List<IWaveSerializer>();
+                Serializers.Add(new WaveDataSerializer_LSW());
+                Serializers.Add(new WaveDataSerializer_KHW());
+                Serializers.Add(new WaveDataSerializer_SHK());
             }
             public int ReceiverTypeIndex { get; set; }
             public string ModuleIp { get; set; }
-            public Dictionary<string, IWaveSerializer> Serializers { get; set; }
+            public List<IWaveSerializer> Serializers { get; set; }
             public string FilePath { get; set; }
             public string ServerIp { get; set; }
             public int Port { get; set; }

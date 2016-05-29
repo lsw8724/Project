@@ -1,4 +1,5 @@
 ﻿using DaqProtocol;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,14 +12,57 @@ using System.Windows.Forms;
 
 namespace TestCms1
 {
-    [Serializable]
+    public class VDPMReceiver : IWavesReceiver
+    {
+        private Daq5509Receiver DaqReceiver;
+        public string ModuleIp;
+        public event Action<WaveData[]> WavesReceived;
+        public VDPMReceiver() { }
+        public VDPMReceiver(string ip)
+        {
+            ModuleIp = ip;
+        }
+
+        private void DaqReceiver_WaveReceived(WaveData[] waves)
+        {
+            WavesReceived(waves);
+        }
+
+        public void Start()
+        {
+            if (DaqReceiver == null)
+            {
+                RobinChannel[] channels = new RobinChannel[8];
+                for (int i = 0; i < channels.Length; i++)
+                    channels[i] = new RobinChannel(i, ConstantMember.AsyncFMax, ConstantMember.AsyncLine);
+                DaqReceiver = new Daq5509Receiver(ModuleIp, channels);
+                DaqReceiver.WavesReceived += DaqReceiver_WaveReceived;
+            }
+            DaqReceiver.Start();
+        }
+
+        public void Stop()
+        {
+            if (DaqReceiver != null)
+                DaqReceiver.Stop();
+        }
+
+        public void Dispose()
+        {
+        }
+
+        public override string ToString()
+        {
+            return "VDPMReceiver - " + ModuleIp;
+        }
+    }
     public class FileReceiver : IWavesReceiver
     {
         public event Action<WaveData[]> WavesReceived;
-        [NonSerialized]
         private System.Timers.Timer Timer;
         private IWaveSerializer WaveSerializer;
         private string FilePath;
+        public FileReceiver() { }
         public FileReceiver(string filePath, IWaveSerializer serializer)
         {
             WaveSerializer = serializer;
@@ -30,7 +74,7 @@ namespace TestCms1
 
         private void TimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            using(var br = new BinaryReader(new FileStream(FilePath, FileMode.Open)))
+            using (var br = new BinaryReader(new FileStream(FilePath, FileMode.Open)))
             {
                 if (br.PeekChar() >= 0)
                 {
@@ -57,11 +101,10 @@ namespace TestCms1
 
         public override string ToString()
         {
-            return "FileReceiver," + Path.GetFileName(FilePath);
+            return "FileReceiver - " + Path.GetFileName(FilePath)+", "+WaveSerializer.ToString();
         }
     }
 
-    [Serializable]
     public class NetworkReceiver : IWavesReceiver
     {
         public event Action<WaveData[]> WavesReceived;
@@ -70,7 +113,8 @@ namespace TestCms1
         private IWaveSerializer WaveSerializer;
         private Socket Client;
         private IPEndPoint LocalEndPoint;
-        public NetworkReceiver(string Ip, int port,IWaveSerializer serializer)
+        public NetworkReceiver() { }
+        public NetworkReceiver(string Ip, int port, IWaveSerializer serializer)
         {
             WaveSerializer = serializer;
             LocalEndPoint = new IPEndPoint(IPAddress.Parse(Ip), port);
@@ -129,6 +173,11 @@ namespace TestCms1
         {
             Timer.Dispose();
             Client.Dispose();
+        }
+
+        public override string ToString()
+        {
+            return "NetReceiver - " + LocalEndPoint.Address + ":" + LocalEndPoint.Port+ ", " + WaveSerializer.ToString(); ;
         }
     }
 }

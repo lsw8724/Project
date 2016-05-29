@@ -66,8 +66,8 @@
             this.btnStop = new DevExpress.XtraEditors.SimpleButton();
             this.btnStart = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.waveMonitorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TrendChart = new Steema.TeeChart.TChart();
+            this.waveMonitorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gr_Recoder)).BeginInit();
@@ -136,8 +136,6 @@
             this.TimeSerise1.Title = "Ch1";
             this.TimeSerise1.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             // 
-            // 
-            // 
             // TimeSerise2
             // 
             this.TimeSerise2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
@@ -150,10 +148,6 @@
             this.TimeSerise2.Title = "Ch2";
             this.TimeSerise2.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.TimeSerise2.Visible = false;
-            // 
-            // 
-            // 
-
             // 
             // TimeSerise3
             // 
@@ -168,10 +162,6 @@
             this.TimeSerise3.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.TimeSerise3.Visible = false;
             // 
-            // 
-            // 
-
-            // 
             // TimeSerise4
             // 
             this.TimeSerise4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(151)))), ((int)(((byte)(168)))));
@@ -184,10 +174,6 @@
             this.TimeSerise4.Title = "Ch4";
             this.TimeSerise4.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.TimeSerise4.Visible = false;
-            // 
-            // 
-            // 
-
             // 
             // TimeSerise5
             // 
@@ -202,10 +188,6 @@
             this.TimeSerise5.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.TimeSerise5.Visible = false;
             // 
-            // 
-            // 
-
-            // 
             // TimeSerise6
             // 
             this.TimeSerise6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(123)))), ((int)(((byte)(99)))));
@@ -218,9 +200,6 @@
             this.TimeSerise6.Title = "Ch6";
             this.TimeSerise6.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.TimeSerise6.Visible = false;
-            // 
-            // 
-            // 
             // 
             // TimeSerise7
             // 
@@ -235,10 +214,6 @@
             this.TimeSerise7.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.TimeSerise7.Visible = false;
             // 
-            // 
-            // 
-
-            // 
             // TimeSerise8
             // 
             this.TimeSerise8.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
@@ -251,10 +226,6 @@
             this.TimeSerise8.Title = "Ch8";
             this.TimeSerise8.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.TimeSerise8.Visible = false;
-            // 
-            // 
-            // 
-
             // 
             // FFTChart
             // 
@@ -314,10 +285,6 @@
             this.FFTSerise1.Title = "Ch1";
             this.FFTSerise1.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             // 
-            // 
-            // 
- 
-            // 
             // FFTSerise2
             // 
             this.FFTSerise2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
@@ -330,9 +297,6 @@
             this.FFTSerise2.Title = "Ch2";
             this.FFTSerise2.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.FFTSerise2.Visible = false;
-            // 
-            // 
-            // 
             // 
             // FFTSerise3
             // 
@@ -347,9 +311,6 @@
             this.FFTSerise3.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.FFTSerise3.Visible = false;
             // 
-            // 
-
-            // 
             // FFTSerise4
             // 
             this.FFTSerise4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(151)))), ((int)(((byte)(168)))));
@@ -362,9 +323,6 @@
             this.FFTSerise4.Title = "Ch4";
             this.FFTSerise4.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.FFTSerise4.Visible = false;
-            // 
-            // 
-
             // 
             // FFTSerise5
             // 
@@ -379,9 +337,6 @@
             this.FFTSerise5.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.FFTSerise5.Visible = false;
             // 
-            // 
-
-            // 
             // FFTSerise6
             // 
             this.FFTSerise6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(123)))), ((int)(((byte)(99)))));
@@ -394,10 +349,6 @@
             this.FFTSerise6.Title = "Ch6";
             this.FFTSerise6.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.FFTSerise6.Visible = false;
-            // 
-            // 
-            // 
-
             // 
             // FFTSerise7
             // 
@@ -412,10 +363,6 @@
             this.FFTSerise7.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.FFTSerise7.Visible = false;
             // 
-            // 
-            // 
-
-            // 
             // FFTSerise8
             // 
             this.FFTSerise8.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
@@ -428,10 +375,6 @@
             this.FFTSerise8.Title = "Ch8";
             this.FFTSerise8.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
             this.FFTSerise8.Visible = false;
-            // 
-            // 
-            // 
-
             // 
             // groupControl1
             // 
@@ -504,7 +447,6 @@
             this.lb_Measure.ItemHeight = 12;
             this.lb_Measure.Location = new System.Drawing.Point(2, 22);
             this.lb_Measure.Name = "lb_Measure";
-            this.lb_Measure.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.lb_Measure.Size = new System.Drawing.Size(238, 88);
             this.lb_Measure.TabIndex = 22;
             // 
@@ -605,10 +547,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(996, 692);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // waveMonitorBindingSource
-            // 
-            this.waveMonitorBindingSource.DataSource = typeof(TestCms1.WaveMonitor);
-            // 
             // TrendChart
             // 
             // 
@@ -629,6 +567,10 @@
             this.TrendChart.Name = "TrendChart";
             this.TrendChart.Size = new System.Drawing.Size(990, 173);
             this.TrendChart.TabIndex = 5;
+            // 
+            // waveMonitorBindingSource
+            // 
+            this.waveMonitorBindingSource.DataSource = typeof(TestCms1.WaveMonitor);
             // 
             // WaveMonitor
             // 

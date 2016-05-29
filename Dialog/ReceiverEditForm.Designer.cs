@@ -150,13 +150,11 @@
             // 
             // cb_Protocol
             // 
-            this.cb_Protocol.DisplayMember = "Key";
             this.cb_Protocol.FormattingEnabled = true;
             this.cb_Protocol.Location = new System.Drawing.Point(213, 138);
             this.cb_Protocol.Name = "cb_Protocol";
             this.cb_Protocol.Size = new System.Drawing.Size(121, 22);
             this.cb_Protocol.TabIndex = 35;
-            this.cb_Protocol.ValueMember = "Value";
             // 
             // radioGroup1
             // 

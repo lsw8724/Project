@@ -1,112 +1,45 @@
-﻿using DaqProtocol; 
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using Newtonsoft.Json;
+using DaqProtocol;
+using System.ComponentModel;
 
 namespace TestCms1
 {
-    class ConfigFileSerializer_Receiver
+    public interface IConfigSerializer
     {
-        public static void Serialize(string filename, BindingList<IWavesReceiver> instance)
-        {
-            FileStream fileStreamObject = null;
-            try
-            {
-                fileStreamObject = new FileStream(filename, FileMode.Create);
-                IFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(fileStreamObject, instance);
-            }
-            finally
-            {
-                fileStreamObject.Close();
-            }
-        }
-
-        public static BindingList<IWavesReceiver> Deserialize(string filename)
-        {
-            FileStream fileStreamObject = null;
-            try
-            {
-                fileStreamObject = new FileStream(filename, FileMode.Open);
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                var obj = binaryFormatter.Deserialize(fileStreamObject);
-                return obj as BindingList<IWavesReceiver>;
-            }
-            finally
-            {
-                fileStreamObject.Close();
-            }
-        } 
+        void Serialize<T>(BinaryWriter writer, IList<T> list);
+        IList<T> DeSerialize<T>(BinaryReader reader);
     }
-    class ConfigFileSerializer_Measure
+
+    public class ConfigSerializer_LSW : IConfigSerializer
     {
-        public static void Serialize(string filename, BindingList<IMeasureCalculator> instance)
+        public void Serialize<T>(BinaryWriter writer, IList<T> list)
         {
-            FileStream fileStreamObject = null;
-            try
+            writer.Write(list.Count);
+            foreach (var obj in list)
             {
-                fileStreamObject = new FileStream(filename, FileMode.Create);
-                IFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(fileStreamObject, instance);
-            }
-            finally
-            {
-                fileStreamObject.Close();
+                writer.Write(obj.ToString());
+                string json = JsonConvert.SerializeObject(obj);
+                writer.Write(json);
             }
         }
 
-        public static BindingList<IMeasureCalculator> Deserialize(string filename)
+        public IList<T> DeSerialize<T>(BinaryReader reader)
         {
-            FileStream fileStreamObject = null;
-            try
+            IList<T> list = new BindingList<T>();
+            int count = reader.ReadInt32();
+            for (int i = 0; i < count; i++)
             {
-                fileStreamObject = new FileStream(filename, FileMode.Open);
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                var obj = binaryFormatter.Deserialize(fileStreamObject);
-                return obj as BindingList<IMeasureCalculator>;
+                string json = reader.ReadString().ToString();
+                VDPMReceiver test = JsonConvert.DeserializeObject<VDPMReceiver>(json);              
+                dynamic result = JsonConvert.DeserializeObject<dynamic>(json);
+                list.Add(result);
             }
-            finally
-            {
-                fileStreamObject.Close();
-            }
-        }
-    }
-    class ConfigFileSerializer_Recoder
-    {
-        public static void Serialize(string filename, BindingList<IWaveRecoder> instance)
-        {
-            FileStream fileStreamObject = null;
-            try
-            {
-                fileStreamObject = new FileStream(filename, FileMode.Create);
-                IFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(fileStreamObject, instance);
-            }
-            finally
-            {
-                fileStreamObject.Close();
-            }
-        }
-
-        public static BindingList<IWaveRecoder> Deserialize(string filename)
-        {
-            FileStream fileStreamObject = null;
-            try
-            {
-                fileStreamObject = new FileStream(filename, FileMode.Open);
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                var obj = binaryFormatter.Deserialize(fileStreamObject);
-                return obj as BindingList<IWaveRecoder>;
-            }
-            finally
-            {
-                fileStreamObject.Close();
-            }
+            return list;
         }
     }
 }

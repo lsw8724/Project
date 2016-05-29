@@ -10,8 +10,8 @@ namespace TestCms1
 {
     public interface IWaveSerializer
     {
-        void Serialize(BinaryWriter binWriter, WaveData[] wave);
-        WaveData[] Deserialize(BinaryReader binReader);
+        void Serialize(BinaryWriter writer, WaveData[] wave);
+        WaveData[] Deserialize(BinaryReader reader);
     }
     public class WaveDataSerializer_LSW : IWaveSerializer
     {
@@ -60,6 +60,10 @@ namespace TestCms1
                 //TODO Write Log
             }
             return waves;
+        }
+        public override string ToString()
+        {
+            return "LSW";
         }
     }
     public class WaveDataSerializer_KHW : IWaveSerializer
@@ -113,6 +117,10 @@ namespace TestCms1
             }
             return waves;
         }
+        public override string ToString()
+        {
+            return "KHW";
+        }
     }
     public class WaveDataSerializer_SHK : IWaveSerializer
     {
@@ -123,6 +131,11 @@ namespace TestCms1
         public WaveData[] Deserialize(BinaryReader reader)
         {
             return null;
+        }
+
+        public override string ToString()
+        {
+            return "SHK";
         }
     }
 }

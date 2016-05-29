@@ -28,7 +28,7 @@ namespace TestCms1.Dialog
 
         private void btn_Ok_Click(object sender, EventArgs e)
         {
-            IMeasureCalculator CurrentMeasure = null;
+            IWavesMeasure CurrentMeasure = null;
             switch ((MeasureType)ConfigItems.MeasureTypeIndex)
             {
                 case MeasureType.RMS: CurrentMeasure = new RMSMeasure(ConfigItems.Low, ConfigItems.High) { ChannelIdx = ConfigItems.ChannelIdx }; break;

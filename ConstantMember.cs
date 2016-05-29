@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace TestCms1
 {
@@ -10,6 +11,7 @@ namespace TestCms1
         public const int AsyncFMax = 3200;
         public const int AsyncLine = 3200;
     }
+
     enum MeasureType
     {
         RMS = 0,
