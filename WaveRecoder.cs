@@ -36,8 +36,8 @@ namespace TestCms1
     
     public class FileRecoder : IWavesRecoder
     {
-        private IWaveSerializer WaveSerializer;
-        private string FilePath;
+        public IWaveSerializer WaveSerializer;
+        public string FilePath;
         private Thread RecodeThread;
         public Queue<WaveData[]> WavesQueue = new Queue<WaveData[]>();
         public FileRecoder(string filePath, IWaveSerializer serializer)
@@ -92,14 +92,14 @@ namespace TestCms1
     class NetworkRecoder : IWavesRecoder
     {
         private Socket Server;
-        private IWaveSerializer WaveSerializer;
+        public IWaveSerializer WaveSerializer;
         private Thread RecodeThread;
         public Queue<WaveData[]> WavesQueue = new Queue<WaveData[]>();
-        private IPEndPoint IpEP;
+        public int Port;
         public NetworkRecoder(int port, IWaveSerializer serializer)
         {
             Server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IpEP = new IPEndPoint(IPAddress.Any, port);
+            Port = port;
             WaveSerializer = serializer;
             RecodeThread = new Thread(OnThread);
         }
@@ -108,7 +108,7 @@ namespace TestCms1
         {
             while (true)
             {
-                Server.Bind(IpEP);
+                Server.Bind(new IPEndPoint(IPAddress.Any, Port));
                 Server.Listen(5);
                 Socket client = Server.Accept();
                 try
@@ -155,7 +155,7 @@ namespace TestCms1
 
         public override string ToString()
         {
-            return "NetReceiver - " + IpEP.Port+ ", " + WaveSerializer.ToString(); ;
+            return "NetReceiver - " + Port+ ", " + WaveSerializer.ToString(); ;
         }
 
     }

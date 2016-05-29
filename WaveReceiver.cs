@@ -60,7 +60,7 @@ namespace TestCms1
     {
         public event Action<WaveData[]> WavesReceived;
         private System.Timers.Timer Timer;
-        private IWaveSerializer WaveSerializer;
+        public IWaveSerializer WaveSerializer;
         public string FilePath;
         public FileReceiver() { }
         public FileReceiver(string filePath, IWaveSerializer serializer)
@@ -110,7 +110,7 @@ namespace TestCms1
         public event Action<WaveData[]> WavesReceived;
         [NonSerialized]
         private System.Timers.Timer Timer;
-        private IWaveSerializer WaveSerializer;
+        public IWaveSerializer WaveSerializer;
         private Socket Client;
         public string ServerIp;
         public int Port;

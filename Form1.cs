@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using System.Collections;
 using Newtonsoft.Json;
@@ -22,24 +23,18 @@ namespace TestCms1
         public BindingList<IWavesRecoder> RecoderList = new BindingList<IWavesRecoder>();
         private IWavesReceiver SelectedReceiver;
         public Queue<WaveData[]> WaveQueue = new Queue<WaveData[]>();
-        private string ConfigPath = Application.StartupPath + "\\Config.JSON";
+        private string ReceiverConfigPath = Application.StartupPath + "\\ReceiverConfigs.JSON";
+        private string MeasureConfigPath = Application.StartupPath + "\\MeasureConfigs.JSON";
+        private string RecoderConfigPath = Application.StartupPath + "\\RecoderConfigs.JSON";
+        JsonSerializerSettings JSONSettings = new JsonSerializerSettings(){TypeNameHandling = TypeNameHandling.All};
 
         public WaveMonitor()
         {
             InitializeComponent();
 
-            //if (File.Exists(ConfigPath))
-            //{
-            //    var configReceiver = new FileConfigReceiver(ConfigPath, new ConfigSerializer_LSW());
-            //    var configs = configReceiver.ReceiveConfig();
-            //    ReceiverList = configs.Receivers as BindingList<IWavesReceiver>;
-            //    MeasureList = configs.Measures as BindingList<IWavesMeasure>;
-            //    RecoderList = configs.Recoders as BindingList<IWavesRecoder>;
-            //}
-
-            ReceiverList.ListChanged += List_Changed;
-            MeasureList.ListChanged += List_Changed;
-            RecoderList.ListChanged += List_Changed;
+            LoadConfig(ReceiverConfigPath, ReceiverList);
+            LoadConfig(MeasureConfigPath, MeasureList);
+            LoadConfig(RecoderConfigPath, RecoderList);
 
             FFTChart.Axes.Bottom.Maximum = ConstantMember.AsyncFMax;
             TrendChart.Axes.Bottom.Labels.DateTimeFormat = "yyyy.M.d\nHH:mm:ss";
@@ -66,14 +61,20 @@ namespace TestCms1
                 btn.Click += DelBtn_Click;
         }
 
-        private void List_Changed(object sender, ListChangedEventArgs e)
+        private void LoadConfig(string path, IList list)
         {
-            List<SendableConfig> confList = new List<SendableConfig>();
-            foreach (var receiver in ReceiverList)
-               confList.Add(new SendableConfig(receiver.GetType().ToString(), JsonConvert.SerializeObject(receiver)));
-            var jsonStr = JsonConvert.SerializeObject(confList[0]);
-            File.WriteAllText(Application.StartupPath + "\\Receiver.JSON", jsonStr);
-            SendableConfig obj = JsonConvert.DeserializeObject<SendableConfig>(jsonStr);
+            if (File.Exists(path))
+            {
+                foreach (var str in File.ReadAllLines(path))
+                    list.Add(JsonConvert.DeserializeObject(str,JSONSettings));
+            }
+        }
+        private void SaveConfig(string path, IList sourceList)
+        {
+            List<string> jsonList = new List<string>();
+            foreach (var item in sourceList)
+                jsonList.Add(JsonConvert.SerializeObject(item,JSONSettings));
+            File.WriteAllLines(path, jsonList);
         }
 
         private void DelBtn_Click(object sender, EventArgs e)
@@ -138,6 +139,10 @@ namespace TestCms1
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            SaveConfig(ReceiverConfigPath, ReceiverList);
+            SaveConfig(MeasureConfigPath, MeasureList);
+            SaveConfig(RecoderConfigPath, RecoderList);
+
             if (SelectedReceiver != null)
             {
                 SelectedReceiver.Stop();
