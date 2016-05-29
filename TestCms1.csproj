@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigUtil.cs" />
     <Compile Include="ConstantMember.cs" />
     <Compile Include="Dialog\MeasureEditForm.cs">
       <SubType>Form</SubType>
@@ -83,7 +84,6 @@
       <DependentUpon>RecoderEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FFTCalculator.cs" />
-    <Compile Include="SendableConfig.cs" />
     <Compile Include="WaveMeasure.cs" />
     <Compile Include="WaveReceiver.cs" />
     <Compile Include="DaqProtocol\ElapsedHandler.cs" />

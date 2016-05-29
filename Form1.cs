@@ -26,15 +26,15 @@ namespace TestCms1
         private string ReceiverConfigPath = Application.StartupPath + "\\ReceiverConfigs.JSON";
         private string MeasureConfigPath = Application.StartupPath + "\\MeasureConfigs.JSON";
         private string RecoderConfigPath = Application.StartupPath + "\\RecoderConfigs.JSON";
-        JsonSerializerSettings JSONSettings = new JsonSerializerSettings(){TypeNameHandling = TypeNameHandling.All};
+        
 
         public WaveMonitor()
         {
             InitializeComponent();
 
-            LoadConfig(ReceiverConfigPath, ReceiverList);
-            LoadConfig(MeasureConfigPath, MeasureList);
-            LoadConfig(RecoderConfigPath, RecoderList);
+            ConfigUtil.LoadConfig(ReceiverConfigPath, ReceiverList);
+            ConfigUtil.LoadConfig(MeasureConfigPath, MeasureList);
+            ConfigUtil.LoadConfig(RecoderConfigPath, RecoderList);
 
             FFTChart.Axes.Bottom.Maximum = ConstantMember.AsyncFMax;
             TrendChart.Axes.Bottom.Labels.DateTimeFormat = "yyyy.M.d\nHH:mm:ss";
@@ -59,22 +59,6 @@ namespace TestCms1
             btn_DelRecode.Tag = lb_Recoder;
             foreach (var btn in DelButtons)
                 btn.Click += DelBtn_Click;
-        }
-
-        private void LoadConfig(string path, IList list)
-        {
-            if (File.Exists(path))
-            {
-                foreach (var str in File.ReadAllLines(path))
-                    list.Add(JsonConvert.DeserializeObject(str,JSONSettings));
-            }
-        }
-        private void SaveConfig(string path, IList sourceList)
-        {
-            List<string> jsonList = new List<string>();
-            foreach (var item in sourceList)
-                jsonList.Add(JsonConvert.SerializeObject(item,JSONSettings));
-            File.WriteAllLines(path, jsonList);
         }
 
         private void DelBtn_Click(object sender, EventArgs e)
@@ -122,7 +106,6 @@ namespace TestCms1
                     FFTChart.Series[ch].Add(fft.XValues[i], fft.YValues[i]);
             }
 
-
             /*Trend*/
             if (MeasureList.Count > 0)
             {
@@ -139,9 +122,9 @@ namespace TestCms1
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SaveConfig(ReceiverConfigPath, ReceiverList);
-            SaveConfig(MeasureConfigPath, MeasureList);
-            SaveConfig(RecoderConfigPath, RecoderList);
+            ConfigUtil.SaveConfig(ReceiverConfigPath, ReceiverList);
+            ConfigUtil.SaveConfig(MeasureConfigPath, MeasureList);
+            ConfigUtil.SaveConfig(RecoderConfigPath, RecoderList);
 
             if (SelectedReceiver != null)
             {

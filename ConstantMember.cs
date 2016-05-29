@@ -12,6 +12,18 @@ namespace TestCms1
         public const int AsyncLine = 3200;
     }
 
+    enum Monitor_Cmd
+    {
+        Stop = 0x0,
+        Start = 0x1,
+        ConfigReceive = 0x2 
+    }
+
+    enum Wave_Cmd
+    {
+
+    }
+
     enum MeasureType
     {
         RMS = 0,
