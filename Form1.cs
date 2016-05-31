@@ -26,7 +26,7 @@ namespace TestCms1
         private string ReceiverConfigPath = Application.StartupPath + "\\ReceiverConfigs.JSON";
         private string MeasureConfigPath = Application.StartupPath + "\\MeasureConfigs.JSON";
         private string RecoderConfigPath = Application.StartupPath + "\\RecoderConfigs.JSON";
-        
+        private ModeConfig Config = new ModeConfig();
 
         public WaveMonitor()
         {
@@ -38,14 +38,19 @@ namespace TestCms1
 
             FFTChart.Axes.Bottom.Maximum = ConstantMember.AsyncFMax;
             TrendChart.Axes.Bottom.Labels.DateTimeFormat = "yyyy.M.d\nHH:mm:ss";
-            openFileDialog1.InitialDirectory = Application.StartupPath;
-            openFileDialog2.InitialDirectory = Application.StartupPath;
 
             lb_Receiver.DataSource = ReceiverList;
             lb_Measure.DataSource = MeasureList;
             lb_Recoder.DataSource = RecoderList;
 
-            lb_Receiver.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
+            waveMonitorBindingSource.DataSource = Config;
+
+            tb_ServerIp.DataBindings.Add(new Binding("Text", waveMonitorBindingSource, "ServerIp"));
+            tb_ReceivePort.DataBindings.Add(new Binding("Text", waveMonitorBindingSource, "ReceivePort"));
+            tb_SendPort.DataBindings.Add(new Binding("Text", waveMonitorBindingSource, "SendPort"));
+
+            
+
             AddButtons = new SimpleButton[] { btn_AddMeasure, btn_AddRceive, btn_AddRecode };
             btn_AddMeasure.Tag = new MeasureEditForm();
             btn_AddRceive.Tag = new ReceiverEditForm();
@@ -174,5 +179,39 @@ namespace TestCms1
             foreach (var recoder in RecoderList)
                 recoder.Stop();
         }
+
+        private void btn_Listen_Click(object sender, EventArgs e)
+        {
+            if(radio_Server.Checked)
+            {
+                ConfigUtil.ReceiveConfig(Config.ReceivePort, ReceiverList);
+                ConfigUtil.ReceiveConfig(Config.ReceivePort+1, MeasureList);
+                ConfigUtil.ReceiveConfig(Config.ReceivePort+2, RecoderList);
+            }
+        }
+
+        private void btn_Connect_Click(object sender, EventArgs e)
+        {
+            if (radio_Client.Checked)
+            {
+                ConfigUtil.SendConfig(Config.ServerIp,Config.SendPort, ReceiverList);
+                ConfigUtil.SendConfig(Config.ServerIp,Config.SendPort + 1, MeasureList);
+                ConfigUtil.SendConfig(Config.ServerIp, Config.SendPort + 2, RecoderList);
+            }
+        }
+    }
+
+    public class ModeConfig
+    {
+        public ModeConfig()
+        {
+            ServerIp = "127.0.0.1";
+            ReceivePort = 9333;
+            SendPort = 9333;
+        }
+
+        public string ServerIp { get; set; }
+        public int ReceivePort { get; set; }
+        public int SendPort { get; set; }
     }
 }

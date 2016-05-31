@@ -30,10 +30,24 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaveMonitor));
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.TimeChart = new Steema.TeeChart.TChart();
+            this.TimeSerise1 = new Steema.TeeChart.Styles.FastLine();
+            this.TimeSerise2 = new Steema.TeeChart.Styles.FastLine();
+            this.TimeSerise3 = new Steema.TeeChart.Styles.FastLine();
+            this.TimeSerise4 = new Steema.TeeChart.Styles.FastLine();
+            this.TimeSerise5 = new Steema.TeeChart.Styles.FastLine();
+            this.TimeSerise6 = new Steema.TeeChart.Styles.FastLine();
+            this.TimeSerise7 = new Steema.TeeChart.Styles.FastLine();
+            this.TimeSerise8 = new Steema.TeeChart.Styles.FastLine();
             this.FFTChart = new Steema.TeeChart.TChart();
+            this.FFTSerise1 = new Steema.TeeChart.Styles.FastLine();
+            this.FFTSerise2 = new Steema.TeeChart.Styles.FastLine();
+            this.FFTSerise3 = new Steema.TeeChart.Styles.FastLine();
+            this.FFTSerise4 = new Steema.TeeChart.Styles.FastLine();
+            this.FFTSerise5 = new Steema.TeeChart.Styles.FastLine();
+            this.FFTSerise6 = new Steema.TeeChart.Styles.FastLine();
+            this.FFTSerise7 = new Steema.TeeChart.Styles.FastLine();
+            this.FFTSerise8 = new Steema.TeeChart.Styles.FastLine();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.gr_Recoder = new DevExpress.XtraEditors.GroupControl();
             this.lb_Recoder = new System.Windows.Forms.ListBox();
@@ -52,33 +66,17 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.TrendChart = new Steema.TeeChart.TChart();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.tb_ServerPort = new DevExpress.XtraEditors.TextEdit();
-            this.tb_ClientIp = new DevExpress.XtraEditors.TextEdit();
-            this.tb_ClientPort = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.btn_Listen = new DevExpress.XtraEditors.SimpleButton();
-            this.radio_Local = new System.Windows.Forms.RadioButton();
-            this.radio_Server = new System.Windows.Forms.RadioButton();
-            this.radio_Client = new System.Windows.Forms.RadioButton();
             this.btn_Connect = new DevExpress.XtraEditors.SimpleButton();
-            this.FFTSerise1 = new Steema.TeeChart.Styles.FastLine();
-            this.FFTSerise2 = new Steema.TeeChart.Styles.FastLine();
-            this.FFTSerise3 = new Steema.TeeChart.Styles.FastLine();
-            this.FFTSerise4 = new Steema.TeeChart.Styles.FastLine();
-            this.FFTSerise5 = new Steema.TeeChart.Styles.FastLine();
-            this.FFTSerise6 = new Steema.TeeChart.Styles.FastLine();
-            this.FFTSerise7 = new Steema.TeeChart.Styles.FastLine();
-            this.FFTSerise8 = new Steema.TeeChart.Styles.FastLine();
-            this.TimeSerise1 = new Steema.TeeChart.Styles.FastLine();
-            this.TimeSerise2 = new Steema.TeeChart.Styles.FastLine();
-            this.TimeSerise3 = new Steema.TeeChart.Styles.FastLine();
-            this.TimeSerise4 = new Steema.TeeChart.Styles.FastLine();
-            this.TimeSerise5 = new Steema.TeeChart.Styles.FastLine();
-            this.TimeSerise6 = new Steema.TeeChart.Styles.FastLine();
-            this.TimeSerise7 = new Steema.TeeChart.Styles.FastLine();
-            this.TimeSerise8 = new Steema.TeeChart.Styles.FastLine();
+            this.radio_Client = new System.Windows.Forms.RadioButton();
+            this.radio_Server = new System.Windows.Forms.RadioButton();
+            this.radio_Local = new System.Windows.Forms.RadioButton();
+            this.btn_Listen = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.tb_SendPort = new DevExpress.XtraEditors.TextEdit();
+            this.tb_ServerIp = new DevExpress.XtraEditors.TextEdit();
+            this.tb_ReceivePort = new DevExpress.XtraEditors.TextEdit();
             this.waveMonitorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -91,19 +89,11 @@
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ServerPort.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ClientIp.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ClientPort.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_SendPort.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_ServerIp.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_ReceivePort.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.waveMonitorBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // openFileDialog2
-            // 
-            this.openFileDialog2.FileName = "openFileDialog2";
             // 
             // TimeChart
             // 
@@ -141,6 +131,172 @@
             this.TimeChart.Series.Add(this.TimeSerise8);
             this.TimeChart.Size = new System.Drawing.Size(990, 163);
             this.TimeChart.TabIndex = 4;
+            // 
+            // TimeSerise1
+            // 
+            this.TimeSerise1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
+            this.TimeSerise1.ColorEach = false;
+            // 
+            // 
+            // 
+            this.TimeSerise1.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
+            this.TimeSerise1.Title = "Ch1";
+            this.TimeSerise1.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            // 
+            // 
+            // 
+            this.TimeSerise1.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.TimeSerise1.YValues.DataMember = "Y";
+            // 
+            // TimeSerise2
+            // 
+            this.TimeSerise2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
+            this.TimeSerise2.ColorEach = false;
+            // 
+            // 
+            // 
+            this.TimeSerise2.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
+            this.TimeSerise2.SeriesData = resources.GetString("TimeSerise2.SeriesData");
+            this.TimeSerise2.Title = "Ch2";
+            this.TimeSerise2.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.TimeSerise2.Visible = false;
+            // 
+            // 
+            // 
+            this.TimeSerise2.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.TimeSerise2.YValues.DataMember = "Y";
+            // 
+            // TimeSerise3
+            // 
+            this.TimeSerise3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(76)))), ((int)(((byte)(20)))));
+            this.TimeSerise3.ColorEach = false;
+            // 
+            // 
+            // 
+            this.TimeSerise3.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(76)))), ((int)(((byte)(20)))));
+            this.TimeSerise3.SeriesData = resources.GetString("TimeSerise3.SeriesData");
+            this.TimeSerise3.Title = "Ch3";
+            this.TimeSerise3.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.TimeSerise3.Visible = false;
+            // 
+            // 
+            // 
+            this.TimeSerise3.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.TimeSerise3.YValues.DataMember = "Y";
+            // 
+            // TimeSerise4
+            // 
+            this.TimeSerise4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(151)))), ((int)(((byte)(168)))));
+            this.TimeSerise4.ColorEach = false;
+            // 
+            // 
+            // 
+            this.TimeSerise4.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(151)))), ((int)(((byte)(168)))));
+            this.TimeSerise4.SeriesData = resources.GetString("TimeSerise4.SeriesData");
+            this.TimeSerise4.Title = "Ch4";
+            this.TimeSerise4.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.TimeSerise4.Visible = false;
+            // 
+            // 
+            // 
+            this.TimeSerise4.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.TimeSerise4.YValues.DataMember = "Y";
+            // 
+            // TimeSerise5
+            // 
+            this.TimeSerise5.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(64)))), ((int)(((byte)(107)))));
+            this.TimeSerise5.ColorEach = false;
+            // 
+            // 
+            // 
+            this.TimeSerise5.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(64)))), ((int)(((byte)(107)))));
+            this.TimeSerise5.SeriesData = resources.GetString("TimeSerise5.SeriesData");
+            this.TimeSerise5.Title = "Ch5";
+            this.TimeSerise5.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.TimeSerise5.Visible = false;
+            // 
+            // 
+            // 
+            this.TimeSerise5.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.TimeSerise5.YValues.DataMember = "Y";
+            // 
+            // TimeSerise6
+            // 
+            this.TimeSerise6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(123)))), ((int)(((byte)(99)))));
+            this.TimeSerise6.ColorEach = false;
+            // 
+            // 
+            // 
+            this.TimeSerise6.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(123)))), ((int)(((byte)(99)))));
+            this.TimeSerise6.SeriesData = resources.GetString("TimeSerise6.SeriesData");
+            this.TimeSerise6.Title = "Ch6";
+            this.TimeSerise6.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.TimeSerise6.Visible = false;
+            // 
+            // 
+            // 
+            this.TimeSerise6.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.TimeSerise6.YValues.DataMember = "Y";
+            // 
+            // TimeSerise7
+            // 
+            this.TimeSerise7.Color = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(8)))), ((int)(((byte)(14)))));
+            this.TimeSerise7.ColorEach = false;
+            // 
+            // 
+            // 
+            this.TimeSerise7.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(8)))), ((int)(((byte)(14)))));
+            this.TimeSerise7.SeriesData = resources.GetString("TimeSerise7.SeriesData");
+            this.TimeSerise7.Title = "Ch7";
+            this.TimeSerise7.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.TimeSerise7.Visible = false;
+            // 
+            // 
+            // 
+            this.TimeSerise7.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.TimeSerise7.YValues.DataMember = "Y";
+            // 
+            // TimeSerise8
+            // 
+            this.TimeSerise8.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
+            this.TimeSerise8.ColorEach = false;
+            // 
+            // 
+            // 
+            this.TimeSerise8.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
+            this.TimeSerise8.SeriesData = resources.GetString("TimeSerise8.SeriesData");
+            this.TimeSerise8.Title = "Ch8";
+            this.TimeSerise8.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.TimeSerise8.Visible = false;
+            // 
+            // 
+            // 
+            this.TimeSerise8.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.TimeSerise8.YValues.DataMember = "Y";
             // 
             // FFTChart
             // 
@@ -188,6 +344,172 @@
             this.FFTChart.Series.Add(this.FFTSerise8);
             this.FFTChart.Size = new System.Drawing.Size(990, 163);
             this.FFTChart.TabIndex = 2;
+            // 
+            // FFTSerise1
+            // 
+            this.FFTSerise1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
+            this.FFTSerise1.ColorEach = false;
+            // 
+            // 
+            // 
+            this.FFTSerise1.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
+            this.FFTSerise1.Title = "Ch1";
+            this.FFTSerise1.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            // 
+            // 
+            // 
+            this.FFTSerise1.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.FFTSerise1.YValues.DataMember = "Y";
+            // 
+            // FFTSerise2
+            // 
+            this.FFTSerise2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
+            this.FFTSerise2.ColorEach = false;
+            // 
+            // 
+            // 
+            this.FFTSerise2.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
+            this.FFTSerise2.SeriesData = resources.GetString("FFTSerise2.SeriesData");
+            this.FFTSerise2.Title = "Ch2";
+            this.FFTSerise2.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.FFTSerise2.Visible = false;
+            // 
+            // 
+            // 
+            this.FFTSerise2.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.FFTSerise2.YValues.DataMember = "Y";
+            // 
+            // FFTSerise3
+            // 
+            this.FFTSerise3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(76)))), ((int)(((byte)(20)))));
+            this.FFTSerise3.ColorEach = false;
+            // 
+            // 
+            // 
+            this.FFTSerise3.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(76)))), ((int)(((byte)(20)))));
+            this.FFTSerise3.SeriesData = resources.GetString("FFTSerise3.SeriesData");
+            this.FFTSerise3.Title = "Ch3";
+            this.FFTSerise3.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.FFTSerise3.Visible = false;
+            // 
+            // 
+            // 
+            this.FFTSerise3.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.FFTSerise3.YValues.DataMember = "Y";
+            // 
+            // FFTSerise4
+            // 
+            this.FFTSerise4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(151)))), ((int)(((byte)(168)))));
+            this.FFTSerise4.ColorEach = false;
+            // 
+            // 
+            // 
+            this.FFTSerise4.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(151)))), ((int)(((byte)(168)))));
+            this.FFTSerise4.SeriesData = resources.GetString("FFTSerise4.SeriesData");
+            this.FFTSerise4.Title = "Ch4";
+            this.FFTSerise4.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.FFTSerise4.Visible = false;
+            // 
+            // 
+            // 
+            this.FFTSerise4.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.FFTSerise4.YValues.DataMember = "Y";
+            // 
+            // FFTSerise5
+            // 
+            this.FFTSerise5.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(64)))), ((int)(((byte)(107)))));
+            this.FFTSerise5.ColorEach = false;
+            // 
+            // 
+            // 
+            this.FFTSerise5.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(64)))), ((int)(((byte)(107)))));
+            this.FFTSerise5.SeriesData = resources.GetString("FFTSerise5.SeriesData");
+            this.FFTSerise5.Title = "Ch5";
+            this.FFTSerise5.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.FFTSerise5.Visible = false;
+            // 
+            // 
+            // 
+            this.FFTSerise5.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.FFTSerise5.YValues.DataMember = "Y";
+            // 
+            // FFTSerise6
+            // 
+            this.FFTSerise6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(123)))), ((int)(((byte)(99)))));
+            this.FFTSerise6.ColorEach = false;
+            // 
+            // 
+            // 
+            this.FFTSerise6.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(123)))), ((int)(((byte)(99)))));
+            this.FFTSerise6.SeriesData = resources.GetString("FFTSerise6.SeriesData");
+            this.FFTSerise6.Title = "Ch6";
+            this.FFTSerise6.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.FFTSerise6.Visible = false;
+            // 
+            // 
+            // 
+            this.FFTSerise6.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.FFTSerise6.YValues.DataMember = "Y";
+            // 
+            // FFTSerise7
+            // 
+            this.FFTSerise7.Color = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(8)))), ((int)(((byte)(14)))));
+            this.FFTSerise7.ColorEach = false;
+            // 
+            // 
+            // 
+            this.FFTSerise7.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(8)))), ((int)(((byte)(14)))));
+            this.FFTSerise7.SeriesData = resources.GetString("FFTSerise7.SeriesData");
+            this.FFTSerise7.Title = "Ch7";
+            this.FFTSerise7.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.FFTSerise7.Visible = false;
+            // 
+            // 
+            // 
+            this.FFTSerise7.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.FFTSerise7.YValues.DataMember = "Y";
+            // 
+            // FFTSerise8
+            // 
+            this.FFTSerise8.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
+            this.FFTSerise8.ColorEach = false;
+            // 
+            // 
+            // 
+            this.FFTSerise8.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
+            this.FFTSerise8.SeriesData = resources.GetString("FFTSerise8.SeriesData");
+            this.FFTSerise8.Title = "Ch8";
+            this.FFTSerise8.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.FFTSerise8.Visible = false;
+            // 
+            // 
+            // 
+            this.FFTSerise8.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.FFTSerise8.YValues.DataMember = "Y";
             // 
             // groupControl1
             // 
@@ -405,9 +727,9 @@
             this.groupControl2.Controls.Add(this.labelControl3);
             this.groupControl2.Controls.Add(this.labelControl2);
             this.groupControl2.Controls.Add(this.labelControl1);
-            this.groupControl2.Controls.Add(this.tb_ClientPort);
-            this.groupControl2.Controls.Add(this.tb_ClientIp);
-            this.groupControl2.Controls.Add(this.tb_ServerPort);
+            this.groupControl2.Controls.Add(this.tb_SendPort);
+            this.groupControl2.Controls.Add(this.tb_ServerIp);
+            this.groupControl2.Controls.Add(this.tb_ReceivePort);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(3, 653);
             this.groupControl2.Name = "groupControl2";
@@ -416,42 +738,55 @@
             this.groupControl2.TabIndex = 6;
             this.groupControl2.Text = "groupControl2";
             // 
-            // tb_ServerPort
+            // btn_Connect
             // 
-            this.tb_ServerPort.Location = new System.Drawing.Point(278, 8);
-            this.tb_ServerPort.Name = "tb_ServerPort";
-            this.tb_ServerPort.Size = new System.Drawing.Size(100, 20);
-            this.tb_ServerPort.TabIndex = 1;
+            this.btn_Connect.Location = new System.Drawing.Point(902, 5);
+            this.btn_Connect.Name = "btn_Connect";
+            this.btn_Connect.Size = new System.Drawing.Size(75, 26);
+            this.btn_Connect.TabIndex = 11;
+            this.btn_Connect.Text = "Connect";
+            this.btn_Connect.Click += new System.EventHandler(this.btn_Connect_Click);
             // 
-            // tb_ClientIp
+            // radio_Client
             // 
-            this.tb_ClientIp.Location = new System.Drawing.Point(706, 8);
-            this.tb_ClientIp.Name = "tb_ClientIp";
-            this.tb_ClientIp.Size = new System.Drawing.Size(100, 20);
-            this.tb_ClientIp.TabIndex = 2;
+            this.radio_Client.AutoSize = true;
+            this.radio_Client.Location = new System.Drawing.Point(589, 11);
+            this.radio_Client.Name = "radio_Client";
+            this.radio_Client.Size = new System.Drawing.Size(83, 16);
+            this.radio_Client.TabIndex = 10;
+            this.radio_Client.Text = "클라이언트";
+            this.radio_Client.UseVisualStyleBackColor = true;
             // 
-            // tb_ClientPort
+            // radio_Server
             // 
-            this.tb_ClientPort.Location = new System.Drawing.Point(844, 8);
-            this.tb_ClientPort.Name = "tb_ClientPort";
-            this.tb_ClientPort.Size = new System.Drawing.Size(52, 20);
-            this.tb_ClientPort.TabIndex = 3;
+            this.radio_Server.AutoSize = true;
+            this.radio_Server.Location = new System.Drawing.Point(188, 11);
+            this.radio_Server.Name = "radio_Server";
+            this.radio_Server.Size = new System.Drawing.Size(47, 16);
+            this.radio_Server.TabIndex = 9;
+            this.radio_Server.Text = "서버";
+            this.radio_Server.UseVisualStyleBackColor = true;
             // 
-            // labelControl1
+            // radio_Local
             // 
-            this.labelControl1.Location = new System.Drawing.Point(249, 11);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(23, 14);
-            this.labelControl1.TabIndex = 4;
-            this.labelControl1.Text = "Port";
+            this.radio_Local.AutoSize = true;
+            this.radio_Local.Checked = true;
+            this.radio_Local.Location = new System.Drawing.Point(9, 10);
+            this.radio_Local.Name = "radio_Local";
+            this.radio_Local.Size = new System.Drawing.Size(47, 16);
+            this.radio_Local.TabIndex = 8;
+            this.radio_Local.TabStop = true;
+            this.radio_Local.Text = "로컬";
+            this.radio_Local.UseVisualStyleBackColor = true;
             // 
-            // labelControl2
+            // btn_Listen
             // 
-            this.labelControl2.Location = new System.Drawing.Point(689, 11);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(11, 14);
-            this.labelControl2.TabIndex = 5;
-            this.labelControl2.Text = "IP";
+            this.btn_Listen.Location = new System.Drawing.Point(384, 6);
+            this.btn_Listen.Name = "btn_Listen";
+            this.btn_Listen.Size = new System.Drawing.Size(75, 26);
+            this.btn_Listen.TabIndex = 7;
+            this.btn_Listen.Text = "Listen";
+            this.btn_Listen.Click += new System.EventHandler(this.btn_Listen_Click);
             // 
             // labelControl3
             // 
@@ -461,386 +796,42 @@
             this.labelControl3.TabIndex = 6;
             this.labelControl3.Text = "Port";
             // 
-            // btn_Listen
+            // labelControl2
             // 
-            this.btn_Listen.Location = new System.Drawing.Point(384, 6);
-            this.btn_Listen.Name = "btn_Listen";
-            this.btn_Listen.Size = new System.Drawing.Size(75, 26);
-            this.btn_Listen.TabIndex = 7;
-            this.btn_Listen.Text = "Listen";
+            this.labelControl2.Location = new System.Drawing.Point(689, 11);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(11, 14);
+            this.labelControl2.TabIndex = 5;
+            this.labelControl2.Text = "IP";
             // 
-            // radio_Local
+            // labelControl1
             // 
-            this.radio_Local.AutoSize = true;
-            this.radio_Local.Location = new System.Drawing.Point(9, 10);
-            this.radio_Local.Name = "radio_Local";
-            this.radio_Local.Size = new System.Drawing.Size(47, 16);
-            this.radio_Local.TabIndex = 8;
-            this.radio_Local.TabStop = true;
-            this.radio_Local.Text = "로컬";
-            this.radio_Local.UseVisualStyleBackColor = true;
+            this.labelControl1.Location = new System.Drawing.Point(249, 11);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(23, 14);
+            this.labelControl1.TabIndex = 4;
+            this.labelControl1.Text = "Port";
             // 
-            // radio_Server
+            // tb_SendPort
             // 
-            this.radio_Server.AutoSize = true;
-            this.radio_Server.Location = new System.Drawing.Point(188, 11);
-            this.radio_Server.Name = "radio_Server";
-            this.radio_Server.Size = new System.Drawing.Size(47, 16);
-            this.radio_Server.TabIndex = 9;
-            this.radio_Server.TabStop = true;
-            this.radio_Server.Text = "서버";
-            this.radio_Server.UseVisualStyleBackColor = true;
+            this.tb_SendPort.Location = new System.Drawing.Point(844, 8);
+            this.tb_SendPort.Name = "tb_SendPort";
+            this.tb_SendPort.Size = new System.Drawing.Size(52, 20);
+            this.tb_SendPort.TabIndex = 3;
             // 
-            // radio_Client
+            // tb_ServerIp
             // 
-            this.radio_Client.AutoSize = true;
-            this.radio_Client.Location = new System.Drawing.Point(589, 11);
-            this.radio_Client.Name = "radio_Client";
-            this.radio_Client.Size = new System.Drawing.Size(83, 16);
-            this.radio_Client.TabIndex = 10;
-            this.radio_Client.TabStop = true;
-            this.radio_Client.Text = "클라이언트";
-            this.radio_Client.UseVisualStyleBackColor = true;
+            this.tb_ServerIp.Location = new System.Drawing.Point(706, 8);
+            this.tb_ServerIp.Name = "tb_ServerIp";
+            this.tb_ServerIp.Size = new System.Drawing.Size(100, 20);
+            this.tb_ServerIp.TabIndex = 2;
             // 
-            // btn_Connect
+            // tb_ReceivePort
             // 
-            this.btn_Connect.Location = new System.Drawing.Point(902, 5);
-            this.btn_Connect.Name = "btn_Connect";
-            this.btn_Connect.Size = new System.Drawing.Size(75, 26);
-            this.btn_Connect.TabIndex = 11;
-            this.btn_Connect.Text = "Connect";
-            // 
-            // FFTSerise1
-            // 
-            this.FFTSerise1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
-            this.FFTSerise1.ColorEach = false;
-            // 
-            // 
-            // 
-            this.FFTSerise1.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
-            this.FFTSerise1.Title = "Ch1";
-            this.FFTSerise1.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            // 
-            // 
-            // 
-            this.FFTSerise1.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.FFTSerise1.YValues.DataMember = "Y";
-            // 
-            // FFTSerise2
-            // 
-            this.FFTSerise2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
-            this.FFTSerise2.ColorEach = false;
-            // 
-            // 
-            // 
-            this.FFTSerise2.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
-            this.FFTSerise2.SeriesData = resources.GetString("FFTSerise2.SeriesData");
-            this.FFTSerise2.Title = "Ch2";
-            this.FFTSerise2.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.FFTSerise2.Visible = false;
-            // 
-            // 
-            // 
-            this.FFTSerise2.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.FFTSerise2.YValues.DataMember = "Y";
-            // 
-            // FFTSerise3
-            // 
-            this.FFTSerise3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(76)))), ((int)(((byte)(20)))));
-            this.FFTSerise3.ColorEach = false;
-            // 
-            // 
-            // 
-            this.FFTSerise3.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(76)))), ((int)(((byte)(20)))));
-            this.FFTSerise3.SeriesData = resources.GetString("FFTSerise3.SeriesData");
-            this.FFTSerise3.Title = "Ch3";
-            this.FFTSerise3.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.FFTSerise3.Visible = false;
-            // 
-            // 
-            // 
-            this.FFTSerise3.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.FFTSerise3.YValues.DataMember = "Y";
-            // 
-            // FFTSerise4
-            // 
-            this.FFTSerise4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(151)))), ((int)(((byte)(168)))));
-            this.FFTSerise4.ColorEach = false;
-            // 
-            // 
-            // 
-            this.FFTSerise4.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(151)))), ((int)(((byte)(168)))));
-            this.FFTSerise4.SeriesData = resources.GetString("FFTSerise4.SeriesData");
-            this.FFTSerise4.Title = "Ch4";
-            this.FFTSerise4.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.FFTSerise4.Visible = false;
-            // 
-            // 
-            // 
-            this.FFTSerise4.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.FFTSerise4.YValues.DataMember = "Y";
-            // 
-            // FFTSerise5
-            // 
-            this.FFTSerise5.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(64)))), ((int)(((byte)(107)))));
-            this.FFTSerise5.ColorEach = false;
-            // 
-            // 
-            // 
-            this.FFTSerise5.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(64)))), ((int)(((byte)(107)))));
-            this.FFTSerise5.SeriesData = resources.GetString("FFTSerise5.SeriesData");
-            this.FFTSerise5.Title = "Ch5";
-            this.FFTSerise5.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.FFTSerise5.Visible = false;
-            // 
-            // 
-            // 
-            this.FFTSerise5.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.FFTSerise5.YValues.DataMember = "Y";
-            // 
-            // FFTSerise6
-            // 
-            this.FFTSerise6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(123)))), ((int)(((byte)(99)))));
-            this.FFTSerise6.ColorEach = false;
-            // 
-            // 
-            // 
-            this.FFTSerise6.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(123)))), ((int)(((byte)(99)))));
-            this.FFTSerise6.SeriesData = resources.GetString("FFTSerise6.SeriesData");
-            this.FFTSerise6.Title = "Ch6";
-            this.FFTSerise6.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.FFTSerise6.Visible = false;
-            // 
-            // 
-            // 
-            this.FFTSerise6.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.FFTSerise6.YValues.DataMember = "Y";
-            // 
-            // FFTSerise7
-            // 
-            this.FFTSerise7.Color = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(8)))), ((int)(((byte)(14)))));
-            this.FFTSerise7.ColorEach = false;
-            // 
-            // 
-            // 
-            this.FFTSerise7.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(8)))), ((int)(((byte)(14)))));
-            this.FFTSerise7.SeriesData = resources.GetString("FFTSerise7.SeriesData");
-            this.FFTSerise7.Title = "Ch7";
-            this.FFTSerise7.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.FFTSerise7.Visible = false;
-            // 
-            // 
-            // 
-            this.FFTSerise7.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.FFTSerise7.YValues.DataMember = "Y";
-            // 
-            // FFTSerise8
-            // 
-            this.FFTSerise8.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
-            this.FFTSerise8.ColorEach = false;
-            // 
-            // 
-            // 
-            this.FFTSerise8.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
-            this.FFTSerise8.SeriesData = resources.GetString("FFTSerise8.SeriesData");
-            this.FFTSerise8.Title = "Ch8";
-            this.FFTSerise8.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.FFTSerise8.Visible = false;
-            // 
-            // 
-            // 
-            this.FFTSerise8.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.FFTSerise8.YValues.DataMember = "Y";
-            // 
-            // TimeSerise1
-            // 
-            this.TimeSerise1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
-            this.TimeSerise1.ColorEach = false;
-            // 
-            // 
-            // 
-            this.TimeSerise1.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
-            this.TimeSerise1.Title = "Ch1";
-            this.TimeSerise1.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            // 
-            // 
-            // 
-            this.TimeSerise1.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.TimeSerise1.YValues.DataMember = "Y";
-            // 
-            // TimeSerise2
-            // 
-            this.TimeSerise2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
-            this.TimeSerise2.ColorEach = false;
-            // 
-            // 
-            // 
-            this.TimeSerise2.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
-            this.TimeSerise2.SeriesData = resources.GetString("TimeSerise2.SeriesData");
-            this.TimeSerise2.Title = "Ch2";
-            this.TimeSerise2.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.TimeSerise2.Visible = false;
-            // 
-            // 
-            // 
-            this.TimeSerise2.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.TimeSerise2.YValues.DataMember = "Y";
-            // 
-            // TimeSerise3
-            // 
-            this.TimeSerise3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(76)))), ((int)(((byte)(20)))));
-            this.TimeSerise3.ColorEach = false;
-            // 
-            // 
-            // 
-            this.TimeSerise3.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(76)))), ((int)(((byte)(20)))));
-            this.TimeSerise3.SeriesData = resources.GetString("TimeSerise3.SeriesData");
-            this.TimeSerise3.Title = "Ch3";
-            this.TimeSerise3.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.TimeSerise3.Visible = false;
-            // 
-            // 
-            // 
-            this.TimeSerise3.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.TimeSerise3.YValues.DataMember = "Y";
-            // 
-            // TimeSerise4
-            // 
-            this.TimeSerise4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(151)))), ((int)(((byte)(168)))));
-            this.TimeSerise4.ColorEach = false;
-            // 
-            // 
-            // 
-            this.TimeSerise4.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(151)))), ((int)(((byte)(168)))));
-            this.TimeSerise4.SeriesData = resources.GetString("TimeSerise4.SeriesData");
-            this.TimeSerise4.Title = "Ch4";
-            this.TimeSerise4.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.TimeSerise4.Visible = false;
-            // 
-            // 
-            // 
-            this.TimeSerise4.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.TimeSerise4.YValues.DataMember = "Y";
-            // 
-            // TimeSerise5
-            // 
-            this.TimeSerise5.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(64)))), ((int)(((byte)(107)))));
-            this.TimeSerise5.ColorEach = false;
-            // 
-            // 
-            // 
-            this.TimeSerise5.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(64)))), ((int)(((byte)(107)))));
-            this.TimeSerise5.SeriesData = resources.GetString("TimeSerise5.SeriesData");
-            this.TimeSerise5.Title = "Ch5";
-            this.TimeSerise5.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.TimeSerise5.Visible = false;
-            // 
-            // 
-            // 
-            this.TimeSerise5.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.TimeSerise5.YValues.DataMember = "Y";
-            // 
-            // TimeSerise6
-            // 
-            this.TimeSerise6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(123)))), ((int)(((byte)(99)))));
-            this.TimeSerise6.ColorEach = false;
-            // 
-            // 
-            // 
-            this.TimeSerise6.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(123)))), ((int)(((byte)(99)))));
-            this.TimeSerise6.SeriesData = resources.GetString("TimeSerise6.SeriesData");
-            this.TimeSerise6.Title = "Ch6";
-            this.TimeSerise6.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.TimeSerise6.Visible = false;
-            // 
-            // 
-            // 
-            this.TimeSerise6.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.TimeSerise6.YValues.DataMember = "Y";
-            // 
-            // TimeSerise7
-            // 
-            this.TimeSerise7.Color = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(8)))), ((int)(((byte)(14)))));
-            this.TimeSerise7.ColorEach = false;
-            // 
-            // 
-            // 
-            this.TimeSerise7.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(8)))), ((int)(((byte)(14)))));
-            this.TimeSerise7.SeriesData = resources.GetString("TimeSerise7.SeriesData");
-            this.TimeSerise7.Title = "Ch7";
-            this.TimeSerise7.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.TimeSerise7.Visible = false;
-            // 
-            // 
-            // 
-            this.TimeSerise7.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.TimeSerise7.YValues.DataMember = "Y";
-            // 
-            // TimeSerise8
-            // 
-            this.TimeSerise8.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
-            this.TimeSerise8.ColorEach = false;
-            // 
-            // 
-            // 
-            this.TimeSerise8.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
-            this.TimeSerise8.SeriesData = resources.GetString("TimeSerise8.SeriesData");
-            this.TimeSerise8.Title = "Ch8";
-            this.TimeSerise8.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
-            this.TimeSerise8.Visible = false;
-            // 
-            // 
-            // 
-            this.TimeSerise8.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.TimeSerise8.YValues.DataMember = "Y";
+            this.tb_ReceivePort.Location = new System.Drawing.Point(278, 8);
+            this.tb_ReceivePort.Name = "tb_ReceivePort";
+            this.tb_ReceivePort.Size = new System.Drawing.Size(100, 20);
+            this.tb_ReceivePort.TabIndex = 1;
             // 
             // waveMonitorBindingSource
             // 
@@ -868,9 +859,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.groupControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ServerPort.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ClientIp.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ClientPort.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_SendPort.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_ServerIp.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_ReceivePort.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.waveMonitorBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -878,8 +869,6 @@
 
         #endregion
 
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.BindingSource waveMonitorBindingSource;
         private Steema.TeeChart.TChart TimeChart;
         private Steema.TeeChart.Styles.FastLine TimeSerise1;
@@ -920,9 +909,9 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit tb_ClientPort;
-        private DevExpress.XtraEditors.TextEdit tb_ClientIp;
-        private DevExpress.XtraEditors.TextEdit tb_ServerPort;
+        private DevExpress.XtraEditors.TextEdit tb_SendPort;
+        private DevExpress.XtraEditors.TextEdit tb_ServerIp;
+        private DevExpress.XtraEditors.TextEdit tb_ReceivePort;
         private DevExpress.XtraEditors.SimpleButton btn_Listen;
         private System.Windows.Forms.RadioButton radio_Client;
         private System.Windows.Forms.RadioButton radio_Server;
