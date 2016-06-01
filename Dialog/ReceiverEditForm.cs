@@ -13,6 +13,7 @@ namespace TestCms1.Dialog
 {
     public partial class ReceiverEditForm : DevExpress.XtraEditors.XtraForm
     {
+        public enum ReceiverType { Daq5509 = 0, File, Network }
         private ReceiveConfig ConfigItems = new ReceiveConfig();
         public ReceiverEditForm()
         {

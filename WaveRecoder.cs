@@ -15,7 +15,7 @@ namespace TestCms1
     {
         public static void WavesRecodeFromQueue(Stream stream, IWaveSerializer serializer, Queue<WaveData[]> queue)
         {
-            if (queue.Count <= 0) return;
+            while (queue.Count <= 0);
             WaveData[] waves = null;
             lock ((queue as ICollection).SyncRoot)
             {
@@ -39,12 +39,11 @@ namespace TestCms1
         public IWaveSerializer WaveSerializer;
         public string FilePath;
         private Thread RecodeThread;
-        public Queue<WaveData[]> WavesQueue = new Queue<WaveData[]>();
+        private Queue<WaveData[]> WavesQueue = new Queue<WaveData[]>();
         public FileRecoder(string filePath, IWaveSerializer serializer)
         {
             WaveSerializer = serializer;
-            FilePath = filePath;
-            RecodeThread = new Thread(OnThread);
+            FilePath = filePath; 
         }
 
         public void OnThread()
@@ -53,8 +52,10 @@ namespace TestCms1
             {
                 try
                 {
-                    var stream = new FileStream(FilePath, FileMode.Append);
-                    RecodeUtil.WavesRecodeFromQueue(stream, WaveSerializer, WavesQueue);
+                    using (var fs = new FileStream(FilePath, FileMode.Append))
+                    {
+                        RecodeUtil.WavesRecodeFromQueue(fs, WaveSerializer, WavesQueue);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -65,13 +66,15 @@ namespace TestCms1
 
         public void Start()
         {
+            RecodeThread = new Thread(OnThread);
             RecodeThread.Start();
         }
 
         public void Stop()
         {
             if (RecodeThread != null && RecodeThread.IsAlive)
-                RecodeThread.Join();
+                RecodeThread.Interrupt();
+            
         }
 
         public void Dispose()
@@ -94,14 +97,12 @@ namespace TestCms1
         private Socket Server;
         public IWaveSerializer WaveSerializer;
         private Thread RecodeThread;
-        public Queue<WaveData[]> WavesQueue = new Queue<WaveData[]>();
+        private Queue<WaveData[]> WavesQueue = new Queue<WaveData[]>();
         public int Port;
         public NetworkRecoder(int port, IWaveSerializer serializer)
         {
-            Server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             Port = port;
             WaveSerializer = serializer;
-            RecodeThread = new Thread(OnThread);
         }
 
         public void OnThread()
@@ -130,22 +131,19 @@ namespace TestCms1
 
         public void Start()
         {
+            Server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            RecodeThread = new Thread(OnThread);
             RecodeThread.Start();
         }
 
         public void Stop()
         {
             if (RecodeThread != null && RecodeThread.IsAlive)
-                RecodeThread.Join();
-            if (Server != null)
-            {
-                Server.Close();
-            }
+                RecodeThread.Interrupt();
         }
 
         public void Dispose()
         {
-            Server.Dispose();
         }
 
         public Queue<WaveData[]> GetWavesQueue()

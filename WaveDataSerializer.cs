@@ -44,12 +44,15 @@ namespace TestCms1
             {
                 for(int ch=0; ch<waves.Length; ch++)
                 {
+                    var dataCount = reader.ReadInt32();
+                    var chId = reader.ReadInt32();
+                    var dateTime = DateTime.FromOADate(reader.ReadDouble());
                     waves[ch] = new WaveData()
-                        {
-                            AsyncDataCount = reader.ReadInt32(),
-                            ChannelId = reader.ReadInt32(),
-                            DateTime = DateTime.FromOADate(reader.ReadDouble()),
-                        };
+                    {
+                        AsyncDataCount = dataCount,
+                        ChannelId = chId,
+                        DateTime = dateTime
+                    };
                     waves[ch].AsyncData = new float[waves[ch].AsyncDataCount];
 
                     for (int i = 0; i < waves[ch].AsyncDataCount; i++)

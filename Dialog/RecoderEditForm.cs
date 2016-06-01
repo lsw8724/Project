@@ -11,6 +11,7 @@ namespace TestCms1.Dialog
 {
     public partial class RecoderEditForm : DevExpress.XtraEditors.XtraForm
     {
+        public enum RecoderType{ File = 0, Network = 1}
         private RecodeConfig ConfigItems = new RecodeConfig();
         public RecoderEditForm()
         {

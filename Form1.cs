@@ -27,7 +27,7 @@ namespace TestCms1
         private string MeasureConfigPath = Application.StartupPath + "\\MeasureConfigs.JSON";
         private string RecoderConfigPath = Application.StartupPath + "\\RecoderConfigs.JSON";
         public ModeConfig Config = new ModeConfig();
-        private ConfigReceiver ConfReceiver;
+        private CommandReceiver CmdReceiver;
         
         public WaveMonitor()
         {
@@ -37,13 +37,16 @@ namespace TestCms1
             ConfigUtil.LoadConfig(MeasureConfigPath, MeasureList);
             ConfigUtil.LoadConfig(RecoderConfigPath, RecoderList);
 
+            foreach (var receiver in ReceiverList)
+                receiver.WavesReceived += waveReceiver_WavesReceived;
+
             FFTChart.Axes.Bottom.Maximum = ConstantMember.AsyncFMax;
             TrendChart.Axes.Bottom.Labels.DateTimeFormat = "yyyy.M.d\nHH:mm:ss";
 
             lb_Receiver.DataSource = ReceiverList;
-            lb_Receiver.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.OnValidation;
             lb_Measure.DataSource = MeasureList;
             lb_Recoder.DataSource = RecoderList;
+            //lb_Recoder.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
 
             waveMonitorBindingSource.DataSource = Config;
 
@@ -69,6 +72,7 @@ namespace TestCms1
         private void Config_Received(ISendableConfig config)
         {
             RecoderList.Add(config as IRecoder);
+            lb_Recoder.DataSource = RecoderList;
         }
 
         private void DelBtn_Click(object sender, EventArgs e)
@@ -96,7 +100,7 @@ namespace TestCms1
                 var queue = recoder.GetWavesQueue();
                 lock (((ICollection)queue).SyncRoot)
                 {
-                    if (queue.Count > 10) WaveQueue.Clear();
+                    if (queue.Count > 100) WaveQueue.Clear();
                     queue.Enqueue(waves);
                 }
             }
@@ -145,10 +149,17 @@ namespace TestCms1
             }
 
             if (RecoderList.Count > 0)
-            {
+            { 
                 foreach (var recoder in RecoderList)
                     recoder.Stop();
                 RecoderList.Clear();
+            }
+
+            if (CmdReceiver != null)
+            {
+                CmdReceiver.Stop();
+                CmdReceiver.Dispose();
+                CmdReceiver = null;
             }
         }
 
@@ -189,22 +200,31 @@ namespace TestCms1
 
         private void btn_Listen_Click(object sender, EventArgs e)
         {
-            ConfReceiver = new ConfigReceiver(Convert.ToInt32(tb_ReceivePort.Text)) { LogBox = this.rtb_Server };
-            ConfReceiver.ConfigReceived += Config_Received;
-            ConfReceiver.Start();
+            CmdReceiver = new CommandReceiver(Convert.ToInt32(tb_ReceivePort.Text)) { LogBox = this.rtb_Server };
+            CmdReceiver.Cmd_ConfigReceived += Config_Received;
+            CmdReceiver.Cmd_Start += btnStart_Click;
+            CmdReceiver.Cmd_Stop += btnStop_Click;
+
+            CmdReceiver.Start();
             btn_Shutdown.Enabled = true;
             btn_Listen.Enabled = false;
         }
 
         private void btn_Shutdown_Click(object sender, EventArgs e)
         {
-            if (ConfReceiver != null)
+            if (CmdReceiver != null)
             {
-                ConfReceiver.Stop();
+                CmdReceiver.Stop();
                 btn_Listen.Enabled = true;
                 btn_Shutdown.Enabled = false;
             }
         }
+    }
+
+    public class ConstantMember
+    {
+        public const int AsyncFMax = 3200;
+        public const int AsyncLine = 3200;
     }
 
     public class ModeConfig

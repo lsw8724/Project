@@ -11,6 +11,7 @@ namespace TestCms1.Dialog
 {
     public partial class MeasureEditForm : DevExpress.XtraEditors.XtraForm
     {
+        public enum MeasureType { RMS = 0, PeakToPeak, Peak, Lift_Shock, Lift_Move }
         private MeasureConfig ConfigItems = new MeasureConfig();
         public MeasureEditForm()
         {

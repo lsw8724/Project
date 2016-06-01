@@ -63,13 +63,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="TeeChart.Client, Version=4.1.2014.12152, Culture=neutral, PublicKeyToken=9c8126276c77bdb7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Steema Software\Steema TeeChart for .NET 2014 4.1.2014.12150\net40\x86\TeeChart.Client.dll</HintPath>
+      <HintPath>bin\Debug\TeeChart.Client.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigReceiver.cs" />
+    <Compile Include="CommandReceiver.cs" />
     <Compile Include="ConfigUtil.cs" />
-    <Compile Include="ConstantMember.cs" />
     <Compile Include="Dialog\MeasureEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,7 +88,6 @@
       <DependentUpon>RecoderEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FFTCalculator.cs" />
-    <Compile Include="Packet.cs" />
     <Compile Include="WaveMeasure.cs" />
     <Compile Include="WaveReceiver.cs" />
     <Compile Include="DaqProtocol\ElapsedHandler.cs" />

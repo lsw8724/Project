@@ -135,7 +135,7 @@
             this.TimeChart.Series.Add(this.TimeSerise6);
             this.TimeChart.Series.Add(this.TimeSerise7);
             this.TimeChart.Series.Add(this.TimeSerise8);
-            this.TimeChart.Size = new System.Drawing.Size(990, 173);
+            this.TimeChart.Size = new System.Drawing.Size(1127, 173);
             this.TimeChart.TabIndex = 4;
             // 
             // TimeSerise1
@@ -348,7 +348,7 @@
             this.FFTChart.Series.Add(this.FFTSerise6);
             this.FFTChart.Series.Add(this.FFTSerise7);
             this.FFTChart.Series.Add(this.FFTSerise8);
-            this.FFTChart.Size = new System.Drawing.Size(990, 173);
+            this.FFTChart.Size = new System.Drawing.Size(1127, 173);
             this.FFTChart.TabIndex = 2;
             // 
             // FFTSerise1
@@ -519,17 +519,17 @@
             // 
             // groupControl1
             // 
-            this.groupControl1.Controls.Add(this.btnStop);
             this.groupControl1.Controls.Add(this.btnStart);
             this.groupControl1.Controls.Add(this.xtraTabControl1);
             this.groupControl1.Controls.Add(this.gr_Recoder);
             this.groupControl1.Controls.Add(this.gr_Measure);
             this.groupControl1.Controls.Add(this.Gr_Receiver);
+            this.groupControl1.Controls.Add(this.btnStop);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(3, 540);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.ShowCaption = false;
-            this.groupControl1.Size = new System.Drawing.Size(990, 149);
+            this.groupControl1.Size = new System.Drawing.Size(1127, 149);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "groupControl1";
             // 
@@ -537,31 +537,32 @@
             // 
             this.btnStop.Appearance.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
             this.btnStop.Appearance.Options.UseFont = true;
-            this.btnStop.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnStop.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(883, 2);
+            this.btnStop.Location = new System.Drawing.Point(1019, 2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(106, 145);
             this.btnStop.TabIndex = 1;
-            this.btnStop.Text = "Recive Stop";
+            this.btnStop.Text = "Recive\r\nStop";
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnStart
             // 
             this.btnStart.Appearance.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
             this.btnStart.Appearance.Options.UseFont = true;
-            this.btnStart.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnStart.Location = new System.Drawing.Point(780, 2);
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnStart.Location = new System.Drawing.Point(916, 2);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(103, 145);
             this.btnStart.TabIndex = 0;
-            this.btnStart.Text = "Recive Start";
+            this.btnStart.Text = "Recive\r\nStart";
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // xtraTabControl1
             // 
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.xtraTabControl1.Location = new System.Drawing.Point(496, 2);
+            this.xtraTabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.xtraTabControl1.Location = new System.Drawing.Point(632, 2);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
             this.xtraTabControl1.Size = new System.Drawing.Size(284, 145);
@@ -584,7 +585,6 @@
             this.rtb_Local.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtb_Local.Appearance.Text.Font = new System.Drawing.Font("Tahoma", 6F);
             this.rtb_Local.Appearance.Text.Options.UseFont = true;
             this.rtb_Local.Cursor = System.Windows.Forms.Cursors.Default;
             this.rtb_Local.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -592,6 +592,8 @@
             this.rtb_Local.Name = "rtb_Local";
             this.rtb_Local.Options.Fields.UseCurrentCultureDateTimeFormat = false;
             this.rtb_Local.Options.MailMerge.KeepLastParagraph = false;
+            this.rtb_Local.ReadOnly = true;
+            this.rtb_Local.ShowCaretInReadOnly = false;
             this.rtb_Local.Size = new System.Drawing.Size(270, 110);
             this.rtb_Local.TabIndex = 9;
             // 
@@ -623,7 +625,7 @@
             this.rtb_Server.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtb_Server.Appearance.Text.Font = new System.Drawing.Font("Tahoma", 6F);
+            this.rtb_Server.Appearance.Text.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtb_Server.Appearance.Text.Options.UseFont = true;
             this.rtb_Server.Cursor = System.Windows.Forms.Cursors.Default;
             this.rtb_Server.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -631,6 +633,8 @@
             this.rtb_Server.Name = "rtb_Server";
             this.rtb_Server.Options.Fields.UseCurrentCultureDateTimeFormat = false;
             this.rtb_Server.Options.MailMerge.KeepLastParagraph = false;
+            this.rtb_Server.ReadOnly = true;
+            this.rtb_Server.ShowCaretInReadOnly = false;
             this.rtb_Server.Size = new System.Drawing.Size(270, 84);
             this.rtb_Server.TabIndex = 35;
             // 
@@ -676,7 +680,6 @@
             this.rtb_Client.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtb_Client.Appearance.Text.Font = new System.Drawing.Font("Tahoma", 6F);
             this.rtb_Client.Appearance.Text.Options.UseFont = true;
             this.rtb_Client.Cursor = System.Windows.Forms.Cursors.Default;
             this.rtb_Client.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -684,6 +687,8 @@
             this.rtb_Client.Name = "rtb_Client";
             this.rtb_Client.Options.Fields.UseCurrentCultureDateTimeFormat = false;
             this.rtb_Client.Options.MailMerge.KeepLastParagraph = false;
+            this.rtb_Client.ReadOnly = true;
+            this.rtb_Client.ShowCaretInReadOnly = false;
             this.rtb_Client.Size = new System.Drawing.Size(270, 84);
             this.rtb_Client.TabIndex = 8;
             // 
@@ -704,7 +709,7 @@
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(128, 6);
+            this.labelControl3.Location = new System.Drawing.Point(144, 6);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(23, 14);
             this.labelControl3.TabIndex = 6;
@@ -712,9 +717,9 @@
             // 
             // tb_SendPort
             // 
-            this.tb_SendPort.Location = new System.Drawing.Point(157, 3);
+            this.tb_SendPort.Location = new System.Drawing.Point(173, 3);
             this.tb_SendPort.Name = "tb_SendPort";
-            this.tb_SendPort.Size = new System.Drawing.Size(52, 20);
+            this.tb_SendPort.Size = new System.Drawing.Size(66, 20);
             this.tb_SendPort.TabIndex = 3;
             // 
             // gr_Recoder
@@ -723,29 +728,30 @@
             this.gr_Recoder.Controls.Add(this.btn_DelRecode);
             this.gr_Recoder.Controls.Add(this.btn_AddRecode);
             this.gr_Recoder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gr_Recoder.Location = new System.Drawing.Point(333, 2);
+            this.gr_Recoder.Location = new System.Drawing.Point(427, 2);
             this.gr_Recoder.Name = "gr_Recoder";
-            this.gr_Recoder.Size = new System.Drawing.Size(163, 145);
+            this.gr_Recoder.Size = new System.Drawing.Size(205, 145);
             this.gr_Recoder.TabIndex = 33;
             this.gr_Recoder.Text = "Recoder";
             // 
             // lb_Recoder
             // 
-            this.lb_Recoder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lb_Recoder.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Recoder.FormattingEnabled = true;
             this.lb_Recoder.ItemHeight = 12;
             this.lb_Recoder.Location = new System.Drawing.Point(2, 22);
             this.lb_Recoder.Name = "lb_Recoder";
-            this.lb_Recoder.Size = new System.Drawing.Size(161, 88);
+            this.lb_Recoder.Size = new System.Drawing.Size(203, 88);
             this.lb_Recoder.TabIndex = 22;
             // 
             // btn_DelRecode
             // 
-            this.btn_DelRecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_DelRecode.Location = new System.Drawing.Point(91, 116);
+            this.btn_DelRecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_DelRecode.Location = new System.Drawing.Point(109, 117);
             this.btn_DelRecode.Name = "btn_DelRecode";
-            this.btn_DelRecode.Size = new System.Drawing.Size(67, 23);
+            this.btn_DelRecode.Size = new System.Drawing.Size(91, 23);
             this.btn_DelRecode.TabIndex = 28;
             this.btn_DelRecode.Tag = "";
             this.btn_DelRecode.Text = "Delete";
@@ -755,7 +761,7 @@
             this.btn_AddRecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_AddRecode.Location = new System.Drawing.Point(5, 117);
             this.btn_AddRecode.Name = "btn_AddRecode";
-            this.btn_AddRecode.Size = new System.Drawing.Size(78, 23);
+            this.btn_AddRecode.Size = new System.Drawing.Size(98, 23);
             this.btn_AddRecode.TabIndex = 25;
             this.btn_AddRecode.Text = "Add";
             // 
@@ -765,29 +771,30 @@
             this.gr_Measure.Controls.Add(this.btn_DelMeasure);
             this.gr_Measure.Controls.Add(this.btn_AddMeasure);
             this.gr_Measure.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gr_Measure.Location = new System.Drawing.Point(162, 2);
+            this.gr_Measure.Location = new System.Drawing.Point(207, 2);
             this.gr_Measure.Name = "gr_Measure";
-            this.gr_Measure.Size = new System.Drawing.Size(171, 145);
+            this.gr_Measure.Size = new System.Drawing.Size(220, 145);
             this.gr_Measure.TabIndex = 32;
             this.gr_Measure.Text = "Measure";
             // 
             // lb_Measure
             // 
-            this.lb_Measure.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lb_Measure.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Measure.FormattingEnabled = true;
             this.lb_Measure.ItemHeight = 12;
             this.lb_Measure.Location = new System.Drawing.Point(2, 22);
             this.lb_Measure.Name = "lb_Measure";
-            this.lb_Measure.Size = new System.Drawing.Size(169, 88);
+            this.lb_Measure.Size = new System.Drawing.Size(218, 88);
             this.lb_Measure.TabIndex = 22;
             // 
             // btn_DelMeasure
             // 
-            this.btn_DelMeasure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_DelMeasure.Location = new System.Drawing.Point(94, 117);
+            this.btn_DelMeasure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_DelMeasure.Location = new System.Drawing.Point(115, 117);
             this.btn_DelMeasure.Name = "btn_DelMeasure";
-            this.btn_DelMeasure.Size = new System.Drawing.Size(73, 23);
+            this.btn_DelMeasure.Size = new System.Drawing.Size(99, 23);
             this.btn_DelMeasure.TabIndex = 28;
             this.btn_DelMeasure.Tag = "";
             this.btn_DelMeasure.Text = "Delete";
@@ -797,7 +804,7 @@
             this.btn_AddMeasure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_AddMeasure.Location = new System.Drawing.Point(6, 117);
             this.btn_AddMeasure.Name = "btn_AddMeasure";
-            this.btn_AddMeasure.Size = new System.Drawing.Size(82, 23);
+            this.btn_AddMeasure.Size = new System.Drawing.Size(103, 23);
             this.btn_AddMeasure.TabIndex = 25;
             this.btn_AddMeasure.Text = "Add";
             // 
@@ -809,37 +816,37 @@
             this.Gr_Receiver.Dock = System.Windows.Forms.DockStyle.Left;
             this.Gr_Receiver.Location = new System.Drawing.Point(2, 2);
             this.Gr_Receiver.Name = "Gr_Receiver";
-            this.Gr_Receiver.Size = new System.Drawing.Size(160, 145);
+            this.Gr_Receiver.Size = new System.Drawing.Size(205, 145);
             this.Gr_Receiver.TabIndex = 31;
             this.Gr_Receiver.Text = "Receiver";
             // 
             // lb_Receiver
             // 
-            this.lb_Receiver.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lb_Receiver.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Receiver.FormattingEnabled = true;
             this.lb_Receiver.ItemHeight = 12;
             this.lb_Receiver.Location = new System.Drawing.Point(2, 22);
             this.lb_Receiver.Name = "lb_Receiver";
-            this.lb_Receiver.Size = new System.Drawing.Size(158, 88);
+            this.lb_Receiver.Size = new System.Drawing.Size(203, 88);
             this.lb_Receiver.TabIndex = 22;
             // 
             // btn_DelReceive
             // 
-            this.btn_DelReceive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_DelReceive.Location = new System.Drawing.Point(85, 116);
+            this.btn_DelReceive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_DelReceive.Location = new System.Drawing.Point(106, 117);
             this.btn_DelReceive.Name = "btn_DelReceive";
-            this.btn_DelReceive.Size = new System.Drawing.Size(70, 23);
+            this.btn_DelReceive.Size = new System.Drawing.Size(94, 23);
             this.btn_DelReceive.TabIndex = 28;
             this.btn_DelReceive.Tag = "";
             this.btn_DelReceive.Text = "Delete";
             // 
             // btn_AddRceive
             // 
-            this.btn_AddRceive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_AddRceive.Location = new System.Drawing.Point(5, 116);
+            this.btn_AddRceive.Location = new System.Drawing.Point(7, 117);
             this.btn_AddRceive.Name = "btn_AddRceive";
-            this.btn_AddRceive.Size = new System.Drawing.Size(74, 23);
+            this.btn_AddRceive.Size = new System.Drawing.Size(95, 23);
             this.btn_AddRceive.TabIndex = 25;
             this.btn_AddRceive.Tag = "";
             this.btn_AddRceive.Text = "Add";
@@ -858,10 +865,10 @@
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.01156F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.25434F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(996, 692);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1133, 692);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // TrendChart
@@ -870,6 +877,7 @@
             // 
             // 
             this.TrendChart.Aspect.View3D = false;
+            this.TrendChart.Cursor = System.Windows.Forms.Cursors.Default;
             this.TrendChart.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // 
@@ -878,11 +886,16 @@
             // 
             // 
             // 
+            this.TrendChart.Legend.Alignment = Steema.TeeChart.LegendAlignments.Bottom;
             this.TrendChart.Legend.CheckBoxes = true;
             this.TrendChart.Legend.FontSeriesColor = true;
             this.TrendChart.Location = new System.Drawing.Point(3, 361);
             this.TrendChart.Name = "TrendChart";
-            this.TrendChart.Size = new System.Drawing.Size(990, 173);
+            // 
+            // 
+            // 
+            this.TrendChart.Panel.MarginBottom = 8D;
+            this.TrendChart.Size = new System.Drawing.Size(1127, 173);
             this.TrendChart.TabIndex = 5;
             // 
             // waveMonitorBindingSource
@@ -893,7 +906,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 692);
+            this.ClientSize = new System.Drawing.Size(1133, 692);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "WaveMonitor";
             this.ShowIcon = false;
