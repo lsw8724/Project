@@ -12,7 +12,11 @@ using System.Windows.Forms;
 
 namespace TestCms1
 {
-    public class VDPMReceiver : IWavesReceiver
+    public interface IReceiver : IWavesReceiver, ISendableConfig
+    {
+    }
+
+    public class VDPMReceiver : IReceiver
     {
         private Daq5509Receiver DaqReceiver;
         public string ModuleIp;
@@ -56,7 +60,7 @@ namespace TestCms1
             return "VDPMReceiver - " + ModuleIp;
         }
     }
-    public class FileReceiver : IWavesReceiver
+    public class FileReceiver : IReceiver
     {
         public event Action<WaveData[]> WavesReceived;
         private System.Timers.Timer Timer;
@@ -105,10 +109,9 @@ namespace TestCms1
         }
     }
 
-    public class NetworkReceiver : IWavesReceiver
+    public class NetworkReceiver : IReceiver
     {
         public event Action<WaveData[]> WavesReceived;
-        [NonSerialized]
         private System.Timers.Timer Timer;
         public IWaveSerializer WaveSerializer;
         private Socket Client;

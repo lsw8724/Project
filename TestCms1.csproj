@@ -33,9 +33,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v12.2.Core, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v12.2.Core, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v12.2.Core, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraEditors.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="MathNet.Iridium, Version=2008.8.16.470, Culture=neutral, PublicKeyToken=c061a3ec32cc0c6f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\MathNet.Iridium.dll</HintPath>
@@ -63,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigReceiver.cs" />
     <Compile Include="ConfigUtil.cs" />
     <Compile Include="ConstantMember.cs" />
     <Compile Include="Dialog\MeasureEditForm.cs">
@@ -84,6 +89,7 @@
       <DependentUpon>RecoderEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FFTCalculator.cs" />
+    <Compile Include="Packet.cs" />
     <Compile Include="WaveMeasure.cs" />
     <Compile Include="WaveReceiver.cs" />
     <Compile Include="DaqProtocol\ElapsedHandler.cs" />

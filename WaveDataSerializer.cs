@@ -14,6 +14,7 @@ namespace TestCms1
         void Serialize(BinaryWriter writer, WaveData[] wave);
         WaveData[] Deserialize(BinaryReader reader);
     }
+
     public class WaveDataSerializer_LSW : IWaveSerializer
     {
         public void Serialize(BinaryWriter writer, WaveData[] waves)
@@ -67,6 +68,7 @@ namespace TestCms1
             return "LSW";
         }
     }
+
     public class WaveDataSerializer_KHW : IWaveSerializer
     {
         public void Serialize(BinaryWriter writer, WaveData[] waves)
@@ -123,6 +125,7 @@ namespace TestCms1
             return "KHW";
         }
     }
+
     public class WaveDataSerializer_SHK : IWaveSerializer
     {
         public void Serialize(BinaryWriter writer, WaveData[] wave)

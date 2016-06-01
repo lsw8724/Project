@@ -28,7 +28,8 @@ namespace TestCms1.Dialog
 
         private void btn_Ok_Click(object sender, EventArgs e)
         {
-            IWavesMeasure CurrentMeasure = null;
+            var monitor = Owner as WaveMonitor;
+            IMeasure CurrentMeasure = null;
             switch ((MeasureType)ConfigItems.MeasureTypeIndex)
             {
                 case MeasureType.RMS: CurrentMeasure = new RMSMeasure(ConfigItems.Low, ConfigItems.High) { ChannelIdx = ConfigItems.ChannelIdx }; break;
@@ -39,7 +40,9 @@ namespace TestCms1.Dialog
             }
             if (CurrentMeasure != null)
             {
-                (Owner as WaveMonitor).MeasureList.Add(CurrentMeasure);
+                monitor.MeasureList.Add(CurrentMeasure);
+                if (monitor.xtraTabControl1.SelectedTabPageIndex == 2)
+                    ConfigUtil.SendConfig(monitor.Config.ServerIp, monitor.Config.SendPort, CurrentMeasure, monitor.rtb_Client);
                 Close();
             }
         }

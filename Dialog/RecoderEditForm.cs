@@ -32,7 +32,7 @@ namespace TestCms1.Dialog
         {
             var serializer = cb_Protocol.SelectedValue as IWaveSerializer;
             var monitor = Owner as WaveMonitor;
-            IWavesRecoder CurrentRecoder = null;
+            IRecoder CurrentRecoder = null;
             switch ((RecoderType)ConfigItems.RecoderTypeIndex)
             {
                 case RecoderType.File: CurrentRecoder = new FileRecoder(ConfigItems.FilePath, serializer); break;
@@ -41,6 +41,8 @@ namespace TestCms1.Dialog
             if (CurrentRecoder != null)
             {
                 monitor.RecoderList.Add(CurrentRecoder);
+                if (monitor.xtraTabControl1.SelectedTabPageIndex == 2)
+                    ConfigUtil.SendConfig(monitor.Config.ServerIp, monitor.Config.SendPort,CurrentRecoder,monitor.rtb_Client);
                 Close();
             }
         }

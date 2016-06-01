@@ -29,12 +29,12 @@ namespace TestCms1
         }
     }
 
-    public interface IWavesRecoder : ICancelableTask
+    public interface IRecoder : ICancelableTask, ISendableConfig
     {
         Queue<WaveData[]> GetWavesQueue();
     }
     
-    public class FileRecoder : IWavesRecoder
+    public class FileRecoder : IRecoder
     {
         public IWaveSerializer WaveSerializer;
         public string FilePath;
@@ -89,7 +89,7 @@ namespace TestCms1
         }
     }
 
-    class NetworkRecoder : IWavesRecoder
+    class NetworkRecoder : IRecoder
     {
         private Socket Server;
         public IWaveSerializer WaveSerializer;

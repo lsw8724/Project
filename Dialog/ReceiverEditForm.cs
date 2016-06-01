@@ -36,7 +36,7 @@ namespace TestCms1.Dialog
         {
             var monitor = Owner as WaveMonitor;
             var Serializers = cb_Protocol.SelectedValue as IWaveSerializer;
-            IWavesReceiver CurrentReceiver = null;
+            IReceiver CurrentReceiver = null;
             switch ((ReceiverType)ConfigItems.ReceiverTypeIndex)
             {
                 case ReceiverType.Daq5509:               
@@ -51,6 +51,8 @@ namespace TestCms1.Dialog
             {
                 CurrentReceiver.WavesReceived += monitor.waveReceiver_WavesReceived;
                 monitor.ReceiverList.Add(CurrentReceiver);
+                if (monitor.xtraTabControl1.SelectedTabPageIndex == 2)
+                    ConfigUtil.SendConfig(monitor.Config.ServerIp, monitor.Config.SendPort, CurrentReceiver, monitor.rtb_Client);
                 Close();
             }
         }

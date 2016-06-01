@@ -12,19 +12,9 @@ namespace TestCms1
         public const int AsyncLine = 3200;
     }
 
-    enum Monitor_Cmd
-    {
-        Stop = 0x0,
-        Start = 0x1,
-        ConfigReceive = 0x2 
-    }
+    public enum CmdType : byte { Stop = 0x00, Start = 0x01, ReadConfig = 0x02 }
 
-    enum Wave_Cmd
-    {
-
-    }
-
-    enum MeasureType
+    public enum MeasureType
     {
         RMS = 0,
         PeakToPeak = 1,
@@ -33,19 +23,20 @@ namespace TestCms1
         Lift_Move = 4
     }
 
-    enum ReceiverType
+    public enum ReceiverType
     {
         Daq5509 = 0,
         File = 1,
         Network = 2
     }
-    enum RecoderType
+
+    public enum RecoderType
     {
         File = 0,
         Network = 1
     }
 
-    enum TrasCmd
+    public enum TrasCmd
     {
         MsgType_Cmd_Start,
         MsgType_Cmd_Stop,

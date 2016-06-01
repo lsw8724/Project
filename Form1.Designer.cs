@@ -49,6 +49,23 @@
             this.FFTSerise7 = new Steema.TeeChart.Styles.FastLine();
             this.FFTSerise8 = new Steema.TeeChart.Styles.FastLine();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btnStop = new DevExpress.XtraEditors.SimpleButton();
+            this.btnStart = new DevExpress.XtraEditors.SimpleButton();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.rtb_Local = new DevExpress.XtraRichEdit.RichEditControl();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.btn_Shutdown = new DevExpress.XtraEditors.SimpleButton();
+            this.rtb_Server = new DevExpress.XtraRichEdit.RichEditControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.tb_ReceivePort = new DevExpress.XtraEditors.TextEdit();
+            this.btn_Listen = new DevExpress.XtraEditors.SimpleButton();
+            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            this.rtb_Client = new DevExpress.XtraRichEdit.RichEditControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.tb_ServerIp = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.tb_SendPort = new DevExpress.XtraEditors.TextEdit();
             this.gr_Recoder = new DevExpress.XtraEditors.GroupControl();
             this.lb_Recoder = new System.Windows.Forms.ListBox();
             this.btn_DelRecode = new DevExpress.XtraEditors.SimpleButton();
@@ -61,25 +78,19 @@
             this.lb_Receiver = new System.Windows.Forms.ListBox();
             this.btn_DelReceive = new DevExpress.XtraEditors.SimpleButton();
             this.btn_AddRceive = new DevExpress.XtraEditors.SimpleButton();
-            this.btnStop = new DevExpress.XtraEditors.SimpleButton();
-            this.btnStart = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.TrendChart = new Steema.TeeChart.TChart();
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.btn_Connect = new DevExpress.XtraEditors.SimpleButton();
-            this.radio_Client = new System.Windows.Forms.RadioButton();
-            this.radio_Server = new System.Windows.Forms.RadioButton();
-            this.radio_Local = new System.Windows.Forms.RadioButton();
-            this.btn_Listen = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.tb_SendPort = new DevExpress.XtraEditors.TextEdit();
-            this.tb_ServerIp = new DevExpress.XtraEditors.TextEdit();
-            this.tb_ReceivePort = new DevExpress.XtraEditors.TextEdit();
             this.waveMonitorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
+            this.xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_ReceivePort.Properties)).BeginInit();
+            this.xtraTabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_ServerIp.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_SendPort.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gr_Recoder)).BeginInit();
             this.gr_Recoder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gr_Measure)).BeginInit();
@@ -87,11 +98,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Gr_Receiver)).BeginInit();
             this.Gr_Receiver.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_SendPort.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ServerIp.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ReceivePort.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.waveMonitorBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,7 +122,7 @@
             // 
             // 
             // 
-            this.TimeChart.Legend.Font.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(8)))), ((int)(((byte)(14)))));
+            this.TimeChart.Legend.Font.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
             this.TimeChart.Legend.FontSeriesColor = true;
             this.TimeChart.Legend.LegendStyle = Steema.TeeChart.LegendStyles.Series;
             this.TimeChart.Location = new System.Drawing.Point(3, 3);
@@ -129,7 +135,7 @@
             this.TimeChart.Series.Add(this.TimeSerise6);
             this.TimeChart.Series.Add(this.TimeSerise7);
             this.TimeChart.Series.Add(this.TimeSerise8);
-            this.TimeChart.Size = new System.Drawing.Size(990, 163);
+            this.TimeChart.Size = new System.Drawing.Size(990, 173);
             this.TimeChart.TabIndex = 4;
             // 
             // TimeSerise1
@@ -329,10 +335,10 @@
             // 
             // 
             // 
-            this.FFTChart.Legend.Font.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(8)))), ((int)(((byte)(14)))));
+            this.FFTChart.Legend.Font.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(93)))));
             this.FFTChart.Legend.FontSeriesColor = true;
             this.FFTChart.Legend.LegendStyle = Steema.TeeChart.LegendStyles.Series;
-            this.FFTChart.Location = new System.Drawing.Point(3, 172);
+            this.FFTChart.Location = new System.Drawing.Point(3, 182);
             this.FFTChart.Name = "FFTChart";
             this.FFTChart.Series.Add(this.FFTSerise1);
             this.FFTChart.Series.Add(this.FFTSerise2);
@@ -342,7 +348,7 @@
             this.FFTChart.Series.Add(this.FFTSerise6);
             this.FFTChart.Series.Add(this.FFTSerise7);
             this.FFTChart.Series.Add(this.FFTSerise8);
-            this.FFTChart.Size = new System.Drawing.Size(990, 163);
+            this.FFTChart.Size = new System.Drawing.Size(990, 173);
             this.FFTChart.TabIndex = 2;
             // 
             // FFTSerise1
@@ -513,18 +519,203 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.btnStop);
+            this.groupControl1.Controls.Add(this.btnStart);
+            this.groupControl1.Controls.Add(this.xtraTabControl1);
             this.groupControl1.Controls.Add(this.gr_Recoder);
             this.groupControl1.Controls.Add(this.gr_Measure);
             this.groupControl1.Controls.Add(this.Gr_Receiver);
-            this.groupControl1.Controls.Add(this.btnStop);
-            this.groupControl1.Controls.Add(this.btnStart);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(3, 510);
+            this.groupControl1.Location = new System.Drawing.Point(3, 540);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.ShowCaption = false;
-            this.groupControl1.Size = new System.Drawing.Size(990, 137);
+            this.groupControl1.Size = new System.Drawing.Size(990, 149);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "groupControl1";
+            // 
+            // btnStop
+            // 
+            this.btnStop.Appearance.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
+            this.btnStop.Appearance.Options.UseFont = true;
+            this.btnStop.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnStop.Enabled = false;
+            this.btnStop.Location = new System.Drawing.Point(883, 2);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(106, 145);
+            this.btnStop.TabIndex = 1;
+            this.btnStop.Text = "Recive Stop";
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.Appearance.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
+            this.btnStart.Appearance.Options.UseFont = true;
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnStart.Location = new System.Drawing.Point(780, 2);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(103, 145);
+            this.btnStart.TabIndex = 0;
+            this.btnStart.Text = "Recive Start";
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.xtraTabControl1.Location = new System.Drawing.Point(496, 2);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(284, 145);
+            this.xtraTabControl1.TabIndex = 34;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2,
+            this.xtraTabPage3});
+            // 
+            // xtraTabPage1
+            // 
+            this.xtraTabPage1.Controls.Add(this.rtb_Local);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(278, 116);
+            this.xtraTabPage1.Text = "로컬모드";
+            // 
+            // rtb_Local
+            // 
+            this.rtb_Local.ActiveViewType = DevExpress.XtraRichEdit.RichEditViewType.Simple;
+            this.rtb_Local.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtb_Local.Appearance.Text.Font = new System.Drawing.Font("Tahoma", 6F);
+            this.rtb_Local.Appearance.Text.Options.UseFont = true;
+            this.rtb_Local.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rtb_Local.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.rtb_Local.Location = new System.Drawing.Point(5, 3);
+            this.rtb_Local.Name = "rtb_Local";
+            this.rtb_Local.Options.Fields.UseCurrentCultureDateTimeFormat = false;
+            this.rtb_Local.Options.MailMerge.KeepLastParagraph = false;
+            this.rtb_Local.Size = new System.Drawing.Size(270, 110);
+            this.rtb_Local.TabIndex = 9;
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Controls.Add(this.btn_Shutdown);
+            this.xtraTabPage2.Controls.Add(this.rtb_Server);
+            this.xtraTabPage2.Controls.Add(this.labelControl1);
+            this.xtraTabPage2.Controls.Add(this.tb_ReceivePort);
+            this.xtraTabPage2.Controls.Add(this.btn_Listen);
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(278, 116);
+            this.xtraTabPage2.Text = "서버모드";
+            // 
+            // btn_Shutdown
+            // 
+            this.btn_Shutdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Shutdown.Enabled = false;
+            this.btn_Shutdown.Location = new System.Drawing.Point(208, 3);
+            this.btn_Shutdown.Name = "btn_Shutdown";
+            this.btn_Shutdown.Size = new System.Drawing.Size(67, 20);
+            this.btn_Shutdown.TabIndex = 36;
+            this.btn_Shutdown.Text = "Shutdown";
+            this.btn_Shutdown.Click += new System.EventHandler(this.btn_Shutdown_Click);
+            // 
+            // rtb_Server
+            // 
+            this.rtb_Server.ActiveViewType = DevExpress.XtraRichEdit.RichEditViewType.Simple;
+            this.rtb_Server.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtb_Server.Appearance.Text.Font = new System.Drawing.Font("Tahoma", 6F);
+            this.rtb_Server.Appearance.Text.Options.UseFont = true;
+            this.rtb_Server.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rtb_Server.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.rtb_Server.Location = new System.Drawing.Point(5, 29);
+            this.rtb_Server.Name = "rtb_Server";
+            this.rtb_Server.Options.Fields.UseCurrentCultureDateTimeFormat = false;
+            this.rtb_Server.Options.MailMerge.KeepLastParagraph = false;
+            this.rtb_Server.Size = new System.Drawing.Size(270, 84);
+            this.rtb_Server.TabIndex = 35;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(5, 6);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(23, 14);
+            this.labelControl1.TabIndex = 4;
+            this.labelControl1.Text = "Port";
+            // 
+            // tb_ReceivePort
+            // 
+            this.tb_ReceivePort.Location = new System.Drawing.Point(34, 3);
+            this.tb_ReceivePort.Name = "tb_ReceivePort";
+            this.tb_ReceivePort.Size = new System.Drawing.Size(108, 20);
+            this.tb_ReceivePort.TabIndex = 1;
+            // 
+            // btn_Listen
+            // 
+            this.btn_Listen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Listen.Location = new System.Drawing.Point(148, 3);
+            this.btn_Listen.Name = "btn_Listen";
+            this.btn_Listen.Size = new System.Drawing.Size(54, 20);
+            this.btn_Listen.TabIndex = 7;
+            this.btn_Listen.Text = "Listen";
+            this.btn_Listen.Click += new System.EventHandler(this.btn_Listen_Click);
+            // 
+            // xtraTabPage3
+            // 
+            this.xtraTabPage3.Controls.Add(this.rtb_Client);
+            this.xtraTabPage3.Controls.Add(this.labelControl2);
+            this.xtraTabPage3.Controls.Add(this.tb_ServerIp);
+            this.xtraTabPage3.Controls.Add(this.labelControl3);
+            this.xtraTabPage3.Controls.Add(this.tb_SendPort);
+            this.xtraTabPage3.Name = "xtraTabPage3";
+            this.xtraTabPage3.Size = new System.Drawing.Size(278, 116);
+            this.xtraTabPage3.Text = "클라이언트모드";
+            // 
+            // rtb_Client
+            // 
+            this.rtb_Client.ActiveViewType = DevExpress.XtraRichEdit.RichEditViewType.Simple;
+            this.rtb_Client.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtb_Client.Appearance.Text.Font = new System.Drawing.Font("Tahoma", 6F);
+            this.rtb_Client.Appearance.Text.Options.UseFont = true;
+            this.rtb_Client.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rtb_Client.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.rtb_Client.Location = new System.Drawing.Point(5, 29);
+            this.rtb_Client.Name = "rtb_Client";
+            this.rtb_Client.Options.Fields.UseCurrentCultureDateTimeFormat = false;
+            this.rtb_Client.Options.MailMerge.KeepLastParagraph = false;
+            this.rtb_Client.Size = new System.Drawing.Size(270, 84);
+            this.rtb_Client.TabIndex = 8;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(5, 6);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(11, 14);
+            this.labelControl2.TabIndex = 5;
+            this.labelControl2.Text = "IP";
+            // 
+            // tb_ServerIp
+            // 
+            this.tb_ServerIp.Location = new System.Drawing.Point(22, 3);
+            this.tb_ServerIp.Name = "tb_ServerIp";
+            this.tb_ServerIp.Size = new System.Drawing.Size(100, 20);
+            this.tb_ServerIp.TabIndex = 2;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(128, 6);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(23, 14);
+            this.labelControl3.TabIndex = 6;
+            this.labelControl3.Text = "Port";
+            // 
+            // tb_SendPort
+            // 
+            this.tb_SendPort.Location = new System.Drawing.Point(157, 3);
+            this.tb_SendPort.Name = "tb_SendPort";
+            this.tb_SendPort.Size = new System.Drawing.Size(52, 20);
+            this.tb_SendPort.TabIndex = 3;
             // 
             // gr_Recoder
             // 
@@ -532,9 +723,9 @@
             this.gr_Recoder.Controls.Add(this.btn_DelRecode);
             this.gr_Recoder.Controls.Add(this.btn_AddRecode);
             this.gr_Recoder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gr_Recoder.Location = new System.Drawing.Point(486, 2);
+            this.gr_Recoder.Location = new System.Drawing.Point(333, 2);
             this.gr_Recoder.Name = "gr_Recoder";
-            this.gr_Recoder.Size = new System.Drawing.Size(242, 133);
+            this.gr_Recoder.Size = new System.Drawing.Size(163, 145);
             this.gr_Recoder.TabIndex = 33;
             this.gr_Recoder.Text = "Recoder";
             // 
@@ -546,15 +737,15 @@
             this.lb_Recoder.ItemHeight = 12;
             this.lb_Recoder.Location = new System.Drawing.Point(2, 22);
             this.lb_Recoder.Name = "lb_Recoder";
-            this.lb_Recoder.Size = new System.Drawing.Size(238, 76);
+            this.lb_Recoder.Size = new System.Drawing.Size(161, 88);
             this.lb_Recoder.TabIndex = 22;
             // 
             // btn_DelRecode
             // 
             this.btn_DelRecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_DelRecode.Location = new System.Drawing.Point(128, 104);
+            this.btn_DelRecode.Location = new System.Drawing.Point(91, 116);
             this.btn_DelRecode.Name = "btn_DelRecode";
-            this.btn_DelRecode.Size = new System.Drawing.Size(112, 23);
+            this.btn_DelRecode.Size = new System.Drawing.Size(67, 23);
             this.btn_DelRecode.TabIndex = 28;
             this.btn_DelRecode.Tag = "";
             this.btn_DelRecode.Text = "Delete";
@@ -562,9 +753,9 @@
             // btn_AddRecode
             // 
             this.btn_AddRecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_AddRecode.Location = new System.Drawing.Point(2, 104);
+            this.btn_AddRecode.Location = new System.Drawing.Point(5, 117);
             this.btn_AddRecode.Name = "btn_AddRecode";
-            this.btn_AddRecode.Size = new System.Drawing.Size(120, 23);
+            this.btn_AddRecode.Size = new System.Drawing.Size(78, 23);
             this.btn_AddRecode.TabIndex = 25;
             this.btn_AddRecode.Text = "Add";
             // 
@@ -574,9 +765,9 @@
             this.gr_Measure.Controls.Add(this.btn_DelMeasure);
             this.gr_Measure.Controls.Add(this.btn_AddMeasure);
             this.gr_Measure.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gr_Measure.Location = new System.Drawing.Point(244, 2);
+            this.gr_Measure.Location = new System.Drawing.Point(162, 2);
             this.gr_Measure.Name = "gr_Measure";
-            this.gr_Measure.Size = new System.Drawing.Size(242, 133);
+            this.gr_Measure.Size = new System.Drawing.Size(171, 145);
             this.gr_Measure.TabIndex = 32;
             this.gr_Measure.Text = "Measure";
             // 
@@ -588,15 +779,15 @@
             this.lb_Measure.ItemHeight = 12;
             this.lb_Measure.Location = new System.Drawing.Point(2, 22);
             this.lb_Measure.Name = "lb_Measure";
-            this.lb_Measure.Size = new System.Drawing.Size(238, 76);
+            this.lb_Measure.Size = new System.Drawing.Size(169, 88);
             this.lb_Measure.TabIndex = 22;
             // 
             // btn_DelMeasure
             // 
             this.btn_DelMeasure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_DelMeasure.Location = new System.Drawing.Point(128, 104);
+            this.btn_DelMeasure.Location = new System.Drawing.Point(94, 117);
             this.btn_DelMeasure.Name = "btn_DelMeasure";
-            this.btn_DelMeasure.Size = new System.Drawing.Size(112, 23);
+            this.btn_DelMeasure.Size = new System.Drawing.Size(73, 23);
             this.btn_DelMeasure.TabIndex = 28;
             this.btn_DelMeasure.Tag = "";
             this.btn_DelMeasure.Text = "Delete";
@@ -604,9 +795,9 @@
             // btn_AddMeasure
             // 
             this.btn_AddMeasure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_AddMeasure.Location = new System.Drawing.Point(4, 104);
+            this.btn_AddMeasure.Location = new System.Drawing.Point(6, 117);
             this.btn_AddMeasure.Name = "btn_AddMeasure";
-            this.btn_AddMeasure.Size = new System.Drawing.Size(120, 23);
+            this.btn_AddMeasure.Size = new System.Drawing.Size(82, 23);
             this.btn_AddMeasure.TabIndex = 25;
             this.btn_AddMeasure.Text = "Add";
             // 
@@ -618,7 +809,7 @@
             this.Gr_Receiver.Dock = System.Windows.Forms.DockStyle.Left;
             this.Gr_Receiver.Location = new System.Drawing.Point(2, 2);
             this.Gr_Receiver.Name = "Gr_Receiver";
-            this.Gr_Receiver.Size = new System.Drawing.Size(242, 133);
+            this.Gr_Receiver.Size = new System.Drawing.Size(160, 145);
             this.Gr_Receiver.TabIndex = 31;
             this.Gr_Receiver.Text = "Receiver";
             // 
@@ -630,15 +821,15 @@
             this.lb_Receiver.ItemHeight = 12;
             this.lb_Receiver.Location = new System.Drawing.Point(2, 22);
             this.lb_Receiver.Name = "lb_Receiver";
-            this.lb_Receiver.Size = new System.Drawing.Size(238, 76);
+            this.lb_Receiver.Size = new System.Drawing.Size(158, 88);
             this.lb_Receiver.TabIndex = 22;
             // 
             // btn_DelReceive
             // 
             this.btn_DelReceive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_DelReceive.Location = new System.Drawing.Point(134, 104);
+            this.btn_DelReceive.Location = new System.Drawing.Point(85, 116);
             this.btn_DelReceive.Name = "btn_DelReceive";
-            this.btn_DelReceive.Size = new System.Drawing.Size(108, 23);
+            this.btn_DelReceive.Size = new System.Drawing.Size(70, 23);
             this.btn_DelReceive.TabIndex = 28;
             this.btn_DelReceive.Tag = "";
             this.btn_DelReceive.Text = "Delete";
@@ -646,33 +837,12 @@
             // btn_AddRceive
             // 
             this.btn_AddRceive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_AddRceive.Location = new System.Drawing.Point(0, 104);
+            this.btn_AddRceive.Location = new System.Drawing.Point(5, 116);
             this.btn_AddRceive.Name = "btn_AddRceive";
-            this.btn_AddRceive.Size = new System.Drawing.Size(124, 23);
+            this.btn_AddRceive.Size = new System.Drawing.Size(74, 23);
             this.btn_AddRceive.TabIndex = 25;
             this.btn_AddRceive.Tag = "";
             this.btn_AddRceive.Text = "Add";
-            // 
-            // btnStop
-            // 
-            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(777, 75);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(204, 60);
-            this.btnStop.TabIndex = 1;
-            this.btnStop.Text = "Recive Stop";
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // btnStart
-            // 
-            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart.Location = new System.Drawing.Point(777, 5);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(204, 64);
-            this.btnStart.TabIndex = 0;
-            this.btnStart.Text = "Recive Start";
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -682,16 +852,14 @@
             this.tableLayoutPanel1.Controls.Add(this.FFTChart, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.TimeChart, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.TrendChart, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(996, 692);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -712,126 +880,10 @@
             // 
             this.TrendChart.Legend.CheckBoxes = true;
             this.TrendChart.Legend.FontSeriesColor = true;
-            this.TrendChart.Location = new System.Drawing.Point(3, 341);
+            this.TrendChart.Location = new System.Drawing.Point(3, 361);
             this.TrendChart.Name = "TrendChart";
-            this.TrendChart.Size = new System.Drawing.Size(990, 163);
+            this.TrendChart.Size = new System.Drawing.Size(990, 173);
             this.TrendChart.TabIndex = 5;
-            // 
-            // groupControl2
-            // 
-            this.groupControl2.Controls.Add(this.btn_Connect);
-            this.groupControl2.Controls.Add(this.radio_Client);
-            this.groupControl2.Controls.Add(this.radio_Server);
-            this.groupControl2.Controls.Add(this.radio_Local);
-            this.groupControl2.Controls.Add(this.btn_Listen);
-            this.groupControl2.Controls.Add(this.labelControl3);
-            this.groupControl2.Controls.Add(this.labelControl2);
-            this.groupControl2.Controls.Add(this.labelControl1);
-            this.groupControl2.Controls.Add(this.tb_SendPort);
-            this.groupControl2.Controls.Add(this.tb_ServerIp);
-            this.groupControl2.Controls.Add(this.tb_ReceivePort);
-            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(3, 653);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.ShowCaption = false;
-            this.groupControl2.Size = new System.Drawing.Size(990, 36);
-            this.groupControl2.TabIndex = 6;
-            this.groupControl2.Text = "groupControl2";
-            // 
-            // btn_Connect
-            // 
-            this.btn_Connect.Location = new System.Drawing.Point(902, 5);
-            this.btn_Connect.Name = "btn_Connect";
-            this.btn_Connect.Size = new System.Drawing.Size(75, 26);
-            this.btn_Connect.TabIndex = 11;
-            this.btn_Connect.Text = "Connect";
-            this.btn_Connect.Click += new System.EventHandler(this.btn_Connect_Click);
-            // 
-            // radio_Client
-            // 
-            this.radio_Client.AutoSize = true;
-            this.radio_Client.Location = new System.Drawing.Point(589, 11);
-            this.radio_Client.Name = "radio_Client";
-            this.radio_Client.Size = new System.Drawing.Size(83, 16);
-            this.radio_Client.TabIndex = 10;
-            this.radio_Client.Text = "클라이언트";
-            this.radio_Client.UseVisualStyleBackColor = true;
-            // 
-            // radio_Server
-            // 
-            this.radio_Server.AutoSize = true;
-            this.radio_Server.Location = new System.Drawing.Point(188, 11);
-            this.radio_Server.Name = "radio_Server";
-            this.radio_Server.Size = new System.Drawing.Size(47, 16);
-            this.radio_Server.TabIndex = 9;
-            this.radio_Server.Text = "서버";
-            this.radio_Server.UseVisualStyleBackColor = true;
-            // 
-            // radio_Local
-            // 
-            this.radio_Local.AutoSize = true;
-            this.radio_Local.Checked = true;
-            this.radio_Local.Location = new System.Drawing.Point(9, 10);
-            this.radio_Local.Name = "radio_Local";
-            this.radio_Local.Size = new System.Drawing.Size(47, 16);
-            this.radio_Local.TabIndex = 8;
-            this.radio_Local.TabStop = true;
-            this.radio_Local.Text = "로컬";
-            this.radio_Local.UseVisualStyleBackColor = true;
-            // 
-            // btn_Listen
-            // 
-            this.btn_Listen.Location = new System.Drawing.Point(384, 6);
-            this.btn_Listen.Name = "btn_Listen";
-            this.btn_Listen.Size = new System.Drawing.Size(75, 26);
-            this.btn_Listen.TabIndex = 7;
-            this.btn_Listen.Text = "Listen";
-            this.btn_Listen.Click += new System.EventHandler(this.btn_Listen_Click);
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Location = new System.Drawing.Point(815, 11);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(23, 14);
-            this.labelControl3.TabIndex = 6;
-            this.labelControl3.Text = "Port";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(689, 11);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(11, 14);
-            this.labelControl2.TabIndex = 5;
-            this.labelControl2.Text = "IP";
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(249, 11);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(23, 14);
-            this.labelControl1.TabIndex = 4;
-            this.labelControl1.Text = "Port";
-            // 
-            // tb_SendPort
-            // 
-            this.tb_SendPort.Location = new System.Drawing.Point(844, 8);
-            this.tb_SendPort.Name = "tb_SendPort";
-            this.tb_SendPort.Size = new System.Drawing.Size(52, 20);
-            this.tb_SendPort.TabIndex = 3;
-            // 
-            // tb_ServerIp
-            // 
-            this.tb_ServerIp.Location = new System.Drawing.Point(706, 8);
-            this.tb_ServerIp.Name = "tb_ServerIp";
-            this.tb_ServerIp.Size = new System.Drawing.Size(100, 20);
-            this.tb_ServerIp.TabIndex = 2;
-            // 
-            // tb_ReceivePort
-            // 
-            this.tb_ReceivePort.Location = new System.Drawing.Point(278, 8);
-            this.tb_ReceivePort.Name = "tb_ReceivePort";
-            this.tb_ReceivePort.Size = new System.Drawing.Size(100, 20);
-            this.tb_ReceivePort.TabIndex = 1;
             // 
             // waveMonitorBindingSource
             // 
@@ -849,6 +901,16 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
+            this.xtraTabPage2.ResumeLayout(false);
+            this.xtraTabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_ReceivePort.Properties)).EndInit();
+            this.xtraTabPage3.ResumeLayout(false);
+            this.xtraTabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_ServerIp.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_SendPort.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gr_Recoder)).EndInit();
             this.gr_Recoder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gr_Measure)).EndInit();
@@ -856,12 +918,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Gr_Receiver)).EndInit();
             this.Gr_Receiver.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
-            this.groupControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_SendPort.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ServerIp.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ReceivePort.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.waveMonitorBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -905,18 +961,21 @@
         private DevExpress.XtraEditors.SimpleButton btnStart;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Steema.TeeChart.TChart TrendChart;
-        private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit tb_SendPort;
-        private DevExpress.XtraEditors.TextEdit tb_ServerIp;
         private DevExpress.XtraEditors.TextEdit tb_ReceivePort;
         private DevExpress.XtraEditors.SimpleButton btn_Listen;
-        private System.Windows.Forms.RadioButton radio_Client;
-        private System.Windows.Forms.RadioButton radio_Server;
-        private System.Windows.Forms.RadioButton radio_Local;
-        private DevExpress.XtraEditors.SimpleButton btn_Connect;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
+        private DevExpress.XtraEditors.SimpleButton btn_Shutdown;
+        public DevExpress.XtraRichEdit.RichEditControl rtb_Client;
+        public DevExpress.XtraRichEdit.RichEditControl rtb_Server;
+        public DevExpress.XtraRichEdit.RichEditControl rtb_Local;
+        public DevExpress.XtraEditors.TextEdit tb_SendPort;
+        public DevExpress.XtraEditors.TextEdit tb_ServerIp;
+        public DevExpress.XtraTab.XtraTabControl xtraTabControl1;
 
     }
 }

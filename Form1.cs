@@ -18,16 +18,17 @@ namespace TestCms1
         private const int TrendXScale = 30;
         private SimpleButton[] AddButtons;
         private SimpleButton[] DelButtons;
-        public BindingList<IWavesReceiver> ReceiverList = new BindingList<IWavesReceiver>();
-        public BindingList<IWavesMeasure> MeasureList = new BindingList<IWavesMeasure>();
-        public BindingList<IWavesRecoder> RecoderList = new BindingList<IWavesRecoder>();
-        private IWavesReceiver SelectedReceiver;
+        public BindingList<IReceiver> ReceiverList = new BindingList<IReceiver>();
+        public BindingList<IMeasure> MeasureList = new BindingList<IMeasure>();
+        public BindingList<IRecoder> RecoderList = new BindingList<IRecoder>();
+        private IReceiver SelectedReceiver;
         public Queue<WaveData[]> WaveQueue = new Queue<WaveData[]>();
         private string ReceiverConfigPath = Application.StartupPath + "\\ReceiverConfigs.JSON";
         private string MeasureConfigPath = Application.StartupPath + "\\MeasureConfigs.JSON";
         private string RecoderConfigPath = Application.StartupPath + "\\RecoderConfigs.JSON";
-        private ModeConfig Config = new ModeConfig();
-
+        public ModeConfig Config = new ModeConfig();
+        private ConfigReceiver ConfReceiver;
+        
         public WaveMonitor()
         {
             InitializeComponent();
@@ -40,6 +41,7 @@ namespace TestCms1
             TrendChart.Axes.Bottom.Labels.DateTimeFormat = "yyyy.M.d\nHH:mm:ss";
 
             lb_Receiver.DataSource = ReceiverList;
+            lb_Receiver.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.OnValidation;
             lb_Measure.DataSource = MeasureList;
             lb_Recoder.DataSource = RecoderList;
 
@@ -48,8 +50,6 @@ namespace TestCms1
             tb_ServerIp.DataBindings.Add(new Binding("Text", waveMonitorBindingSource, "ServerIp"));
             tb_ReceivePort.DataBindings.Add(new Binding("Text", waveMonitorBindingSource, "ReceivePort"));
             tb_SendPort.DataBindings.Add(new Binding("Text", waveMonitorBindingSource, "SendPort"));
-
-            
 
             AddButtons = new SimpleButton[] { btn_AddMeasure, btn_AddRceive, btn_AddRecode };
             btn_AddMeasure.Tag = new MeasureEditForm();
@@ -66,8 +66,15 @@ namespace TestCms1
                 btn.Click += DelBtn_Click;
         }
 
+        private void Config_Received(ISendableConfig config)
+        {
+            RecoderList.Add(config as IRecoder);
+        }
+
         private void DelBtn_Click(object sender, EventArgs e)
         {
+            lb_Receiver.Refresh();
+            lb_Receiver.Update();
             var btn = sender as SimpleButton;
             var listBox = btn.Tag as ListBox;
             if (listBox.Items.Count != 0)
@@ -154,7 +161,7 @@ namespace TestCms1
             btnStart.Enabled = false;
             btnStop.Enabled = true;
 
-            SelectedReceiver = lb_Receiver.SelectedItem as IWavesReceiver;
+            SelectedReceiver = lb_Receiver.SelectedItem as IReceiver;
 
             foreach (var m in MeasureList)
             {
@@ -182,21 +189,20 @@ namespace TestCms1
 
         private void btn_Listen_Click(object sender, EventArgs e)
         {
-            if(radio_Server.Checked)
-            {
-                ConfigUtil.ReceiveConfig(Config.ReceivePort, ReceiverList);
-                ConfigUtil.ReceiveConfig(Config.ReceivePort+1, MeasureList);
-                ConfigUtil.ReceiveConfig(Config.ReceivePort+2, RecoderList);
-            }
+            ConfReceiver = new ConfigReceiver(Convert.ToInt32(tb_ReceivePort.Text)) { LogBox = this.rtb_Server };
+            ConfReceiver.ConfigReceived += Config_Received;
+            ConfReceiver.Start();
+            btn_Shutdown.Enabled = true;
+            btn_Listen.Enabled = false;
         }
 
-        private void btn_Connect_Click(object sender, EventArgs e)
+        private void btn_Shutdown_Click(object sender, EventArgs e)
         {
-            if (radio_Client.Checked)
+            if (ConfReceiver != null)
             {
-                ConfigUtil.SendConfig(Config.ServerIp,Config.SendPort, ReceiverList);
-                ConfigUtil.SendConfig(Config.ServerIp,Config.SendPort + 1, MeasureList);
-                ConfigUtil.SendConfig(Config.ServerIp, Config.SendPort + 2, RecoderList);
+                ConfReceiver.Stop();
+                btn_Listen.Enabled = true;
+                btn_Shutdown.Enabled = false;
             }
         }
     }
