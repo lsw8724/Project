@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Measure">
-      <UniqueIdentifier>{2e988b9f-bf73-434a-9664-0d06afe93030}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Measure">
-      <UniqueIdentifier>{47f063aa-d04f-4f31-9990-cd090370424d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestCms.cpp">
@@ -29,13 +23,13 @@
     <ClInclude Include="Packet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Measure.h">
-      <Filter>헤더 파일\Measure</Filter>
-    </ClInclude>
     <ClInclude Include="Receiver.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Protocol.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Measure.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
