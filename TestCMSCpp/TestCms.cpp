@@ -17,16 +17,18 @@ void delete_pointervector(vector<T*> vec)
 
 enum SerializerType : char
 {
-	Serializer_LSW = 0x00,
-	Serializer_KHW = 0x01,
-	Serializer_SHK = 0x02,
-	Serializer_CPP = 0x03,
+	Serializer_Unknown = 0x00,
+	Serializer_LSW = 0x01,
+	Serializer_KHW = 0x02,
+	Serializer_SHK = 0x03,
+	Serializer_CPP = 0x04,
 };
 
 char* GetSerializerName(char type)
 {
 	switch ((SerializerType)type)
 	{
+	case Serializer_Unknown: return "Unknown";
 	case Serializer_LSW: return "LSW";
 	case Serializer_KHW: return "KHW";
 	case Serializer_SHK: return "SHK";
