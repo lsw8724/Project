@@ -10,7 +10,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Collections;
 using TestCms1.Properties;
-using TestCms1.DataBase;
+using TestCMSCommon.DataBase;
 
 namespace TestCms1
 {
@@ -27,6 +27,7 @@ namespace TestCms1
         public Queue<TrendDataRow[]> MeasureDataQueue = new Queue<TrendDataRow[]>();
         private Integrator NormalIntegrator = new Integrator();
         public Dictionary<int, MeasurementRow> MeasurementCache = new Dictionary<int, MeasurementRow>();
+        public Dictionary<int, ReceiverRow> ReceiverCache = new Dictionary<int, ReceiverRow>();
         public bool EnableIntegrator = false;
 
         public WaveMonitor()
@@ -35,7 +36,8 @@ namespace TestCms1
             SQLRepository.Init();
             if (Settings.Default.EnableDBMode)
             {
-                MeasurementCache = SQLRepository.Measurement.GetAllData();
+                MeasurementCache = SQLRepository.Measurement.GetAllMeasure();
+                ReceiverCache = SQLRepository.Receiver.GetAllReceiver();
                 foreach (var row in MeasurementCache.Values)
                 {
                     switch (row.MeasureType)
@@ -45,6 +47,17 @@ namespace TestCms1
                         case (int)MeasureType.MeasureType_PK: MeasureList.Add(new PeakMeasure(row.Idx, row.ChannelId)); break;
                         case (int)MeasureType.MeasureType_LiftShock: MeasureList.Add(new Lift_ShockMeasure(row.Idx, row.ChannelId, row.Interval1, row.Interval2, row.Interval3)); break;
                         case (int)MeasureType.MeasureType_LiftMove: MeasureList.Add(new Lift_MoveMeasure(row.Idx, row.ChannelId, row.Interval1, row.Interval2, row.Interval3)); break;
+                    }
+                }
+
+                foreach (var row in ReceiverCache.Values)
+                {
+                    switch (row.ReceiverType)
+                    {
+                        case (int)ReceiverType.ReceiverType_Vdpm: ReceiverList.Add(new VDPMReceiver(row.Ip)); break;
+                        case (int)ReceiverType.ReceiverType_File: ReceiverList.Add(new FileReceiver(row.FilePath, SerializerUtil.ToSerializer(row.SerializerType))); break;
+                        case (int)ReceiverType.ReceiverType_Network: ReceiverList.Add(new NetworkReceiver(row.Ip,row.Port,SerializerUtil.ToSerializer(row.SerializerType))); break;
+                        case (int)ReceiverType.ReceiverType_Simulate: ReceiverList.Add(new SimulateReceiver()); break;
                     }
                 }
             }
@@ -91,8 +104,13 @@ namespace TestCms1
             var listBox = btn.Tag as ListBox;
             if (listBox.Items.Count != 0)
             {
-                if (Settings.Default.EnableDBMode && listBox.Name == "lb_Measure")
-                    SQLRepository.Measurement.DeleteData((listBox.SelectedItem as IGettableIdx).GetMeasureId());
+                if (Settings.Default.EnableDBMode)
+                    switch (listBox.Name)
+                    {
+                        case "lb_Measure": SQLRepository.Measurement.DeleteData((listBox.SelectedItem as IGettableIdx).GetMeasureId());break;
+                        //case "lb_Receiver": SQLRepository.Receiver.DeleteData((listBox.SelectedItem as IGettableIdx).GetMeasureId()); break;
+                    }
+                   
                 (listBox.DataSource as IBindingList).RemoveAt(listBox.SelectedIndex);
             }
         }

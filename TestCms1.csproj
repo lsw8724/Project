@@ -44,6 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Math\MathNet.Iridium.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -65,9 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StringUTil.cs" />
-    <Compile Include="DataBase\SQLRepository.cs" />
-    <Compile Include="DataBase\Measurement.cs" />
-    <Compile Include="DataBase\TrendData.cs" />
     <Compile Include="Dialog\MeasureEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,7 +115,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DaqProtocol\Daq5509Receiver.cs" />
     <Compile Include="WaveRecoder.cs" />
-    <Compile Include="WaveDataSerializer.cs" />
+    <Compile Include="WaveSerializer.cs" />
     <EmbeddedResource Include="Dialog\MeasureEditForm.resx">
       <DependentUpon>MeasureEditForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +139,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
+    <Fakes Include="Fakes\TestCMSCommon.fakes" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -168,6 +169,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="TestCMSCommon\TestCMSCommon.csproj">
+      <Project>{ff2d3919-c3dd-4172-9936-45e5f1e356f8}</Project>
+      <Name>TestCMSCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
