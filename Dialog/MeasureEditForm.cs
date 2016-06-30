@@ -6,17 +6,32 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using TestCms1.DataBase;
+using TestCms1.Properties;
 
 namespace TestCms1.Dialog
 {
     public partial class MeasureEditForm : DevExpress.XtraEditors.XtraForm
     {
-        public enum MeasureType { RMS = 0, PeakToPeak, Peak, Lift_Shock, Lift_Move }
-        private MeasureConfig ConfigItems = new MeasureConfig();
-        public MeasureEditForm()
-        {
-            InitializeComponent();
+        public int MeasureId { get; set; }
+        public int MeasureTypeIndex { get; set; }
+        public int High { get; set; }
+        public int Low { get; set; }
+        public int ChannelIdx { get; set; }
+        public int Impulse1RegionTime { get; set; }
+        public int Impulse2RegionTime { get; set; }
+        public int MoveRegionTime { get; set; }
 
+        public MeasureEditForm(IWavesMeasure lastMeasure)
+        {
+            MeasureId = lastMeasure != null? lastMeasure.GetMeasureId(): 0;
+            InitializeComponent();
+            MeasureTypeIndex = 0;
+            High = 62;
+            Low = 58;
+            Impulse1RegionTime = 4000;
+            Impulse2RegionTime = 4000;
+            MoveRegionTime = 6000;
             radioGroup1.DataBindings.Add(new Binding("SelectedIndex", bindingSource1, "MeasureTypeIndex"));
             tb_HighFreq.DataBindings.Add(new Binding("Text", bindingSource1, "High"));
             tb_lowFreq.DataBindings.Add(new Binding("Text", bindingSource1, "Low"));
@@ -24,49 +39,36 @@ namespace TestCms1.Dialog
             tb_Impulse2.DataBindings.Add(new Binding("Text", bindingSource1, "Impulse2RegionTime"));
             tb_Move.DataBindings.Add(new Binding("Text", bindingSource1, "MoveRegionTime"));
             cb_Channel.DataBindings.Add(new Binding("SelectedIndex", bindingSource1, "ChannelIdx"));
-            bindingSource1.DataSource = ConfigItems;
+            bindingSource1.DataSource = this;
         }
 
         private void btn_Ok_Click(object sender, EventArgs e)
         {
             var monitor = Owner as WaveMonitor;
-            IMeasure CurrentMeasure = null;
-            switch ((MeasureType)ConfigItems.MeasureTypeIndex)
+            switch (radioGroup1.SelectedIndex)
             {
-                case MeasureType.RMS: CurrentMeasure = new RMSMeasure(ConfigItems.Low, ConfigItems.High) { ChannelIdx = ConfigItems.ChannelIdx }; break;
-                case MeasureType.PeakToPeak: CurrentMeasure = new PeakToPeakMeasure() { ChannelIdx = ConfigItems.ChannelIdx }; break;
-                case MeasureType.Peak: CurrentMeasure = new PeakMeasure() { ChannelIdx = ConfigItems.ChannelIdx }; break;
-                case MeasureType.Lift_Shock: CurrentMeasure = new Lift_ShockMeasure(ConfigItems.Impulse1RegionTime, ConfigItems.Impulse2RegionTime, ConfigItems.MoveRegionTime) { ChannelIdx = ConfigItems.ChannelIdx }; break;
-                case MeasureType.Lift_Move: CurrentMeasure = new Lift_MoveMeasure(ConfigItems.Impulse1RegionTime, ConfigItems.Impulse2RegionTime, ConfigItems.MoveRegionTime) { ChannelIdx = ConfigItems.ChannelIdx }; break;
+                case 0:
+                    monitor.MeasureList.Add(new RMSMeasure(++MeasureId, ChannelIdx, Low, High));
+                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(MeasureId, (int)MeasureType.MeasureType_RMS , ChannelIdx, Low, High);
+                    break;
+                case 1:
+                    monitor.MeasureList.Add(new PeakToPeakMeasure(++MeasureId, ChannelIdx));
+                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(MeasureId, (int)MeasureType.MeasureType_P2P, ChannelIdx);
+                    break;
+                case 2:
+                    monitor.MeasureList.Add(new PeakMeasure(++MeasureId, ChannelIdx));
+                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(MeasureId, (int)MeasureType.MeasureType_PK, ChannelIdx);
+                    break;
+                case 3:
+                    monitor.MeasureList.Add(new Lift_ShockMeasure(++MeasureId, ChannelIdx, Impulse1RegionTime, Impulse2RegionTime, MoveRegionTime));
+                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(MeasureId, (int)MeasureType.MeasureType_LiftShock, ChannelIdx, Low, High, Impulse2RegionTime, MoveRegionTime);
+                    break;
+                case 4:
+                    monitor.MeasureList.Add(new Lift_MoveMeasure(++MeasureId, ChannelIdx, Impulse1RegionTime, Impulse2RegionTime, MoveRegionTime));
+                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(MeasureId, (int)MeasureType.MeasureType_LiftMove, ChannelIdx, Low, High, Impulse2RegionTime, MoveRegionTime);
+                    break;
             }
-            if (CurrentMeasure != null)
-            {
-                monitor.MeasureList.Add(CurrentMeasure);
-                if (monitor.xtraTabControl1.SelectedTabPageIndex == 2)
-                    ConfigUtil.SendConfig(monitor.Config.ServerIp, monitor.Config.SendPort, CurrentMeasure, monitor.rtb_Client);
-                Close();
-            }
-        }
-
-        private class MeasureConfig
-        {
-            public MeasureConfig()
-            {
-                MeasureTypeIndex = 0;
-                High = 1000;
-                Low = 900;
-
-                Impulse1RegionTime = 4000;
-                Impulse2RegionTime = 4000;
-                MoveRegionTime = 6000;
-            }
-            public int Impulse1RegionTime { get; set; }
-            public int Impulse2RegionTime { get; set; }
-            public int MoveRegionTime { get; set; }
-            public int ChannelIdx { get; set; }
-            public int MeasureTypeIndex { get; set; }
-            public int High { get; set; }
-            public int Low { get; set; }
+            Close();    
         }
     }
 }

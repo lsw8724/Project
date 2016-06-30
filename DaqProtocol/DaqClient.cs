@@ -261,7 +261,7 @@ namespace DaqProtocol
         }
 
         public int PacketCountFor1Sec = 16; //3200일때 16
-        //private DaqData ProcessPacket(List<DaqDataPacket> packets, DaqDataPacket packet)
+        //private DaqData ProcessPacket(Dictionary<int,DaqDataPacket> packets, DaqDataPacket packet)
         //{
         //    DaqData result = null;
 

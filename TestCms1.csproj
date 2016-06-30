@@ -42,14 +42,11 @@
     <Reference Include="DevExpress.XtraRichEdit.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="MathNet.Iridium, Version=2008.8.16.470, Culture=neutral, PublicKeyToken=c061a3ec32cc0c6f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\MathNet.Iridium.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Math\MathNet.Iridium.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Design" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
@@ -67,8 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandReceiver.cs" />
-    <Compile Include="ConfigUtil.cs" />
+    <Compile Include="StringUTil.cs" />
+    <Compile Include="DataBase\SQLRepository.cs" />
+    <Compile Include="DataBase\Measurement.cs" />
+    <Compile Include="DataBase\TrendData.cs" />
     <Compile Include="Dialog\MeasureEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +87,10 @@
       <DependentUpon>RecoderEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FFTCalculator.cs" />
+    <Compile Include="Integrator.cs" />
+    <Compile Include="Packet.cs" />
+    <Compile Include="Protocol.cs" />
+    <Compile Include="SinWave.cs" />
     <Compile Include="WaveMeasure.cs" />
     <Compile Include="WaveReceiver.cs" />
     <Compile Include="DaqProtocol\ElapsedHandler.cs" />
@@ -136,7 +139,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -163,6 +165,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

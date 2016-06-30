@@ -13,18 +13,27 @@ namespace TestCms1.Dialog
 {
     public partial class ReceiverEditForm : DevExpress.XtraEditors.XtraForm
     {
-        public enum ReceiverType { Daq5509 = 0, File, Network }
-        private ReceiveConfig ConfigItems = new ReceiveConfig();
+        public int ReceiverTypeIndex { get; set; }
+        public string ModuleIp { get; set; }
+        public string FilePath { get; set; }
+        public string ServerIp { get; set; }
+        public int Port { get; set; }
+        IWavesSerializer[] Serializers = new IWavesSerializer[] {new WaveDataSerializer_LSW(),new WaveDataSerializer_KHW(),new WaveDataSerializer_SHK(), new WaveDataSerializer_Cpp()};
+
         public ReceiverEditForm()
         {
             InitializeComponent();
-            radioGroup1.DataBindings.Add(new Binding("SelectedIndex", bindingSource1, "ReceiverTypeIndex"));
+            ReceiverTypeIndex = 0;
+            ModuleIp = "192.168.0.11";
+            FilePath = Application.StartupPath + "\\Test_LSW_Cpp.dat";
+            ServerIp = "127.0.0.1";
+            Port = 8999;
             tb_ModuleIp.DataBindings.Add(new Binding("Text", bindingSource1, "ModuleIp"));
             bte_OpenFile.DataBindings.Add(new Binding("Text", bindingSource1, "FilePath"));
             tb_ServerIp.DataBindings.Add(new Binding("Text", bindingSource1, "ServerIp"));
             tb_DataPort.DataBindings.Add(new Binding("Text", bindingSource1, "Port"));
-            bindingSource1.DataSource = ConfigItems;
-            cb_Protocol.DataSource = new BindingSource(ConfigItems.Serializers, null);
+            bindingSource1.DataSource = this;
+            cb_Protocol.DataSource = new BindingSource(Serializers, null);
         }
 
         private void bte_OpenFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -36,49 +45,21 @@ namespace TestCms1.Dialog
         private void btn_Ok_Click(object sender, EventArgs e)
         {
             var monitor = Owner as WaveMonitor;
-            var Serializers = cb_Protocol.SelectedValue as IWaveSerializer;
-            IReceiver CurrentReceiver = null;
-            switch ((ReceiverType)ConfigItems.ReceiverTypeIndex)
+            var Serializers = cb_Protocol.SelectedValue as IWavesSerializer;
+            IHeritableWavesReceiver CurrentReceiver = null;
+            switch (radioGroup1.SelectedIndex)
             {
-                case ReceiverType.Daq5509:               
-                    CurrentReceiver = new VDPMReceiver(ConfigItems.ModuleIp); 
-                    break;
-                case ReceiverType.File: CurrentReceiver = new FileReceiver(ConfigItems.FilePath, Serializers);
-                    break;
-                case ReceiverType.Network: CurrentReceiver = new NetworkReceiver(ConfigItems.ServerIp, ConfigItems.Port, Serializers); 
-                    break;
+                case 0: CurrentReceiver = new VDPMReceiver(ModuleIp); break;
+                case 1: CurrentReceiver = new FileReceiver(FilePath, Serializers); break;
+                case 2: CurrentReceiver = new NetworkReceiver(ServerIp, Port, Serializers); break;
+                case 3: CurrentReceiver = new SimulateReceiver(); break;
             }
             if (CurrentReceiver != null)
             {
                 CurrentReceiver.WavesReceived += monitor.waveReceiver_WavesReceived;
                 monitor.ReceiverList.Add(CurrentReceiver);
-                if (monitor.xtraTabControl1.SelectedTabPageIndex == 2)
-                    ConfigUtil.SendConfig(monitor.Config.ServerIp, monitor.Config.SendPort, CurrentReceiver, monitor.rtb_Client);
                 Close();
             }
-        }
-
-        private class ReceiveConfig
-        {
-            public ReceiveConfig()
-            {
-                ReceiverTypeIndex = 0;
-                ModuleIp = "192.168.0.11";
-                FilePath = Application.StartupPath + "\\Test_LSW.dat";
-                ServerIp = "127.0.0.1";
-                Port = 8999;
-
-                Serializers = new List<IWaveSerializer>();
-                Serializers.Add(new WaveDataSerializer_LSW());
-                Serializers.Add(new WaveDataSerializer_KHW());
-                Serializers.Add(new WaveDataSerializer_SHK());
-            }
-            public int ReceiverTypeIndex { get; set; }
-            public string ModuleIp { get; set; }
-            public List<IWaveSerializer> Serializers { get; set; }
-            public string FilePath { get; set; }
-            public string ServerIp { get; set; }
-            public int Port { get; set; }
         }
     }
 }

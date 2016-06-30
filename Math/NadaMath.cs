@@ -506,7 +506,7 @@ namespace TSICommon
             return window;
         }
 
-        class WindowPerLength : Dictionary<int, double[]> {}
+        class WindowPerLength :Dictionary<int,double[]> {}
         static Dictionary<WindowFunction, WindowPerLength> windowCache = new Dictionary<WindowFunction, WindowPerLength>();
         public static double[] GetWindow(WindowFunction func, int length)
         {
@@ -836,7 +836,7 @@ namespace TSICommon
                                     0, -0.025495, 0, 0.020483, 0, -0.016713, 0, 0.013762, 0, -0.036913, 0 };
 
         static double[,] buffer_dec = new double[256, 41];
-        static Dictionary<int, data_type[]> decimateBuff = new Dictionary<int, data_type[]>();
+        staticDictionary<int,data_type[]> decimateBuff = newDictionary<int,data_type[]>();
 
         static int Decimation2(data_type[] x, data_type[] y, int channelId, int loopIndex)//the length of Y = 0.5*length of x
         {

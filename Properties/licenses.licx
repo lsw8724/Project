@@ -1,5 +1,7 @@
-DevExpress.XtraTab.XtraTabControl, DevExpress.XtraEditors.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
-DevExpress.XtraRichEdit.RichEditControl, DevExpress.XtraRichEdit.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
-Steema.TeeChart.TChart, TeeChart.Client, Version=4.1.2014.12152, Culture=neutral, PublicKeyToken=9c8126276c77bdb7
+DevExpress.XtraEditors.ButtonEdit, DevExpress.XtraEditors.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.XtraEditors.TextEdit, DevExpress.XtraEditors.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
+DevExpress.XtraRichEdit.RichEditControl, DevExpress.XtraRichEdit.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
+DevExpress.XtraTab.XtraTabControl, DevExpress.XtraEditors.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
+Steema.TeeChart.TChart, TeeChart.Client, Version=4.1.2014.12152, Culture=neutral, PublicKeyToken=9c8126276c77bdb7
+DevExpress.XtraEditors.ComboBoxEdit, DevExpress.XtraEditors.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.XtraEditors.LabelControl, DevExpress.XtraEditors.v12.2, Version=12.2.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a

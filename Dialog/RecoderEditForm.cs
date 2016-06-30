@@ -11,16 +11,42 @@ namespace TestCms1.Dialog
 {
     public partial class RecoderEditForm : DevExpress.XtraEditors.XtraForm
     {
-        public enum RecoderType{ File = 0, Network = 1}
-        private RecodeConfig ConfigItems = new RecodeConfig();
+        public int RecoderTypeIndex {get;set;}
+        public string FilePath {get;set;}
+        public int Port { get; set; }
+        public string DbIp { get; set; }
+        public string DbAccount { get; set; }
+        public string DbPassword { get; set; }
+        public string DbName { get; set; }
+        IWavesSerializer[] Serializers = new IWavesSerializer[] 
+        {
+            new WaveDataSerializer_LSW(),
+            new WaveDataSerializer_KHW(),
+            new WaveDataSerializer_SHK(),
+            new WaveDataSerializer_Cpp()
+        };
+
         public RecoderEditForm()
         {
             InitializeComponent();
+            RecoderTypeIndex = 0;
+            FilePath = Application.StartupPath + "\\Test_LSW.dat";
+            Port = 8999;
+
+            DbIp = "127.0.0.1";
+            DbAccount = "sa";
+            DbPassword = "nada1234";
+            DbName = "TestCms";
+
             radioGroup1.DataBindings.Add(new Binding("SelectedIndex", bindingSource1, "RecoderTypeIndex"));
             bte_OpenFile.DataBindings.Add(new Binding("Text", bindingSource1, "FilePath"));
             tb_DataPort.DataBindings.Add(new Binding("Text", bindingSource1, "Port"));
-            bindingSource1.DataSource = ConfigItems;
-            cb_Protocol.DataSource = new BindingSource(ConfigItems.Serializers, null);
+            bindingSource1.DataSource = this;
+            cb_Protocol.DataSource = new BindingSource(Serializers, null);
+            tb_dbIp.DataBindings.Add(new Binding("Text", bindingSource1, "DbIp"));
+            tb_dbAcc.DataBindings.Add(new Binding("Text", bindingSource1, "DbAccount"));
+            tb_dbPw.DataBindings.Add(new Binding("Text", bindingSource1, "DbPassword"));
+            tb_dbName.DataBindings.Add(new Binding("Text", bindingSource1, "DbName"));
         }
 
         private void bte_OpenFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -31,40 +57,15 @@ namespace TestCms1.Dialog
 
         private void btn_Ok_Click(object sender, EventArgs e)
         {
-            var serializer = cb_Protocol.SelectedValue as IWaveSerializer;
+            var serializer = cb_Protocol.SelectedValue as IWavesSerializer;
             var monitor = Owner as WaveMonitor;
-            IRecoder CurrentRecoder = null;
-            switch ((RecoderType)ConfigItems.RecoderTypeIndex)
+            switch (radioGroup1.SelectedIndex)
             {
-                case RecoderType.File: CurrentRecoder = new FileRecoder(ConfigItems.FilePath, serializer); break;
-                case RecoderType.Network: CurrentRecoder = new NetworkRecoder(ConfigItems.Port, serializer); break;
+                case 0: monitor.RecoderList.Add(new FileRecoder(FilePath, serializer)); break;
+                case 1: monitor.RecoderList.Add(new NetworkRecoder(Port, serializer)); break;
+                case 2: monitor.RecoderList.Add(new DBRecoder(DbIp, DbAccount, DbPassword, DbName));break;
             }
-            if (CurrentRecoder != null)
-            {
-                monitor.RecoderList.Add(CurrentRecoder);
-                if (monitor.xtraTabControl1.SelectedTabPageIndex == 2)
-                    ConfigUtil.SendConfig(monitor.Config.ServerIp, monitor.Config.SendPort,CurrentRecoder,monitor.rtb_Client);
-                Close();
-            }
-        }
-        private class RecodeConfig
-        {
-            public RecodeConfig()
-            {
-                RecoderTypeIndex = 0;
-                FilePath = Application.StartupPath + "\\Test_LSW.dat";
-                Port = 8999;
-                Serializers = new List<IWaveSerializer>();
-                Serializers.Add(new WaveDataSerializer_LSW());
-                Serializers.Add(new WaveDataSerializer_KHW());
-                Serializers.Add(new WaveDataSerializer_SHK());
-            }
-
-            public int RecoderTypeIndex { get; set; }
-            public List<IWaveSerializer> Serializers { get; set; }
-
-            public string FilePath { get; set; }
-            public int Port { get; set; }
+            Close();
         }
     }
 }

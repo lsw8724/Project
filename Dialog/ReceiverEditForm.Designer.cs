@@ -164,7 +164,8 @@
             this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Daq Receiver"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "File Receiver"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Network Receiver")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Network Receiver"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Simulate Receiver")});
             this.radioGroup1.Size = new System.Drawing.Size(136, 253);
             this.radioGroup1.TabIndex = 34;
             // 
