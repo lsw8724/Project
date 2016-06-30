@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TestCms1.DataBase;
+using TestCMSCommon.DataBase;
 
 namespace TestCms1
 {

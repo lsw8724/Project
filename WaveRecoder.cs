@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Linq;
-using TestCms1.DataBase;
+using TestCMSCommon.DataBase;
 using System.Windows.Forms;
 
 namespace TestCms1
