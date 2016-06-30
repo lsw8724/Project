@@ -40,6 +40,12 @@ namespace TestCms1.DataBase
             }
         }
 
+        public static void Close()
+        {
+            DBConnection.Close();
+            DBConnection.Dispose();
+        }
+
         private static void OnSQLInfoMessage(object sender, SqlInfoMessageEventArgs e)
         {
             SqlInfoMessage = e.Message;

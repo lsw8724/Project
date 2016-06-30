@@ -204,7 +204,6 @@ namespace TestCms1
             {
                 MessageBox.Show(ex.Message);
             }
-          
 
             if (SelectedReceiver != null)
             {
@@ -217,6 +216,7 @@ namespace TestCms1
                 foreach (var recoder in RecoderList)
                     recoder.Stop();
             }
+            SQLRepository.Close();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
