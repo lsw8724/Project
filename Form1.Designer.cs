@@ -48,6 +48,8 @@
             this.FFTSerise7 = new Steema.TeeChart.Styles.FastLine();
             this.FFTSerise8 = new Steema.TeeChart.Styles.FastLine();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btn_integrate = new DevExpress.XtraEditors.SimpleButton();
+            this.btn_raw = new DevExpress.XtraEditors.SimpleButton();
             this.btnStart = new DevExpress.XtraEditors.SimpleButton();
             this.gr_Recoder = new DevExpress.XtraEditors.GroupControl();
             this.lb_Recoder = new System.Windows.Forms.ListBox();
@@ -493,6 +495,8 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.btn_integrate);
+            this.groupControl1.Controls.Add(this.btn_raw);
             this.groupControl1.Controls.Add(this.btnStart);
             this.groupControl1.Controls.Add(this.gr_Recoder);
             this.groupControl1.Controls.Add(this.gr_Measure);
@@ -506,14 +510,36 @@
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "groupControl1";
             // 
+            // btn_integrate
+            // 
+            this.btn_integrate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_integrate.Location = new System.Drawing.Point(771, 78);
+            this.btn_integrate.Name = "btn_integrate";
+            this.btn_integrate.Size = new System.Drawing.Size(124, 56);
+            this.btn_integrate.TabIndex = 35;
+            this.btn_integrate.Tag = "";
+            this.btn_integrate.Text = "Raw";
+            this.btn_integrate.Click += new System.EventHandler(this.Raw_Click);
+            // 
+            // btn_raw
+            // 
+            this.btn_raw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_raw.Location = new System.Drawing.Point(771, 16);
+            this.btn_raw.Name = "btn_raw";
+            this.btn_raw.Size = new System.Drawing.Size(124, 56);
+            this.btn_raw.TabIndex = 34;
+            this.btn_raw.Tag = "";
+            this.btn_raw.Text = "Integrate";
+            this.btn_raw.Click += new System.EventHandler(this.Integrate_Click);
+            // 
             // btnStart
             // 
             this.btnStart.Appearance.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
             this.btnStart.Appearance.Options.UseFont = true;
             this.btnStart.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnStart.Location = new System.Drawing.Point(789, 2);
+            this.btnStart.Location = new System.Drawing.Point(906, 2);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(172, 145);
+            this.btnStart.Size = new System.Drawing.Size(110, 145);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Recive\r\nStart";
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -653,9 +679,9 @@
             this.btnStop.Appearance.Options.UseFont = true;
             this.btnStop.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(961, 2);
+            this.btnStop.Location = new System.Drawing.Point(1016, 2);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(164, 145);
+            this.btnStop.Size = new System.Drawing.Size(109, 145);
             this.btnStop.TabIndex = 1;
             this.btnStop.Text = "Recive\r\nStop";
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
@@ -766,7 +792,8 @@
         private DevExpress.XtraEditors.SimpleButton btnStart;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Steema.TeeChart.TChart TrendChart;
-
+        private DevExpress.XtraEditors.SimpleButton btn_integrate;
+        private DevExpress.XtraEditors.SimpleButton btn_raw;
     }
 }
 

@@ -27,6 +27,7 @@ namespace TestCms1
         public Queue<TrendDataRow[]> MeasureDataQueue = new Queue<TrendDataRow[]>();
         private Integrator NormalIntegrator = new Integrator();
         public Dictionary<int, MeasurementRow> MeasurementCache = new Dictionary<int, MeasurementRow>();
+        public bool EnableIntegrator = false;
 
         public WaveMonitor()
         {
@@ -109,11 +110,13 @@ namespace TestCms1
             /*Time*/
             var resolution = Settings.Default.AsyncLine / (double)Settings.Default.AsyncFMax;
             foreach (var serise in TimeChart.Series) (serise as FastLine).Clear();
+          
             for (int ch = 0; ch < waves.Length; ch++)
             {
+                var displayData = EnableIntegrator ? NormalIntegrator.Integration(waves[ch].AsyncData) : waves[ch].AsyncData;
                 TimeChart.Series[ch].BeginUpdate();
                 for (int i = 0; i < waves[ch].AsyncDataCount; i++)
-                    TimeChart.Series[ch].Add(i * resolution / (double)waves[ch].AsyncDataCount, waves[ch].AsyncData[i]);
+                    TimeChart.Series[ch].Add(i * resolution / (double)waves[ch].AsyncDataCount, displayData[i]);
                 TimeChart.Series[ch].EndUpdate();
             }
 
@@ -121,7 +124,8 @@ namespace TestCms1
             foreach (var serise in FFTChart.Series) (serise as FastLine).Clear();
             for (int ch = 0; ch < waves.Length; ch++)
             {
-                var fft = FFTCalculator.CreateSpectrumData(waves[ch].AsyncData, waves[ch].DateTime);
+                var displayData = EnableIntegrator ? NormalIntegrator.Integration(waves[ch].AsyncData) : waves[ch].AsyncData;
+                var fft = FFTCalculator.CreateSpectrumData(displayData, waves[ch].DateTime);
                 FFTChart.Series[ch].BeginUpdate();
                 for (int i = 0; i < fft.XValues.Length; i++)
                     FFTChart.Series[ch].Add(fft.XValues[i], fft.YValues[i]);
@@ -248,6 +252,16 @@ namespace TestCms1
             }
             foreach (var recoder in RecoderList)
                 recoder.Stop();
+        }
+
+        private void Raw_Click(object sender, EventArgs e)
+        {
+            EnableIntegrator = false;
+        }
+
+        private void Integrate_Click(object sender, EventArgs e)
+        {
+            EnableIntegrator = true;
         }
     }
 }

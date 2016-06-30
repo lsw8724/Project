@@ -267,11 +267,11 @@ namespace TestCms1
 
         public SimulateReceiver(params SinWave[] sinWaves)
         {
-            SinWaves = new SinWave[] { new SinWave(60, 1) };
+            SinWaves = new SinWave[] { new SinWave(60, 1), new SinWave(70, 2), new SinWave(90, 2), new SinWave(65, 1), new SinWave(75, 1) };
         }
         public SimulateReceiver(byte[] bytes)
         {
-            SinWaves = new SinWave[] { new SinWave(60, 1) };
+            SinWaves = new SinWave[] { new SinWave(60, 1), new SinWave(70, 2), new SinWave(90, 2), new SinWave(65, 1), new SinWave(75, 1) };
         }
 
         public byte[] ToByte()
@@ -324,7 +324,7 @@ namespace TestCms1
             return (amp * Math.Sin(freq * 2 * Math.PI * t));
         }
 
-        public float[] CreateSimulateFloatDataArr(SinWave[] sinWaves) //[진동수, 진폭]
+        public float[] CreateSimulateFloatDataArr(SinWave[] sinWaves)
         {
             float resolution = Settings.Default.AsyncLine / (float)Settings.Default.AsyncFMax;
             float[] dataArr = new float[DataCount];

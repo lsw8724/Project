@@ -18,13 +18,7 @@ namespace TestCms1.Dialog
         public string DbAccount { get; set; }
         public string DbPassword { get; set; }
         public string DbName { get; set; }
-        IWavesSerializer[] Serializers = new IWavesSerializer[] 
-        {
-            new WaveDataSerializer_LSW(),
-            new WaveDataSerializer_KHW(),
-            new WaveDataSerializer_SHK(),
-            new WaveDataSerializer_Cpp()
-        };
+        IWavesSerializer[] Serializers = new IWavesSerializer[] { new WaveDataSerializer_LSW(), new WaveDataSerializer_KHW(), new WaveDataSerializer_SHK(), new WaveDataSerializer_Cpp()};
 
         public RecoderEditForm()
         {

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCms1", "TestCms1.csproj", "{FFBDEAC1-BC79-4F0F-A850-7BD66A911D55}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCMSCpp", "..\TestCMSCpp\TestCMSCpp.vcxproj", "{130AB662-0B5F-4E0A-8A50-A57818E0E502}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCMSCpp", "TestCMSCpp\TestCMSCpp.vcxproj", "{130AB662-0B5F-4E0A-8A50-A57818E0E502}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

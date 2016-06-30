@@ -166,7 +166,7 @@ namespace TestCms1
                     client.Shutdown(SocketShutdown.Both);
                     client.Close();
                 }
-                catch (Exception se)
+                catch (SocketException se)
                 {
                     //TODO Write Log
                 }
@@ -247,19 +247,11 @@ namespace TestCms1
             {
                 try
                 {
-                    while (MeasureDataQueue.Count <= 0) ;
-                    TrendDataRow[] datas = null;
-                    lock ((MeasureDataQueue as ICollection).SyncRoot)
-                    {
-                        datas = MeasureDataQueue.Dequeue();
-                    }
-                    if (datas != null)
-                        foreach (var data in datas)
-                            SQLRepository.TrendData.InsertData(data.TimeStamp, data.MeasureId, data.Scalar);
+                    //TODO Wave 저장
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    //TODO Write Log
                 }
             }
         }
