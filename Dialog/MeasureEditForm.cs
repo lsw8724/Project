@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using TestCMSCommon.DataBase;
+using TestCMSCommon.ADODotNET;
 using TestCms1.Properties;
 
 namespace TestCms1.Dialog

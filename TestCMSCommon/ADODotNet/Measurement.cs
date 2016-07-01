@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using TestCMSCommon.Properties;
 
-namespace TestCMSCommon.DataBase
+namespace TestCMSCommon.ADODotNET
 {
     public class Measurement
     {

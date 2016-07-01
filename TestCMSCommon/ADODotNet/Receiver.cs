@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using TestCMSCommon.Properties;
 
-namespace TestCMSCommon.DataBase
+namespace TestCMSCommon.ADODotNET
 {
     public class Receiver
     {

@@ -10,7 +10,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Collections;
 using TestCms1.Properties;
-using TestCMSCommon.DataBase;
+using TestCMSCommon.ADODotNET;
 
 namespace TestCms1
 {
@@ -105,7 +105,8 @@ namespace TestCms1
                     switch (listBox.Name)
                     {
                         case "lb_Measure": SQLRepository.Measurement.DeleteData((listBox.SelectedItem as ISelectableIdx).GetIdx());break;
-                        //case "lb_Receiver": SQLRepository.Receiver.DeleteData((listBox.SelectedItem as IGettableIdx).GetMeasureId()); break;
+                        case "lb_Receiver": SQLRepository.Receiver.DeleteData((listBox.SelectedItem as ISelectableIdx).GetIdx()); break;
+                        //case "lb_Recoder": SQLRepository.Receiver.DeleteData((listBox.SelectedItem as ISelectableIdx).GetIdx()); break;
                     }
                    
                 (listBox.DataSource as IBindingList).RemoveAt(listBox.SelectedIndex);

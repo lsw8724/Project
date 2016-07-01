@@ -5,7 +5,7 @@ using System.Data.SqlTypes;
 using TestCMSCommon.Properties;
 using System.Linq;
 
-namespace TestCMSCommon.DataBase
+namespace TestCMSCommon.ADODotNET
 {
     public class TrendData
     {

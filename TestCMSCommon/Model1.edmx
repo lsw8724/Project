@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestCmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Measurement">
+          <Key>
+            <PropertyRef Name="Idx" />
+          </Key>
+          <Property Name="Idx" Type="int" Nullable="false" />
+          <Property Name="MeasureType" Type="tinyint" Nullable="false" />
+          <Property Name="ChannelId" Type="int" Nullable="false" />
+          <Property Name="LowFreq" Type="int" />
+          <Property Name="HighFreq" Type="int" />
+          <Property Name="Interval1" Type="int" />
+          <Property Name="Interval2" Type="int" />
+          <Property Name="Interval3" Type="int" />
+        </EntityType>
+        <EntityType Name="Receiver">
+          <Key>
+            <PropertyRef Name="Idx" />
+          </Key>
+          <Property Name="Idx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiverType" Type="tinyint" Nullable="false" />
+          <Property Name="Ip" Type="nvarchar" MaxLength="20" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="Port" Type="int" Nullable="false" />
+          <Property Name="SerializerType" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrendData">
+          <Key>
+            <PropertyRef Name="Idx" />
+          </Key>
+          <Property Name="Idx" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="MeasureId" Type="int" Nullable="false" />
+          <Property Name="Scalar" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TestCmsModelStoreContainer">
+          <EntitySet Name="Measurement" EntityType="Self.Measurement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receiver" EntityType="Self.Receiver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrendData" EntityType="Self.TrendData" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestCmsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="Measurement">
+          <Key>
+            <PropertyRef Name="Idx" />
+          </Key>
+          <Property Name="Idx" Type="Int32" Nullable="false" />
+          <Property Name="MeasureType" Type="Byte" Nullable="false" />
+          <Property Name="ChannelId" Type="Int32" Nullable="false" />
+          <Property Name="LowFreq" Type="Int32" />
+          <Property Name="HighFreq" Type="Int32" />
+          <Property Name="Interval1" Type="Int32" />
+          <Property Name="Interval2" Type="Int32" />
+          <Property Name="Interval3" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Receiver">
+          <Key>
+            <PropertyRef Name="Idx" />
+          </Key>
+          <Property Name="Idx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiverType" Type="Byte" Nullable="false" />
+          <Property Name="Ip" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Port" Type="Int32" Nullable="false" />
+          <Property Name="SerializerType" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrendData">
+          <Key>
+            <PropertyRef Name="Idx" />
+          </Key>
+          <Property Name="Idx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MeasureId" Type="Int32" Nullable="false" />
+          <Property Name="Scalar" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TestCmsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Measurement" EntityType="Self.Measurement" />
+          <EntitySet Name="Receiver" EntityType="Self.Receiver" />
+          <EntitySet Name="TrendData" EntityType="Self.TrendData" />
+          <EntitySet Name="Entity1Set" EntityType="TestCmsModel.Entity1" />
+        </EntityContainer>
+        <EntityType Name="Entity1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestCmsModelStoreContainer" CdmEntityContainer="TestCmsEntities">
+          <EntitySetMapping Name="Measurement">
+            <EntityTypeMapping TypeName="TestCmsModel.Measurement">
+              <MappingFragment StoreEntitySet="Measurement">
+                <ScalarProperty Name="Idx" ColumnName="Idx" />
+                <ScalarProperty Name="MeasureType" ColumnName="MeasureType" />
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="LowFreq" ColumnName="LowFreq" />
+                <ScalarProperty Name="HighFreq" ColumnName="HighFreq" />
+                <ScalarProperty Name="Interval1" ColumnName="Interval1" />
+                <ScalarProperty Name="Interval2" ColumnName="Interval2" />
+                <ScalarProperty Name="Interval3" ColumnName="Interval3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receiver">
+            <EntityTypeMapping TypeName="TestCmsModel.Receiver">
+              <MappingFragment StoreEntitySet="Receiver">
+                <ScalarProperty Name="Idx" ColumnName="Idx" />
+                <ScalarProperty Name="ReceiverType" ColumnName="ReceiverType" />
+                <ScalarProperty Name="Ip" ColumnName="Ip" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="SerializerType" ColumnName="SerializerType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrendData">
+            <EntityTypeMapping TypeName="TestCmsModel.TrendData">
+              <MappingFragment StoreEntitySet="TrendData">
+                <ScalarProperty Name="Idx" ColumnName="Idx" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="MeasureId" ColumnName="MeasureId" />
+                <ScalarProperty Name="Scalar" ColumnName="Scalar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

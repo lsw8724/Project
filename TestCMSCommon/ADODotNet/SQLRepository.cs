@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace TestCMSCommon.DataBase
+namespace TestCMSCommon.ADODotNET
 {
     public enum SQLMessageType : int
     {
@@ -106,6 +106,7 @@ namespace TestCMSCommon.DataBase
             {
                 cmd.Parameters.AddWithValue("@TABLE", tableName);
                 cmd.Parameters.AddWithValue("@MESSAGE", SQLMessageType.Table_Exist.ToString());
+
                 if (DBConnection.State != ConnectionState.Open)
                     DBConnection.Open();
 
