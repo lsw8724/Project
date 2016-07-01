@@ -219,7 +219,7 @@ namespace TestCms1
         public string DbName;
         private Thread RecodeThread;
         private Queue<WaveData[]> WavesQueue = new Queue<WaveData[]>();
-        public Queue<TrendDataRow[]> MeasureDataQueue = new Queue<TrendDataRow[]>();
+        public Queue<TrendData[]> MeasureDataQueue = new Queue<TrendData[]>();
 
         public DBRecoder(string dbIp, string account, string password, string db)
         {

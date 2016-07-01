@@ -16,13 +16,17 @@ namespace TestCms1
         MeasureType_LiftMove,
     }
 
-    public interface IGettableIdx
+    public interface ISelectableIdx
     {
-        int GetChannelIdx();
-        int GetMeasureId();
+        int GetIdx();
     }
 
-    public interface IWavesMeasure : IGettableIdx, ISendableConfig
+    public interface ISelectableChannelIdx
+    {
+        int GetChannelIdx();
+    }
+
+    public interface IWavesMeasure : ISelectableChannelIdx, ISendableConfig, ISelectableIdx
     {
         float CalcMeasureScalar(WaveData wave, SpectrumData spectrum); 
     }
@@ -86,7 +90,7 @@ namespace TestCms1
             return PacketType.PacketType_MeasureConfig;
         }
 
-        public int GetMeasureId()
+        public int GetIdx()
         {
             return MeasureId;
         }
@@ -142,7 +146,7 @@ namespace TestCms1
             return PacketType.PacketType_MeasureConfig;
         }
 
-        public int GetMeasureId()
+        public int GetIdx()
         {
             return MeasureId;
         }
@@ -198,7 +202,7 @@ namespace TestCms1
             return PacketType.PacketType_MeasureConfig;
         }
 
-        public int GetMeasureId()
+        public int GetIdx()
         {
             return MeasureId;
         }
@@ -265,7 +269,7 @@ namespace TestCms1
             return PacketType.PacketType_MeasureConfig;
         }
 
-        public int GetMeasureId()
+        public int GetIdx()
         {
             return MeasureId;
         }
@@ -333,7 +337,7 @@ namespace TestCms1
             return PacketType.PacketType_MeasureConfig;
         }
 
-        public int GetMeasureId()
+        public int GetIdx()
         {
             return MeasureId;
         }

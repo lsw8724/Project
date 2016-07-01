@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using TestCMSCommon.Properties;
 
 namespace TestCMSCommon.DataBase
 {
-    public class ReceiverRow
+    public class Receiver
     {
         public int Idx;
         public byte ReceiverType;
@@ -14,50 +14,51 @@ namespace TestCMSCommon.DataBase
         public int Port;
         public byte SerializerType;
 
-        public ReceiverRow(object id, object type, object ip, object path, object port, object serializer)
+        public Receiver(int id, byte type, string ip, string path, int port, byte serializer)
         {
-            Idx=(int)id;
-            ReceiverType = (byte)type;
-            Ip = ip.ToString();
-            FilePath = path.ToString();
-            Port = (int)port;
-            SerializerType = (byte)serializer;
+            Idx=id;
+            ReceiverType = type;
+            Ip = ip;
+            FilePath = path;
+            Port = port;
+            SerializerType = serializer;
         }
     }
 
-    public class Receiver
+    public class ReceiverTable
     {
         private SqlConnection DBConnection;
-        private const string BaseSelectQuery = "SELECT * FROM [dbo].[Receiver] ";
 
-        public Receiver(SqlConnection conn)
+        public ReceiverTable(SqlConnection conn)
         {
             DBConnection = conn;
-            if (!SQLRepository.CheckExistTable("Receiver"))
-                SQLRepository.CreateReceiverTable();
         }
 
-        public Dictionary<int, ReceiverRow> GetAllReceiver()
+        public Receiver[] GetAllReceiver()
         {
-            using (SqlCommand cmd = new SqlCommand(BaseSelectQuery, DBConnection))
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Receiver]", DBConnection))
                 return GetResult(cmd);
         }
 
-        public void InsertData(int id, int type, string ip, string path, int port, int serializer)
+        public void InsertData(Receiver row)
         {
             using (SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Receiver] VALUES(@ID, @TYPE, @IP , @PATH, @PORT, @SERIALIZER)", DBConnection))
             {
-                cmd.Parameters.AddWithValue("@ID", id);
-                cmd.Parameters.AddWithValue("@TYPE", type);
-                cmd.Parameters.AddWithValue("@IP", ip);
-                cmd.Parameters.AddWithValue("@PATH", path);
-                cmd.Parameters.AddWithValue("@PORT", port);
-                cmd.Parameters.AddWithValue("@SERIALIZER", serializer);
+                cmd.Parameters.AddWithValue("@ID", row.Idx);
+                cmd.Parameters.AddWithValue("@TYPE", row.ReceiverType);
+                cmd.Parameters.AddWithValue("@IP", row.Ip);
+                cmd.Parameters.AddWithValue("@PATH", row.FilePath);
+                cmd.Parameters.AddWithValue("@PORT", row.Port);
+                cmd.Parameters.AddWithValue("@SERIALIZER", row.SerializerType);
 
-                if (DBConnection.State != ConnectionState.Open) DBConnection.Open();
+                if (DBConnection.State != ConnectionState.Open)
+                    DBConnection.Open();
+
                 DBConnection.ChangeDatabase(Settings.Default.DBName);
                 cmd.ExecuteNonQuery();
-                if (DBConnection.State != ConnectionState.Closed) DBConnection.Close();
+
+                if (DBConnection.State != ConnectionState.Closed)
+                    DBConnection.Close();
             }
         }
 
@@ -66,24 +67,32 @@ namespace TestCMSCommon.DataBase
             using (SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Measurement] WHERE Idx = @ID", DBConnection))
             {
                 cmd.Parameters.AddWithValue("@ID", idx);
-                if (DBConnection.State != ConnectionState.Open) DBConnection.Open();
+                if (DBConnection.State != ConnectionState.Open)
+                    DBConnection.Open();
+
                 DBConnection.ChangeDatabase(Settings.Default.DBName);
                 cmd.ExecuteNonQuery();
-                if (DBConnection.State != ConnectionState.Closed) DBConnection.Close();
+
+                if (DBConnection.State != ConnectionState.Closed)
+                    DBConnection.Close();
             }
         }
 
-        private Dictionary<int, ReceiverRow> GetResult(SqlCommand cmd)
+        private Receiver[] GetResult(SqlCommand cmd)
         {
             DataTable dt = new DataTable();
-            if (DBConnection.State != ConnectionState.Open) DBConnection.Open();
+            if (DBConnection.State != ConnectionState.Open)
+                DBConnection.Open();
+
             DBConnection.ChangeDatabase(Settings.Default.DBName);
-            using (var da = new SqlDataAdapter(cmd.CommandText,DBConnection)) da.Fill(dt);
-            if (DBConnection.State != ConnectionState.Closed) DBConnection.Close();
-            Dictionary<int, ReceiverRow> result = new Dictionary<int, ReceiverRow>();
-            foreach (DataRow row in dt.Rows)
-                result.Add((int)row.ItemArray[0],new ReceiverRow(row.ItemArray[0], row.ItemArray[1], row.ItemArray[2], row.ItemArray[3], row.ItemArray[4], row.ItemArray[5]));
-            return result;
+
+            using (var da = new SqlDataAdapter(cmd.CommandText, DBConnection))
+                da.Fill(dt);
+
+            if (DBConnection.State != ConnectionState.Closed)
+                DBConnection.Close();
+
+            return dt.Select().Select(row=>new Receiver((int)row.ItemArray[0], (byte)row.ItemArray[1], row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), (int)row.ItemArray[4], (byte)row.ItemArray[5])).ToArray();
         }
     }
 }

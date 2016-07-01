@@ -24,7 +24,7 @@ namespace TestCms1.Dialog
 
         public MeasureEditForm(IWavesMeasure lastMeasure)
         {
-            MeasureId = lastMeasure != null? lastMeasure.GetMeasureId(): 0;
+            MeasureId = lastMeasure != null? lastMeasure.GetIdx(): 0;
             InitializeComponent();
             MeasureTypeIndex = 0;
             High = 62;
@@ -49,23 +49,23 @@ namespace TestCms1.Dialog
             {
                 case 0:
                     monitor.MeasureList.Add(new RMSMeasure(++MeasureId, ChannelIdx, Low, High));
-                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(MeasureId, (int)MeasureType.MeasureType_RMS , ChannelIdx, Low, High);
+                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(new Measurement(MeasureId, (int)MeasureType.MeasureType_RMS , ChannelIdx, Low, High));
                     break;
                 case 1:
                     monitor.MeasureList.Add(new PeakToPeakMeasure(++MeasureId, ChannelIdx));
-                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(MeasureId, (int)MeasureType.MeasureType_P2P, ChannelIdx);
+                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(new Measurement(MeasureId, (int)MeasureType.MeasureType_P2P, ChannelIdx));
                     break;
                 case 2:
                     monitor.MeasureList.Add(new PeakMeasure(++MeasureId, ChannelIdx));
-                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(MeasureId, (int)MeasureType.MeasureType_PK, ChannelIdx);
+                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(new Measurement(MeasureId, (int)MeasureType.MeasureType_PK, ChannelIdx));
                     break;
                 case 3:
                     monitor.MeasureList.Add(new Lift_ShockMeasure(++MeasureId, ChannelIdx, Impulse1RegionTime, Impulse2RegionTime, MoveRegionTime));
-                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(MeasureId, (int)MeasureType.MeasureType_LiftShock, ChannelIdx, Low, High, Impulse2RegionTime, MoveRegionTime);
+                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(new Measurement(MeasureId, (int)MeasureType.MeasureType_LiftShock, ChannelIdx, Low, High, Impulse2RegionTime, MoveRegionTime));
                     break;
                 case 4:
                     monitor.MeasureList.Add(new Lift_MoveMeasure(++MeasureId, ChannelIdx, Impulse1RegionTime, Impulse2RegionTime, MoveRegionTime));
-                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(MeasureId, (int)MeasureType.MeasureType_LiftMove, ChannelIdx, Low, High, Impulse2RegionTime, MoveRegionTime);
+                    if (Settings.Default.EnableDBMode) SQLRepository.Measurement.InsertData(new Measurement(MeasureId, (int)MeasureType.MeasureType_LiftMove, ChannelIdx, Low, High, Impulse2RegionTime, MoveRegionTime));
                     break;
             }
             Close();    

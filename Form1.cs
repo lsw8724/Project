@@ -24,10 +24,9 @@ namespace TestCms1
         public BindingList<IWavesRecoder> RecoderList = new BindingList<IWavesRecoder>();
         private IHeritableWavesReceiver SelectedReceiver;
         public Queue<WaveData[]> WaveQueue = new Queue<WaveData[]>();
-        public Queue<TrendDataRow[]> MeasureDataQueue = new Queue<TrendDataRow[]>();
+        public Queue<TrendData[]> MeasureDataQueue = new Queue<TrendData[]>();
         private Integrator NormalIntegrator = new Integrator();
-        public Dictionary<int, MeasurementRow> MeasurementCache = new Dictionary<int, MeasurementRow>();
-        public Dictionary<int, ReceiverRow> ReceiverCache = new Dictionary<int, ReceiverRow>();
+       
         public bool EnableIntegrator = false;
 
         public WaveMonitor()
@@ -36,28 +35,26 @@ namespace TestCms1
             SQLRepository.Init();
             if (Settings.Default.EnableDBMode)
             {
-                MeasurementCache = SQLRepository.Measurement.GetAllMeasure();
-                ReceiverCache = SQLRepository.Receiver.GetAllReceiver();
-                foreach (var row in MeasurementCache.Values)
+                foreach (var row in SQLRepository.MeasurementCache.Values)
                 {
-                    switch (row.MeasureType)
+                    switch ((MeasureType)row.MeasureType)
                     {
-                        case (int)MeasureType.MeasureType_RMS: MeasureList.Add(new RMSMeasure(row.Idx, row.ChannelId, row.LowFreq, row.HighFreq)); break;
-                        case (int)MeasureType.MeasureType_P2P: MeasureList.Add(new PeakToPeakMeasure(row.Idx, row.ChannelId)); break;
-                        case (int)MeasureType.MeasureType_PK: MeasureList.Add(new PeakMeasure(row.Idx, row.ChannelId)); break;
-                        case (int)MeasureType.MeasureType_LiftShock: MeasureList.Add(new Lift_ShockMeasure(row.Idx, row.ChannelId, row.Interval1, row.Interval2, row.Interval3)); break;
-                        case (int)MeasureType.MeasureType_LiftMove: MeasureList.Add(new Lift_MoveMeasure(row.Idx, row.ChannelId, row.Interval1, row.Interval2, row.Interval3)); break;
+                        case MeasureType.MeasureType_RMS: MeasureList.Add(new RMSMeasure(row.Idx, row.ChannelId, row.LowFreq, row.HighFreq)); break;
+                        case MeasureType.MeasureType_P2P: MeasureList.Add(new PeakToPeakMeasure(row.Idx, row.ChannelId)); break;
+                        case MeasureType.MeasureType_PK: MeasureList.Add(new PeakMeasure(row.Idx, row.ChannelId)); break;
+                        case MeasureType.MeasureType_LiftShock: MeasureList.Add(new Lift_ShockMeasure(row.Idx, row.ChannelId, row.Interval1, row.Interval2, row.Interval3)); break;
+                        case MeasureType.MeasureType_LiftMove: MeasureList.Add(new Lift_MoveMeasure(row.Idx, row.ChannelId, row.Interval1, row.Interval2, row.Interval3)); break;
                     }
                 }
 
-                foreach (var row in ReceiverCache.Values)
+                foreach (var row in SQLRepository.ReceiverCache.Values)
                 {
-                    switch (row.ReceiverType)
+                    switch ((ReceiverType)row.ReceiverType)
                     {
-                        case (int)ReceiverType.ReceiverType_Vdpm: ReceiverList.Add(new VDPMReceiver(row.Ip)); break;
-                        case (int)ReceiverType.ReceiverType_File: ReceiverList.Add(new FileReceiver(row.FilePath, SerializerUtil.ToSerializer(row.SerializerType))); break;
-                        case (int)ReceiverType.ReceiverType_Network: ReceiverList.Add(new NetworkReceiver(row.Ip,row.Port,SerializerUtil.ToSerializer(row.SerializerType))); break;
-                        case (int)ReceiverType.ReceiverType_Simulate: ReceiverList.Add(new SimulateReceiver()); break;
+                        case ReceiverType.ReceiverType_Vdpm: ReceiverList.Add(new VDPMReceiver(row.Ip)); break;
+                        case ReceiverType.ReceiverType_File: ReceiverList.Add(new FileReceiver(row.FilePath, SerializerUtil.ToSerializer(row.SerializerType))); break;
+                        case ReceiverType.ReceiverType_Network: ReceiverList.Add(new NetworkReceiver(row.Ip,row.Port,SerializerUtil.ToSerializer(row.SerializerType))); break;
+                        case ReceiverType.ReceiverType_Simulate: ReceiverList.Add(new SimulateReceiver()); break;
                     }
                 }
             }
@@ -107,7 +104,7 @@ namespace TestCms1
                 if (Settings.Default.EnableDBMode)
                     switch (listBox.Name)
                     {
-                        case "lb_Measure": SQLRepository.Measurement.DeleteData((listBox.SelectedItem as IGettableIdx).GetMeasureId());break;
+                        case "lb_Measure": SQLRepository.Measurement.DeleteData((listBox.SelectedItem as ISelectableIdx).GetIdx());break;
                         //case "lb_Receiver": SQLRepository.Receiver.DeleteData((listBox.SelectedItem as IGettableIdx).GetMeasureId()); break;
                     }
                    
@@ -149,7 +146,7 @@ namespace TestCms1
                     FFTChart.Series[ch].Add(fft.XValues[i], fft.YValues[i]);
                 FFTChart.Series[ch].EndUpdate();
             }
-            TrendDataRow[] datas = new TrendDataRow[MeasureList.Count];
+            TrendData[] datas = new TrendData[MeasureList.Count];
             /*Trend*/
             if (MeasureList.Count > 0)
             {
@@ -161,7 +158,7 @@ namespace TestCms1
                     if (series.Count > TrendXScale) series.Delete(0);
                     var measureData = MeasureList[i].CalcMeasureScalar(waves[chid], fftData);
                     series.Add(waves[chid].DateTime, MeasureList[i].CalcMeasureScalar(waves[chid], fftData));
-                    SQLRepository.TrendData.InsertData(waves[chid].DateTime, MeasureList[i].GetMeasureId(), measureData);
+                    SQLRepository.TrendData.InsertData(new TrendData(waves[chid].DateTime, MeasureList[i].GetIdx(), measureData));
                 }
             }
 

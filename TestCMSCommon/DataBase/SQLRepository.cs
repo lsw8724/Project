@@ -1,6 +1,9 @@
 ﻿using System.Data.SqlClient;
 using TestCMSCommon.Properties;
 using System.Data;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace TestCMSCommon.DataBase
 {
@@ -14,9 +17,12 @@ namespace TestCMSCommon.DataBase
     {
         private static string SqlInfoMessage = string.Empty;
         private static SqlConnection DBConnection;
-        public static TrendData TrendData { get { return new TrendData(DBConnection); } }
-        public static Measurement Measurement {get{ return new Measurement(DBConnection); }}
-        public static Receiver Receiver { get { return new Receiver(DBConnection); }}
+        public static TrendDataTable TrendData { get { return new TrendDataTable(DBConnection); } }
+        public static MeasurementTable Measurement {get{ return new MeasurementTable(DBConnection); }}
+        public static ReceiverTable Receiver { get { return new ReceiverTable(DBConnection); }}
+
+        public static Dictionary<int, Measurement> MeasurementCache = new Dictionary<int, Measurement>();
+        public static Dictionary<int, Receiver> ReceiverCache = new Dictionary<int, Receiver>();
 
         public static void Init()
         {
@@ -28,7 +34,21 @@ namespace TestCMSCommon.DataBase
                   "pwd=" + Settings.Default.DBPassword + ";" +
                   "database=master;");
                 DBConnection.InfoMessage += OnSQLInfoMessage;
-                if (!CheckExistDatabase()) CreateDatabase();
+                if (!CheckExistDatabase())
+                {
+                    CreateDatabase();
+                    CreateMeasurementTable();
+                    CreateReceiverTable();
+                    CreateTrendDataTable();
+                }
+                else
+                {
+                    if (!CheckExistTable("Measurement")) throw new Exception("Measurement Table Not Exists!");
+                    if (!CheckExistTable("Receiver")) throw new Exception("Receiver Table Not Exists!"); ;
+                    if (!CheckExistTable("TrendData")) throw new Exception("TrendData Table Not Exists!"); ;
+                }
+                MeasurementCache = Measurement.GetAllMeasure().ToDictionary(x => x.Idx);
+                ReceiverCache = Receiver.GetAllReceiver().ToDictionary(x => x.Idx);
             }
             catch (SqlException sqlEx)
             {
@@ -53,9 +73,14 @@ namespace TestCMSCommon.DataBase
             {
                 cmd.Parameters.AddWithValue("@DBNAME", Settings.Default.DBName);
                 cmd.Parameters.AddWithValue("@MESSAGE", SQLMessageType.DB_Exist.ToString());
-                if (DBConnection.State != ConnectionState.Open) DBConnection.Open();
+
+                if (DBConnection.State != ConnectionState.Open)
+                    DBConnection.Open();
+
                 cmd.ExecuteNonQuery();
-                if (DBConnection.State != ConnectionState.Closed) DBConnection.Close();
+
+                if (DBConnection.State != ConnectionState.Closed)
+                    DBConnection.Close();
             }
             if (SqlInfoMessage.Equals(SQLMessageType.DB_Exist.ToString())) return true;
             else return false;            
@@ -65,9 +90,13 @@ namespace TestCMSCommon.DataBase
         {
             using (SqlCommand cmd = new SqlCommand("CREATE DATABASE ["+Settings.Default.DBName+"]", DBConnection))
             {
-                if (DBConnection.State != ConnectionState.Open) DBConnection.Open();
+                if (DBConnection.State != ConnectionState.Open)
+                    DBConnection.Open();
+
                 cmd.ExecuteNonQuery();
-                if (DBConnection.State != ConnectionState.Closed) DBConnection.Close();
+
+                if (DBConnection.State != ConnectionState.Closed)
+                    DBConnection.Close();
             }
         }
 
@@ -77,10 +106,14 @@ namespace TestCMSCommon.DataBase
             {
                 cmd.Parameters.AddWithValue("@TABLE", tableName);
                 cmd.Parameters.AddWithValue("@MESSAGE", SQLMessageType.Table_Exist.ToString());
-                if (DBConnection.State != ConnectionState.Open) DBConnection.Open();
+                if (DBConnection.State != ConnectionState.Open)
+                    DBConnection.Open();
+
                 DBConnection.ChangeDatabase(Settings.Default.DBName);
                 cmd.ExecuteNonQuery();
-                if (DBConnection.State != ConnectionState.Closed) DBConnection.Close();
+
+                if (DBConnection.State != ConnectionState.Closed)
+                    DBConnection.Close();
             }
             if (SqlInfoMessage.Equals(SQLMessageType.Table_Exist.ToString())) return true;
             else return false;           
@@ -100,10 +133,14 @@ namespace TestCMSCommon.DataBase
                             "CONSTRAINT [PK_dbo.Measurement] PRIMARY KEY CLUSTERED([Idx] ASC)) ON[PRIMARY] COMMIT TRAN";
             using (SqlCommand cmd = new SqlCommand(query, DBConnection))
             {
-                if (DBConnection.State != ConnectionState.Open) DBConnection.Open();
+                if (DBConnection.State != ConnectionState.Open)
+                    DBConnection.Open();
+
                 DBConnection.ChangeDatabase(Settings.Default.DBName);
                 cmd.ExecuteNonQuery();
-                if (DBConnection.State != ConnectionState.Closed) DBConnection.Close();
+
+                if (DBConnection.State != ConnectionState.Closed)
+                    DBConnection.Close();
             }
         }
 
@@ -117,10 +154,14 @@ namespace TestCMSCommon.DataBase
                             "CONSTRAINT [PK_dbo.TrendData] PRIMARY KEY CLUSTERED([Idx] ASC)) ON[PRIMARY] COMMIT TRAN";
             using (SqlCommand cmd = new SqlCommand(query, DBConnection))
             {
-                if (DBConnection.State != ConnectionState.Open) DBConnection.Open();
+                if (DBConnection.State != ConnectionState.Open)
+                    DBConnection.Open();
+
                 DBConnection.ChangeDatabase(Settings.Default.DBName);
                 cmd.ExecuteNonQuery();
-                if (DBConnection.State != ConnectionState.Closed) DBConnection.Close();
+
+                if (DBConnection.State != ConnectionState.Closed)
+                    DBConnection.Close();
             }
         }
 
@@ -136,10 +177,14 @@ namespace TestCMSCommon.DataBase
                             "CONSTRAINT [PK_dbo.Receiver] PRIMARY KEY CLUSTERED([Idx] ASC)) ON[PRIMARY] COMMIT TRAN";
             using (SqlCommand cmd = new SqlCommand(query, DBConnection))
             {
-                if (DBConnection.State != ConnectionState.Open) DBConnection.Open();
+                if (DBConnection.State != ConnectionState.Open)
+                    DBConnection.Open();
+
                 DBConnection.ChangeDatabase(Settings.Default.DBName);
                 cmd.ExecuteNonQuery();
-                if (DBConnection.State != ConnectionState.Closed) DBConnection.Close();
+
+                if (DBConnection.State != ConnectionState.Closed)
+                    DBConnection.Close();
             }
         }
     }

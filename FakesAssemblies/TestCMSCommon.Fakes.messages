@@ -1,5 +1,0 @@
-D:\Project\TestCms1_LSW\Fakes\TestCMSCommon.fakes : warning : Cannot generate stub for TestCMSCommon.Properties.Settings: type is sealed.
-D:\Project\TestCms1_LSW\Fakes\TestCMSCommon.fakes : warning : Cannot generate stub for TestCMSCommon.DataBase.SQLMessageType: type is a value type.
-D:\Project\TestCms1_LSW\Fakes\TestCMSCommon.fakes : warning : Cannot generate stub for TestCMSCommon.DataBase.SQLRepository: type is sealed.
-D:\Project\TestCms1_LSW\Fakes\TestCMSCommon.fakes : warning : Cannot generate shim for TestCMSCommon.Properties.Settings: type is not visible to exported or assembly(TestCMSCommon.Fakes).
-D:\Project\TestCms1_LSW\Fakes\TestCMSCommon.fakes : warning : Cannot generate shim for TestCMSCommon.DataBase.SQLMessageType: type is an enum.

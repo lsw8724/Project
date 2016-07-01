@@ -1,52 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using TestCMSCommon.Properties;
+using System.Linq;
 
 namespace TestCMSCommon.DataBase
 {
-    public class TrendDataRow
+    public class TrendData
     {
         public int Idx;
         public DateTime TimeStamp;
         public int MeasureId;
         public float Scalar;
 
-        public TrendDataRow(object idx, object timeStamp, object measureId, object scalar)
+        public TrendData(int idx, DateTime timeStamp, int measureId, float scalar)
         {
-            Idx = (int)idx;
-            TimeStamp = (DateTime)timeStamp;
-            MeasureId =(int)measureId;
-            Scalar = Convert.ToSingle(scalar);
+            Idx = idx;
+            TimeStamp = timeStamp;
+            MeasureId =measureId;
+            Scalar = scalar;
+        }
+
+        public TrendData(DateTime timeStamp, int measureId, float scalar)
+        {
+            TimeStamp = timeStamp;
+            MeasureId =measureId;
+            Scalar = scalar;
         }
     }
 
-    public class TrendData
+    public class TrendDataTable
     {
         private SqlConnection DBConnection;
-        private const string BaseSelectQuery = "SELECT * FROM [dbo].[TrendData] ";
       
-        public TrendData(SqlConnection conn)
+        public TrendDataTable(SqlConnection conn)
         {
             DBConnection = conn;
-            if (!SQLRepository.CheckExistTable("TrendData"))
-                SQLRepository.CreateTrendDataTable();
         }
 
-        public Dictionary<int, TrendDataRow> GetData(int measureId)
+        public TrendData[] GetData(int measureId)
         {
-            using (SqlCommand cmd = new SqlCommand(BaseSelectQuery+ "WHERE [MeasureId] = @ID", DBConnection))
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[TrendData] WHERE [MeasureId] = @ID", DBConnection))
             {
                 cmd.Parameters.AddWithValue("@ID", measureId);
                 return GetResult(cmd);
             }           
         }
 
-        public Dictionary<int, TrendDataRow> GetDataRange(DateTime start, DateTime end)
+        public TrendData[] GetDataRange(DateTime start, DateTime end)
         {
-            using (SqlCommand cmd = new SqlCommand(BaseSelectQuery + "WHERE [TimeStamp] >= @START AND [TimeStamp] < @END", DBConnection))
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[TrendData] WHERE [TimeStamp] >= @START AND [TimeStamp] < @END", DBConnection))
             {
                 cmd.Parameters.AddWithValue("@START", new SqlDateTime(start));
                 cmd.Parameters.AddWithValue("@END", new SqlDateTime(end));
@@ -54,13 +58,13 @@ namespace TestCMSCommon.DataBase
             }
         }
 
-        public void InsertData(DateTime timeStamp, int measureId=-1, float scalar = 0)
+        public void InsertData(TrendData row)
         {
             using (SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[TrendData] (TimeStamp,MeasureId,Scalar) VALUES(@TIMESTAMP, @MEASUREID, @SCALAR)", DBConnection))
             {
-                cmd.Parameters.AddWithValue("@TIMESTAMP", new SqlDateTime(timeStamp));
-                cmd.Parameters.AddWithValue("@MEASUREID", measureId);
-                cmd.Parameters.AddWithValue("@SCALAR", scalar);
+                cmd.Parameters.AddWithValue("@TIMESTAMP", new SqlDateTime(row.TimeStamp));
+                cmd.Parameters.AddWithValue("@MEASUREID", row.MeasureId);
+                cmd.Parameters.AddWithValue("@SCALAR", row.Scalar);
                 if (DBConnection.State != ConnectionState.Open)
                     DBConnection.Open();
 
@@ -88,7 +92,7 @@ namespace TestCMSCommon.DataBase
             } 
         }
 
-        private Dictionary<int, TrendDataRow> GetResult(SqlCommand cmd)
+        private TrendData[] GetResult(SqlCommand cmd)
         {
             var dt = new DataTable();
             if (DBConnection.State != ConnectionState.Open)
@@ -96,16 +100,13 @@ namespace TestCMSCommon.DataBase
 
             DBConnection.ChangeDatabase(Settings.Default.DBName);
 
-            using (var da = new SqlDataAdapter(cmd.CommandText, DBConnection))
+            using (var da = new SqlDataAdapter(cmd))
                 da.Fill(dt);
 
             if (DBConnection.State != ConnectionState.Closed)
                 DBConnection.Close();
 
-            var result = new Dictionary<int, TrendDataRow>();
-            foreach (DataRow row in dt.Rows)
-                result.Add((int)row.ItemArray[0], new TrendDataRow(row.ItemArray[0], row.ItemArray[1], row.ItemArray[2], row.ItemArray[3]));
-            return result;
+            return dt.Select().Select(row => new TrendData((int)row.ItemArray[0], (DateTime)row.ItemArray[1], (int)row.ItemArray[2], Convert.ToSingle(row.ItemArray[3]))).ToArray();
         }
     }
 }
